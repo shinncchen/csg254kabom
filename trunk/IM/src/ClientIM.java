@@ -28,6 +28,17 @@ public class ClientIM extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
+        LoginjFrame = new javax.swing.JFrame();
+        ButtonjPanelR1 = new javax.swing.JPanel();
+        OKjButtonR1 = new javax.swing.JButton();
+        ClearjButtonR1 = new javax.swing.JButton();
+        RContentjPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jTextField4 = new javax.swing.JTextField();
+        jPasswordField2 = new javax.swing.JPasswordField();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
         LogoutjPanel = new javax.swing.JPanel();
@@ -83,6 +94,45 @@ public class ClientIM extends javax.swing.JFrame {
         RContentjPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         RegisterjFrame.getContentPane().add(RContentjPanel, java.awt.BorderLayout.NORTH);
+
+        LoginjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
+        LoginjFrame.setResizable(false);
+
+        ButtonjPanelR1.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
+
+        OKjButtonR1.setText("jButton1");
+        ButtonjPanelR1.add(OKjButtonR1);
+
+        ClearjButtonR1.setText("jButton2");
+        ButtonjPanelR1.add(ClearjButtonR1);
+
+        LoginjFrame.getContentPane().add(ButtonjPanelR1, java.awt.BorderLayout.SOUTH);
+
+        RContentjPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Register To The Server", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        RContentjPanel1.setPreferredSize(new java.awt.Dimension(300, 100));
+        RContentjPanel1.setLayout(new java.awt.BorderLayout(5, 5));
+
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1));
+
+        jLabel5.setText("Username");
+        jPanel3.add(jLabel5);
+
+        jLabel6.setText("Password");
+        jPanel3.add(jLabel6);
+
+        RContentjPanel1.add(jPanel3, java.awt.BorderLayout.WEST);
+
+        jPanel5.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+
+        jTextField4.setText("jTextField1");
+        jPanel5.add(jTextField4);
+
+        jPasswordField2.setText("jPasswordField1");
+        jPanel5.add(jPasswordField2);
+
+        RContentjPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        LoginjFrame.getContentPane().add(RContentjPanel1, java.awt.BorderLayout.NORTH);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,25 +237,36 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JMenu ActionjMenu;
     private javax.swing.JMenuBar ActionjMenuBar;
     private javax.swing.JPanel ButtonjPanelR;
+    private javax.swing.JPanel ButtonjPanelR1;
     private javax.swing.JButton ClearjButtonR;
+    private javax.swing.JButton ClearjButtonR1;
     private javax.swing.JPanel ContentjPanel;
     private javax.swing.JButton LoginjButton;
+    private javax.swing.JFrame LoginjFrame;
     private javax.swing.JPanel LoginjPanel;
     private javax.swing.JMenuItem LogoutjMenuItem;
     private javax.swing.JPanel LogoutjPanel;
     private javax.swing.JButton OKjButtonR;
+    private javax.swing.JButton OKjButtonR1;
     private javax.swing.JPanel RContentjPanel;
+    private javax.swing.JPanel RContentjPanel1;
     private javax.swing.JButton RegisterjButton;
     private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
 
