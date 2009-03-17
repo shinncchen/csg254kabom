@@ -65,7 +65,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         RegisterjFrame.getContentPane().add(ButtonjPanelR, java.awt.BorderLayout.SOUTH);
 
-        RContentjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Register To The Server", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        RContentjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Registration", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         RContentjPanel.setPreferredSize(new java.awt.Dimension(300, 100));
         RContentjPanel.setLayout(new java.awt.BorderLayout(5, 5));
 
