@@ -63,15 +63,24 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Initialize IM client state
+     */
     private void initClientIM() {
         SetLogout();
     }
 
+    /**
+     * Set IM client to logout state
+     */
     private void SetLogout() {
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
     }
 
+    /**
+     * Set IM client to login state
+     */
     private void SetLogin() {
         LogoutjPanel.setVisible(false);
         LoginjPanel.setVisible(true);
