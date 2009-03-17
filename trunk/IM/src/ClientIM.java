@@ -83,14 +83,8 @@ public class ClientIM extends javax.swing.JFrame {
         RContentjPanel.add(jPanel2, java.awt.BorderLayout.WEST);
 
         jPanel4.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
-
-        jTextField1.setText("jTextField1");
         jPanel4.add(jTextField1);
-
-        jTextField3.setText("jTextField1");
         jPanel4.add(jTextField3);
-
-        jPasswordField1.setText("jPasswordField1");
         jPanel4.add(jPasswordField1);
 
         RContentjPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
