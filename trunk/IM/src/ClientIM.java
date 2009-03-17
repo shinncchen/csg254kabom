@@ -15,6 +15,20 @@ public class ClientIM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        RegisterjFrame = new javax.swing.JFrame();
+        ButtonjPanelR = new javax.swing.JPanel();
+        OKjButtonR = new javax.swing.JButton();
+        ClearjButtonR = new javax.swing.JButton();
+        RContentjPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
         LogoutjPanel = new javax.swing.JPanel();
@@ -25,6 +39,53 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenuBar = new javax.swing.JMenuBar();
         ActionjMenu = new javax.swing.JMenu();
         LogoutjMenuItem = new javax.swing.JMenuItem();
+
+        RegisterjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
+
+        ButtonjPanelR.setLayout(new java.awt.GridLayout(1, 3));
+
+        OKjButtonR.setText("jButton1");
+        ButtonjPanelR.add(OKjButtonR);
+
+        ClearjButtonR.setText("jButton2");
+        ButtonjPanelR.add(ClearjButtonR);
+
+        RegisterjFrame.getContentPane().add(ButtonjPanelR, java.awt.BorderLayout.SOUTH);
+
+        RContentjPanel.setPreferredSize(new java.awt.Dimension(300, 100));
+        RContentjPanel.setLayout(new java.awt.GridLayout(3, 1));
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel1.setText("Name");
+        jPanel2.add(jLabel1);
+
+        jTextField1.setText("jTextField1");
+        jPanel2.add(jTextField1);
+
+        RContentjPanel.add(jPanel2);
+
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel3.setText("Name");
+        jPanel4.add(jLabel3);
+
+        jTextField3.setText("jTextField1");
+        jPanel4.add(jTextField3);
+
+        RContentjPanel.add(jPanel4);
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel2.setText("Name");
+        jPanel3.add(jLabel2);
+
+        jTextField2.setText("jTextField1");
+        jPanel3.add(jTextField2);
+
+        RContentjPanel.add(jPanel3);
+
+        RegisterjFrame.getContentPane().add(RContentjPanel, java.awt.BorderLayout.NORTH);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +110,11 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel.add(LoginjButton, new java.awt.GridBagConstraints());
 
         RegisterjButton.setText("Register");
+        RegisterjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterjButtonActionPerformed(evt);
+            }
+        });
         LogoutjPanel.add(RegisterjButton, new java.awt.GridBagConstraints());
 
         ContentjPanel.add(LogoutjPanel, "logoutCard");
@@ -76,12 +142,18 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void RegisterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterjButtonActionPerformed
+        RegisterjFrame.setVisible(true);
+    }//GEN-LAST:event_RegisterjButtonActionPerformed
+
+    
     /**
      * Initialize IM client state
      */
     private void initClientIM() {
         SetLogout();
     }
+
 
     /**
      * Set IM client to logout state
@@ -92,6 +164,7 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenuBar.setEnabled(false);
     }
 
+
     /**
      * Set IM client to login state
      */
@@ -100,6 +173,7 @@ public class ClientIM extends javax.swing.JFrame {
         LoginjPanel.setVisible(true);
         ActionjMenuBar.setEnabled(true);
     }
+
 
     /**
     * @param args the command line arguments
@@ -115,13 +189,27 @@ public class ClientIM extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ActionjMenu;
     private javax.swing.JMenuBar ActionjMenuBar;
+    private javax.swing.JPanel ButtonjPanelR;
+    private javax.swing.JButton ClearjButtonR;
     private javax.swing.JPanel ContentjPanel;
     private javax.swing.JButton LoginjButton;
     private javax.swing.JPanel LoginjPanel;
     private javax.swing.JMenuItem LogoutjMenuItem;
     private javax.swing.JPanel LogoutjPanel;
+    private javax.swing.JButton OKjButtonR;
+    private javax.swing.JPanel RContentjPanel;
     private javax.swing.JButton RegisterjButton;
+    private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
 
