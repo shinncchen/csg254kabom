@@ -22,6 +22,9 @@ public class ClientIM extends javax.swing.JFrame {
         RegisterjButton = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
         StatusjTextField = new javax.swing.JTextField();
+        ActionjMenuBar = new javax.swing.JMenuBar();
+        ActionjMenu = new javax.swing.JMenu();
+        LogoutjMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,7 +38,7 @@ public class ClientIM extends javax.swing.JFrame {
         );
         LoginjPanelLayout.setVerticalGroup(
             LoginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 336, Short.MAX_VALUE)
         );
 
         ContentjPanel.add(LoginjPanel, "loginCard");
@@ -60,6 +63,16 @@ public class ClientIM extends javax.swing.JFrame {
 
         getContentPane().add(jToolBar, java.awt.BorderLayout.SOUTH);
 
+        ActionjMenu.setText("Action");
+        ActionjMenu.setEnabled(false);
+
+        LogoutjMenuItem.setText("Logout");
+        ActionjMenu.add(LogoutjMenuItem);
+
+        ActionjMenuBar.add(ActionjMenu);
+
+        setJMenuBar(ActionjMenuBar);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -76,6 +89,7 @@ public class ClientIM extends javax.swing.JFrame {
     private void SetLogout() {
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
+        ActionjMenuBar.setEnabled(false);
     }
 
     /**
@@ -84,6 +98,7 @@ public class ClientIM extends javax.swing.JFrame {
     private void SetLogin() {
         LogoutjPanel.setVisible(false);
         LoginjPanel.setVisible(true);
+        ActionjMenuBar.setEnabled(true);
     }
 
     /**
@@ -98,9 +113,12 @@ public class ClientIM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu ActionjMenu;
+    private javax.swing.JMenuBar ActionjMenuBar;
     private javax.swing.JPanel ContentjPanel;
     private javax.swing.JButton LoginjButton;
     private javax.swing.JPanel LoginjPanel;
+    private javax.swing.JMenuItem LogoutjMenuItem;
     private javax.swing.JPanel LogoutjPanel;
     private javax.swing.JButton RegisterjButton;
     private javax.swing.JTextField StatusjTextField;
