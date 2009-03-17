@@ -34,12 +34,12 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="OKjButtonR">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
+                <Property name="text" type="java.lang.String" value="OK"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ClearjButtonR">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton2"/>
+                <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -158,12 +158,12 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="OKjButtonR1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
+                <Property name="text" type="java.lang.String" value="OK"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ClearjButtonR1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton2"/>
+                <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
             </Component>
           </SubComponents>

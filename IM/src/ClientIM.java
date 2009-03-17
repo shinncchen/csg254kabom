@@ -57,10 +57,10 @@ public class ClientIM extends javax.swing.JFrame {
 
         ButtonjPanelR.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
 
-        OKjButtonR.setText("jButton1");
+        OKjButtonR.setText("OK");
         ButtonjPanelR.add(OKjButtonR);
 
-        ClearjButtonR.setText("jButton2");
+        ClearjButtonR.setText("Cancel");
         ButtonjPanelR.add(ClearjButtonR);
 
         RegisterjFrame.getContentPane().add(ButtonjPanelR, java.awt.BorderLayout.SOUTH);
@@ -106,10 +106,10 @@ public class ClientIM extends javax.swing.JFrame {
 
         ButtonjPanelR1.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
 
-        OKjButtonR1.setText("jButton1");
+        OKjButtonR1.setText("OK");
         ButtonjPanelR1.add(OKjButtonR1);
 
-        ClearjButtonR1.setText("jButton2");
+        ClearjButtonR1.setText("Cancel");
         ButtonjPanelR1.add(ClearjButtonR1);
 
         LoginjFrame.getContentPane().add(ButtonjPanelR1, java.awt.BorderLayout.SOUTH);
