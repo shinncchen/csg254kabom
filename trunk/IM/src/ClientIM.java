@@ -196,9 +196,11 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void RegisterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterjButtonActionPerformed
         RegisterjFrame.setVisible(true);
         RegisterjFrame.setAlwaysOnTop(true);
+        String name = RegisterjFrame.getParent().getName();
     }//GEN-LAST:event_RegisterjButtonActionPerformed
 
     
