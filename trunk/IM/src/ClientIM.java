@@ -50,6 +50,8 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenu = new javax.swing.JMenu();
         LogoutjMenuItem = new javax.swing.JMenuItem();
 
+        RegisterjFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        RegisterjFrame.setTitle("Registration");
         RegisterjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
         RegisterjFrame.setResizable(false);
 
@@ -95,6 +97,10 @@ public class ClientIM extends javax.swing.JFrame {
 
         RegisterjFrame.getContentPane().add(RContentjPanel, java.awt.BorderLayout.NORTH);
 
+        RegisterjFrame.getAccessibleContext().setAccessibleParent(this);
+
+        LoginjFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        LoginjFrame.setTitle("User Login");
         LoginjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
         LoginjFrame.setResizable(false);
 
@@ -135,6 +141,7 @@ public class ClientIM extends javax.swing.JFrame {
         LoginjFrame.getContentPane().add(RContentjPanel1, java.awt.BorderLayout.NORTH);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("IM Client");
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
@@ -191,6 +198,7 @@ public class ClientIM extends javax.swing.JFrame {
 
     private void RegisterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterjButtonActionPerformed
         RegisterjFrame.setVisible(true);
+        RegisterjFrame.setAlwaysOnTop(true);
     }//GEN-LAST:event_RegisterjButtonActionPerformed
 
     
