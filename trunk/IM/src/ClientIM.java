@@ -22,13 +22,12 @@ public class ClientIM extends javax.swing.JFrame {
         RContentjPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
         LogoutjPanel = new javax.swing.JPanel();
@@ -55,37 +54,33 @@ public class ClientIM extends javax.swing.JFrame {
 
         RContentjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Register To The Server", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         RContentjPanel.setPreferredSize(new java.awt.Dimension(300, 100));
-        RContentjPanel.setLayout(new java.awt.GridLayout(3, 1, 5, 5));
+        RContentjPanel.setLayout(new java.awt.BorderLayout(5, 5));
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 1));
 
         jLabel1.setText("Name");
         jPanel2.add(jLabel1);
 
+        jLabel3.setText("Username");
+        jPanel2.add(jLabel3);
+
+        jLabel2.setText("Password");
+        jPanel2.add(jLabel2);
+
+        RContentjPanel.add(jPanel2, java.awt.BorderLayout.WEST);
+
+        jPanel4.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+
         jTextField1.setText("jTextField1");
-        jPanel2.add(jTextField1);
-
-        RContentjPanel.add(jPanel2);
-
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel3.setText("Name");
-        jPanel4.add(jLabel3);
+        jPanel4.add(jTextField1);
 
         jTextField3.setText("jTextField1");
         jPanel4.add(jTextField3);
 
-        RContentjPanel.add(jPanel4);
+        jPasswordField1.setText("jPasswordField1");
+        jPanel4.add(jPasswordField1);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel2.setText("Name");
-        jPanel3.add(jLabel2);
-
-        jTextField2.setText("jTextField1");
-        jPanel3.add(jTextField2);
-
-        RContentjPanel.add(jPanel3);
+        RContentjPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         RegisterjFrame.getContentPane().add(RContentjPanel, java.awt.BorderLayout.NORTH);
 
@@ -207,10 +202,9 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
