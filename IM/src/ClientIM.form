@@ -7,6 +7,7 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[300, 175]"/>
         </Property>
+        <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -20,6 +21,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="3"/>
+            <Property name="horizontalGap" type="int" value="5"/>
             <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
@@ -37,6 +39,13 @@
         </Container>
         <Container class="javax.swing.JPanel" name="RContentjPanel">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Register To The Server">
+                  <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                </TitledBorder>
+              </Border>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[300, 100]"/>
             </Property>
@@ -49,7 +58,9 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="1"/>
+            <Property name="horizontalGap" type="int" value="5"/>
             <Property name="rows" type="int" value="3"/>
+            <Property name="verticalGap" type="int" value="5"/>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanel2">

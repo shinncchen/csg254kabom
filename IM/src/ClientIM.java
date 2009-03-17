@@ -41,8 +41,9 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjMenuItem = new javax.swing.JMenuItem();
 
         RegisterjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
+        RegisterjFrame.setResizable(false);
 
-        ButtonjPanelR.setLayout(new java.awt.GridLayout(1, 3));
+        ButtonjPanelR.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
 
         OKjButtonR.setText("jButton1");
         ButtonjPanelR.add(OKjButtonR);
@@ -52,8 +53,9 @@ public class ClientIM extends javax.swing.JFrame {
 
         RegisterjFrame.getContentPane().add(ButtonjPanelR, java.awt.BorderLayout.SOUTH);
 
+        RContentjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Register To The Server", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         RContentjPanel.setPreferredSize(new java.awt.Dimension(300, 100));
-        RContentjPanel.setLayout(new java.awt.GridLayout(3, 1));
+        RContentjPanel.setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
