@@ -44,7 +44,7 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel = new javax.swing.JPanel();
         LoginjButton = new javax.swing.JButton();
         RegisterjButton = new javax.swing.JButton();
-        jToolBar = new javax.swing.JToolBar();
+        StatusjToolBar = new javax.swing.JToolBar();
         StatusjTextField = new javax.swing.JTextField();
         ActionjMenuBar = new javax.swing.JMenuBar();
         ActionjMenu = new javax.swing.JMenu();
@@ -175,14 +175,14 @@ public class ClientIM extends javax.swing.JFrame {
 
         getContentPane().add(ContentjPanel, java.awt.BorderLayout.CENTER);
 
-        jToolBar.setRollover(true);
+        StatusjToolBar.setRollover(true);
 
         StatusjTextField.setEditable(false);
         StatusjTextField.setText("Disconnected");
         StatusjTextField.setFocusable(false);
-        jToolBar.add(StatusjTextField);
+        StatusjToolBar.add(StatusjTextField);
 
-        getContentPane().add(jToolBar, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(StatusjToolBar, java.awt.BorderLayout.SOUTH);
 
         ActionjMenu.setText("Action");
         ActionjMenu.setEnabled(false);
@@ -264,6 +264,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JButton RegisterjButton;
     private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
+    private javax.swing.JToolBar StatusjToolBar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -278,7 +279,6 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
 
 }

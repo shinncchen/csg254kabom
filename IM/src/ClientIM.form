@@ -351,7 +351,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JToolBar" name="jToolBar">
+    <Container class="javax.swing.JToolBar" name="StatusjToolBar">
       <Properties>
         <Property name="rollover" type="boolean" value="true"/>
       </Properties>
