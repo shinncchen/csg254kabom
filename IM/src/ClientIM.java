@@ -1,23 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ClientIM.java
- *
- * Created on Mar 14, 2009, 12:25:12 PM
- */
-
-/**
- *
- * @author Shinn Chyang Chen
- */
 public class ClientIM extends javax.swing.JFrame {
 
     /** Creates new form ClientIM */
     public ClientIM() {
         initComponents();
+        initClientIM();
     }
 
     /** This method is called from within the constructor to
@@ -29,49 +15,67 @@ public class ClientIM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        LoginjMenuItem = new javax.swing.JMenuItem();
-        RefreshjMenuItem = new javax.swing.JMenuItem();
-        ExitjMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        ContentjPanel = new javax.swing.JPanel();
+        LoginjPanel = new javax.swing.JPanel();
+        LogoutjPanel = new javax.swing.JPanel();
+        LoginjButton = new javax.swing.JButton();
+        RegisterjButton = new javax.swing.JButton();
+        jToolBar = new javax.swing.JToolBar();
+        StatusjTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ContentjPanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout LoginjPanelLayout = new javax.swing.GroupLayout(LoginjPanel);
+        LoginjPanel.setLayout(LoginjPanelLayout);
+        LoginjPanelLayout.setHorizontalGroup(
+            LoginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 210, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+        LoginjPanelLayout.setVerticalGroup(
+            LoginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        ContentjPanel.add(LoginjPanel, "loginCard");
 
-        jMenu1.setText("File");
+        LogoutjPanel.setLayout(new java.awt.GridBagLayout());
 
-        LoginjMenuItem.setText("Login");
-        jMenu1.add(LoginjMenuItem);
+        LoginjButton.setText("Login");
+        LogoutjPanel.add(LoginjButton, new java.awt.GridBagConstraints());
 
-        RefreshjMenuItem.setText("Refresh contact list");
-        jMenu1.add(RefreshjMenuItem);
+        RegisterjButton.setText("Register");
+        LogoutjPanel.add(RegisterjButton, new java.awt.GridBagConstraints());
 
-        ExitjMenuItem.setText("Exit");
-        jMenu1.add(ExitjMenuItem);
+        ContentjPanel.add(LogoutjPanel, "logoutCard");
 
-        jMenuBar1.add(jMenu1);
+        getContentPane().add(ContentjPanel, java.awt.BorderLayout.CENTER);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jToolBar.setRollover(true);
 
-        setJMenuBar(jMenuBar1);
+        StatusjTextField.setEditable(false);
+        StatusjTextField.setFocusable(false);
+        jToolBar.add(StatusjTextField);
+
+        getContentPane().add(jToolBar, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void initClientIM() {
+        SetLogout();
+    }
+
+    private void SetLogout() {
+        LogoutjPanel.setVisible(true);
+        LoginjPanel.setVisible(false);
+    }
+
+    private void SetLogin() {
+        LogoutjPanel.setVisible(false);
+        LoginjPanel.setVisible(true);
+    }
 
     /**
     * @param args the command line arguments
@@ -85,13 +89,13 @@ public class ClientIM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem ExitjMenuItem;
-    private javax.swing.JMenuItem LoginjMenuItem;
-    private javax.swing.JMenuItem RefreshjMenuItem;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel ContentjPanel;
+    private javax.swing.JButton LoginjButton;
+    private javax.swing.JPanel LoginjPanel;
+    private javax.swing.JPanel LogoutjPanel;
+    private javax.swing.JButton RegisterjButton;
+    private javax.swing.JTextField StatusjTextField;
+    private javax.swing.JToolBar jToolBar;
     // End of variables declaration//GEN-END:variables
 
 }
