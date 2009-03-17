@@ -366,6 +366,7 @@
         <Component class="javax.swing.JTextField" name="StatusjTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Disconnected"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>

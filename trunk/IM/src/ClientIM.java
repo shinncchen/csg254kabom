@@ -178,6 +178,7 @@ public class ClientIM extends javax.swing.JFrame {
         jToolBar.setRollover(true);
 
         StatusjTextField.setEditable(false);
+        StatusjTextField.setText("Disconnected");
         StatusjTextField.setFocusable(false);
         jToolBar.add(StatusjTextField);
 
