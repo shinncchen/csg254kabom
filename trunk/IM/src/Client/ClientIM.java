@@ -1,3 +1,5 @@
+package Client;
+
 public class ClientIM extends javax.swing.JFrame {
 
     /** Creates new form ClientIM */
