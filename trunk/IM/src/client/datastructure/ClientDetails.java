@@ -1,4 +1,4 @@
-package Clients;
+package client.datastructure;
 
 import java.security.Key;
 
@@ -8,7 +8,7 @@ import java.security.Key;
  * mostly from/onto session
  */
 
-public class clientDetails {
+public class ClientDetails {
 	
 	String username;		
 	String pwdHash;			// hash of the password entered
