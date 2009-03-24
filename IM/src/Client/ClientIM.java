@@ -176,15 +176,32 @@ public class ClientIM extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
+        UsernamejTextField.setText("Enter username");
         UsernamejTextField.setMinimumSize(new java.awt.Dimension(15, 20));
+        UsernamejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SelectAllUser(evt);
+            }
+        });
         jPanel7.add(UsernamejTextField);
 
+        jPasswordField.setText("password");
         jPasswordField.setMinimumSize(new java.awt.Dimension(15, 20));
+        jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SelectAllPass(evt);
+            }
+        });
         jPanel7.add(jPasswordField);
 
         jPanel1.add(jPanel7, java.awt.BorderLayout.CENTER);
 
         LoginjButton.setText("Login");
+        LoginjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginjButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(LoginjButton, java.awt.BorderLayout.SOUTH);
 
         LogoutjPanel.add(jPanel1, new java.awt.GridBagConstraints());
@@ -215,15 +232,24 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SelectAllUser(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SelectAllUser
+        UsernamejTextField.selectAll();
+}//GEN-LAST:event_SelectAllUser
 
-    
+    private void SelectAllPass(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SelectAllPass
+        jPasswordField.selectAll();
+    }//GEN-LAST:event_SelectAllPass
+
+    private void LoginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoginjButtonActionPerformed
+
     /**
      * Initialize IM client state
      */
     private void initClientIM() {
         SetLogout();
     }
-
 
     /**
      * Set IM client to logout state
@@ -234,7 +260,6 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenuBar.setEnabled(false);
     }
 
-
     /**
      * Set IM client to login state
      */
@@ -243,7 +268,6 @@ public class ClientIM extends javax.swing.JFrame {
         LoginjPanel.setVisible(true);
         ActionjMenuBar.setEnabled(true);
     }
-
 
     /**
     * @param args the command line arguments
