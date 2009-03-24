@@ -157,6 +157,11 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel.setLayout(new java.awt.GridBagLayout());
 
         LoginjButton.setText("Login");
+        LoginjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginjButtonActionPerformed(evt);
+            }
+        });
         LogoutjPanel.add(LoginjButton, new java.awt.GridBagConstraints());
 
         RegisterjButton.setText("Register");
@@ -199,6 +204,12 @@ public class ClientIM extends javax.swing.JFrame {
         RegisterjFrame.setAlwaysOnTop(true);
         String name = RegisterjFrame.getParent().getName();
     }//GEN-LAST:event_RegisterjButtonActionPerformed
+
+    private void LoginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginjButtonActionPerformed
+        LoginjFrame.setVisible(true);
+        LoginjFrame.setAlwaysOnTop(true);
+        String name = LoginjFrame.getParent().getName();
+    }//GEN-LAST:event_LoginjButtonActionPerformed
 
     
     /**
