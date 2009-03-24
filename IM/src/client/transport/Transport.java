@@ -15,5 +15,4 @@ public class Transport {
         transportData.setMDataReceive("server response".getBytes());
         return transportData;
     }
-
 }
