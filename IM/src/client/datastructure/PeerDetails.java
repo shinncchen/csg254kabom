@@ -1,4 +1,4 @@
-package Clients;
+package client.datastructure;
 
 import java.security.Key;
 
@@ -8,7 +8,7 @@ import java.security.Key;
  */
 
 
-public class peerDetails {
+public class PeerDetails {
 	
 	String username;		// username of the peer whom u want to chat with or .. who initiated the chat
 	String peerIP;			// peer's IP address
