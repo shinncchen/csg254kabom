@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package Client.authentication;
+package Clients.authentication;
 
 import java.io.IOException;
 import client.requests.Rid20;

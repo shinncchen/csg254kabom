@@ -1,4 +1,4 @@
-package Client.gui;
+package Clients.gui;
 
 public class ClientIM extends javax.swing.JFrame {
 

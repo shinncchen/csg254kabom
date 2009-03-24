@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-package Client.transport;
+package Clients.transport;
 
 /**
  *
  * @author Raghuram
  */
-public class Decode {
+public class Encode {
 
 }

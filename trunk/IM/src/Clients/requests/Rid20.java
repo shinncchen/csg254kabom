@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package Client.requests;
+package Clients.requests;
 
 import client.ChatMaster;
 import java.io.ByteArrayOutputStream;
