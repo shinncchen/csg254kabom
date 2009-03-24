@@ -1,4 +1,4 @@
-package Client.gui;
+package Clients.gui;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
