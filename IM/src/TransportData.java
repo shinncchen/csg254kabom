@@ -32,17 +32,17 @@ public class TransportData {
         mMessage = message;
     }
 
-    
-    public void SetDataToSend(byte[] data) {
-        mDataToSend = data;
+
+    public byte[] GetDataToSend() {
+        return mDataReceive;
     }
 
-    public void SetIP(String IP) {
-        mIP = IP;
+    public String GetIP() {
+        return mIP;
     }
 
-    public void SetPort(int port) {
-        mPort = port;
+    public int GetPort() {
+        return mPort;
     }
 
     public byte[] GetDataReceive() {
@@ -56,4 +56,18 @@ public class TransportData {
     public String GetMessage() {
         return mMessage;
     }
+
+    /*
+    public void SetDataToSend(byte[] data) {
+        mDataToSend = data;
+    }
+
+    public void SetIP(String IP) {
+        mIP = IP;
+    }
+
+    public void SetPort(int port) {
+        mPort = port;
+    }
+    */
 }
