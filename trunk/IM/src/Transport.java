@@ -4,7 +4,7 @@ public class Transport {
         return new TransportData();
     }
 
-    public TransportData receive(int port, String message) {
+    public TransportData receive(int port) {
         return new TransportData();
     }
 }
