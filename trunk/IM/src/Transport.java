@@ -21,10 +21,12 @@ public class Transport {
 
             // Receive the data
             byte[] receive = (byte[]) ois.readObject();
-            receiveTransportData = new TransportData();
+            // TODO - set status and message based on received data
+            receiveTransportData = new TransportData(receive, "", 0);
+        } catch(Exception ex) {
+          System.out.println("Error: "+ex.toString());
         }
-        catch (IOException ioex) {}
 
-        return new TransportData();
+        return receiveTransportData;
     }
 }
