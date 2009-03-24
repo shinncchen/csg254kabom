@@ -44,8 +44,14 @@ public class ClientIM extends javax.swing.JFrame {
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
         LogoutjPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        UsernamejLabel = new javax.swing.JLabel();
+        PasswordjLabel = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        UsernamejTextField = new javax.swing.JTextField();
+        jPasswordField = new javax.swing.JPasswordField();
         LoginjButton = new javax.swing.JButton();
-        RegisterjButton = new javax.swing.JButton();
         StatusjToolBar = new javax.swing.JToolBar();
         StatusjTextField = new javax.swing.JTextField();
         ActionjMenuBar = new javax.swing.JMenuBar();
@@ -156,21 +162,32 @@ public class ClientIM extends javax.swing.JFrame {
 
         LogoutjPanel.setLayout(new java.awt.GridBagLayout());
 
-        LoginjButton.setText("Login");
-        LoginjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginjButtonActionPerformed(evt);
-            }
-        });
-        LogoutjPanel.add(LoginjButton, new java.awt.GridBagConstraints());
+        jPanel1.setLayout(new java.awt.BorderLayout(5, 10));
 
-        RegisterjButton.setText("Register");
-        RegisterjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterjButtonActionPerformed(evt);
-            }
-        });
-        LogoutjPanel.add(RegisterjButton, new java.awt.GridBagConstraints());
+        jPanel6.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
+
+        UsernamejLabel.setText("Username");
+        jPanel6.add(UsernamejLabel);
+
+        PasswordjLabel.setText("Password");
+        jPanel6.add(PasswordjLabel);
+
+        jPanel1.add(jPanel6, java.awt.BorderLayout.WEST);
+
+        jPanel7.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
+
+        UsernamejTextField.setMinimumSize(new java.awt.Dimension(15, 20));
+        jPanel7.add(UsernamejTextField);
+
+        jPasswordField.setMinimumSize(new java.awt.Dimension(15, 20));
+        jPanel7.add(jPasswordField);
+
+        jPanel1.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        LoginjButton.setText("Login");
+        jPanel1.add(LoginjButton, java.awt.BorderLayout.SOUTH);
+
+        LogoutjPanel.add(jPanel1, new java.awt.GridBagConstraints());
 
         ContentjPanel.add(LogoutjPanel, "logoutCard");
 
@@ -198,18 +215,6 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void RegisterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterjButtonActionPerformed
-        RegisterjFrame.setVisible(true);
-        RegisterjFrame.setAlwaysOnTop(true);
-        String name = RegisterjFrame.getParent().getName();
-    }//GEN-LAST:event_RegisterjButtonActionPerformed
-
-    private void LoginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginjButtonActionPerformed
-        LoginjFrame.setVisible(true);
-        LoginjFrame.setAlwaysOnTop(true);
-        String name = LoginjFrame.getParent().getName();
-    }//GEN-LAST:event_LoginjButtonActionPerformed
 
     
     /**
@@ -266,21 +271,27 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JPanel LogoutjPanel;
     private javax.swing.JButton OKjButtonR;
     private javax.swing.JButton OKjButtonR1;
+    private javax.swing.JLabel PasswordjLabel;
     private javax.swing.JPanel RContentjPanel;
     private javax.swing.JPanel RContentjPanel1;
-    private javax.swing.JButton RegisterjButton;
     private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
     private javax.swing.JToolBar StatusjToolBar;
+    private javax.swing.JLabel UsernamejLabel;
+    private javax.swing.JTextField UsernamejTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
