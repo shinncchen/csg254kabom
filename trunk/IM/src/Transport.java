@@ -22,7 +22,17 @@ public class Transport {
             // Receive the data
             byte[] receive = (byte[]) ois.readObject();
             // TODO - set status and message based on received data
-            receiveTransportData = new TransportData(receive, "", 0);
+            int status = 0;
+            String message = "";
+            // TODO - set status and message based on received data
+            receiveTransportData = new TransportData(receive, message, status);
+            
+            // close input stream
+            ois.close();
+            // close output stream
+            oos.close();
+            // close client socket
+            sock.close();
         } catch(Exception ex) {
           System.out.println("Error: "+ex.toString());
         }
