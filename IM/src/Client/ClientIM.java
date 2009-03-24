@@ -241,7 +241,8 @@ public class ClientIM extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectAllPass
 
     private void LoginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginjButtonActionPerformed
-        // TODO add your handling code here:
+        String username = UsernamejTextField.getText();
+        String password = new String(jPasswordField.getPassword());
     }//GEN-LAST:event_LoginjButtonActionPerformed
 
     /**
