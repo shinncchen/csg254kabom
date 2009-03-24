@@ -4,7 +4,7 @@ public class TransportData {
     int mSendPort;
     Byte[] mDataReceive;
     int mStatus;
-    String mDataToReceive;
+    String mMessage;
 
     public int send(String ip, int port, byte[] data) {
         return 0;
