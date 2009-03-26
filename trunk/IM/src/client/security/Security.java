@@ -1,6 +1,8 @@
 /**
  * This class has static methods that relate to
  * AES/RSA/Timestamps/Encode/Decode streams
+ * Team members: use this class when you need anything
+ * to do with security
  * 
  */
 package client.security;
@@ -13,6 +15,7 @@ package client.security;
 public class Security {
 	
 	private static final int RSA_KEYSIZE = 1024;
+	private static final int AES_KEY_SIZE = 128;
 	
 	/*
 	 * Returns an RSA PublicKey/PrivateKey pair in object RSAKeys
@@ -38,24 +41,33 @@ public class Security {
 	}
 	
 	/*
+	 * generate AES key
+	 */
+	public byte[] generateAESKey() {
+		return new AES().generateKey(AES_KEY_SIZE);
+	}
+	
+	/*
 	 * AES Encrypt a msg in bytes and return the cipher in bytes
 	 */
-	public byte[] AESEncrypt(byte[] message) {
-		return null;
+	public byte[] AESEncrypt(byte[] key, byte[] message) {
+		return new AES().AESEncrypt(key, message);
 	}
 	
 	/*
 	 * AES Decrypt a msg in bytes and return the plaintext in bytes
 	 */
-	public byte[] AESDecrypt(byte[] message) {
-		return null;
+	public byte[] AESDecrypt(byte[] key, byte[] message) {
+		return new AES().AESDecrypt(key, message);
 	}
+	
+	
 	
 	/*
 	 * test driver
 	 */
 	public static void main(String[] args) {
-		RSAKeys keys;
+		/*RSAKeys keys;
 		Security security = new Security();
 		keys = security.generateRSAKeys();
 		System.out.println("Generated");
@@ -66,7 +78,16 @@ public class Security {
 		//security.RSADecrypt(keys.getPrivateKey(), encrypted);
 		byte[] decrypted = security.RSADecrypt(keys.getPrivateKey(), encrypted);
 		//System.out.println(decrypted==null);
-		System.out.println("Decrypted: " + new String(decrypted));
+		System.out.println("Decrypted: " + new String(decrypted));*/
+
+		Security security = new Security();
+		
+		byte[] AESkey = security.generateAESKey();
+		byte[] encrypted = security.AESEncrypt(AESkey, "don't you just love this man".getBytes());
+		byte[] decrypted = security.AESDecrypt(AESkey, encrypted);
+		System.out.println("Decrypted message is: " + new String(decrypted));
+		
+		
 	}
 	
 	

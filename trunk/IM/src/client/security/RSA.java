@@ -1,5 +1,6 @@
 /**
  * RSA Utilities main body
+ * don't use this class
  */
 package client.security;
 
@@ -101,96 +102,5 @@ public class RSA {
 		}
 		return "Greatness".getBytes();
 	}
-	
-	
-	/**
-	 * Encrypts or decrypts a file and outputs it to a file using
-	 * a cipher that is already initiated.
-	 * @param in the input file's stream
-	 * @param out the output file's stream
-	 * @param cipher the cipher already initiated
-	 * @throws IOException
-	 * @throws GeneralSecurityException
-	 */
-	public static void crypt(InputStream in, OutputStream out,
-			Cipher cipher) throws IOException, GeneralSecurityException {
-		int blockSize = cipher.getBlockSize();
-		int outputSize = cipher.getOutputSize(blockSize);
-		byte[] inBytes = new byte[blockSize];
-		byte[] outBytes = new byte[outputSize];
-
-		System.out.println("blocksize: " + blockSize);
-		int intLength = in.read(inBytes);
-		System.out.println("bytes read from input stream: " + intLength);
-		System.out.println("");
-		int inLength = 0;;
-		boolean more = true;
-		while (more)
-		{
-			inLength = in.read(inBytes);
-			//System.out.println("Still more?");
-			if (inLength == blockSize)
-			{
-				int outLength = cipher.update(inBytes, 0, blockSize, outBytes);
-				out.write(outBytes, 0, outLength);
-			}
-			else more = false;         
-		}
-		if (inLength > 0)
-			outBytes = cipher.doFinal(inBytes, 0, inLength);
-		else
-			outBytes = cipher.doFinal();
-		out.write(outBytes);
-	}
-	/*
-	private void encryptFile() { 
-		System.out.println("Ecrypting file: " + filename2 + " using pubkey: " + filename1);
-		System.out.println("Output: " + filename2+"-encrypted");
-		try {
-
-			//filename1 is public key
-			//filename2 is file to be encrypted
-			
-			//get an instance of AES.
-            KeyGenerator keygen = KeyGenerator.getInstance("AES");
-            keygen.init(AES_KEY_SIZE);
-            SecureRandom random = new SecureRandom();
-            keygen.init(random);
-            SecretKey key = keygen.generateKey();
-
-            //retrieve RSA's public key
-            ObjectInputStream keyIn = new ObjectInputStream(new FileInputStream(filename1));
-            Key publicKey = (Key) keyIn.readObject();
-            keyIn.close();            
-
-            //wrap the AES key with the public key of RSA
-            //and write it to file.
-            Cipher cipher = Cipher.getInstance("RSA");
-            cipher.init(Cipher.WRAP_MODE, publicKey);
-            byte[] wrappedKey = cipher.wrap(key);
-            DataOutputStream out = new DataOutputStream(new FileOutputStream(filename2+"-encrypted"));
-            out.writeInt(wrappedKey.length);
-            out.write(wrappedKey);
-
-            //encode filename2 with the AES that we have
-            //using CBC mode
-            InputStream in = new FileInputStream(filename2);
-            cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-            
-            //must also write out the generated IV to encrypted file
-            //no wrapping here, security risk ?
-            out.write(cipher.getIV());
-            
-            //encryption process
-            crypt(in, out, cipher);
-            in.close();
-            out.close();
-
-		} catch (Exception e) {
-			System.err.println("Error: " + e);
-		}
-		System.out.println("Done!");
-		*/
 	
 }
