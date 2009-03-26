@@ -1,5 +1,7 @@
 package client.gui;
 
+import java.awt.CardLayout;
+
 public class ClientIM extends javax.swing.JFrame {
 
     /** Creates new form ClientIM */
@@ -56,6 +58,7 @@ public class ClientIM extends javax.swing.JFrame {
         StatusjTextField = new javax.swing.JTextField();
         ActionjMenuBar = new javax.swing.JMenuBar();
         ActionjMenu = new javax.swing.JMenu();
+        RefreshjMenuItem = new javax.swing.JMenuItem();
         LogoutjMenuItem = new javax.swing.JMenuItem();
 
         RegisterjFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -199,7 +202,7 @@ public class ClientIM extends javax.swing.JFrame {
         LoginjButton.setText("Login");
         LoginjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginjButtonActionPerformed(evt);
+                LoginAction(evt);
             }
         });
         jPanel1.add(LoginjButton, java.awt.BorderLayout.SOUTH);
@@ -219,10 +222,20 @@ public class ClientIM extends javax.swing.JFrame {
 
         getContentPane().add(StatusjToolBar, java.awt.BorderLayout.SOUTH);
 
+        ActionjMenuBar.setEnabled(false);
+
         ActionjMenu.setText("Action");
         ActionjMenu.setEnabled(false);
 
+        RefreshjMenuItem.setText("Refresh User List");
+        ActionjMenu.add(RefreshjMenuItem);
+
         LogoutjMenuItem.setText("Logout");
+        LogoutjMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutAction(evt);
+            }
+        });
         ActionjMenu.add(LogoutjMenuItem);
 
         ActionjMenuBar.add(ActionjMenu);
@@ -240,10 +253,19 @@ public class ClientIM extends javax.swing.JFrame {
         jPasswordField.selectAll();
     }//GEN-LAST:event_SelectAllPass
 
-    private void LoginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginjButtonActionPerformed
+    private void LoginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginAction
         String username = UsernamejTextField.getText();
         String password = new String(jPasswordField.getPassword());
-    }//GEN-LAST:event_LoginjButtonActionPerformed
+        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
+        cl.show(ContentjPanel, "loginCard");
+        SetLogin();
+}//GEN-LAST:event_LoginAction
+
+    private void LogoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutAction
+        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
+        cl.show(ContentjPanel, "logoutCard");
+        SetLogout();
+    }//GEN-LAST:event_LogoutAction
 
     /**
      * Initialize IM client state
@@ -259,6 +281,8 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
         ActionjMenuBar.setEnabled(false);
+        ActionjMenu.setEnabled(false);
+        StatusjTextField.setText("Disconnected");
     }
 
     /**
@@ -268,6 +292,8 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel.setVisible(false);
         LoginjPanel.setVisible(true);
         ActionjMenuBar.setEnabled(true);
+        ActionjMenu.setEnabled(true);
+        StatusjTextField.setText("Connected");
     }
 
     /**
@@ -299,6 +325,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JLabel PasswordjLabel;
     private javax.swing.JPanel RContentjPanel;
     private javax.swing.JPanel RContentjPanel1;
+    private javax.swing.JMenuItem RefreshjMenuItem;
     private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
     private javax.swing.JToolBar StatusjToolBar;

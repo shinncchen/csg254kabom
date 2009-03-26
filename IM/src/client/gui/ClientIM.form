@@ -237,6 +237,9 @@
       </SubComponents>
     </Container>
     <Menu class="javax.swing.JMenuBar" name="ActionjMenuBar">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="ActionjMenu">
           <Properties>
@@ -244,10 +247,18 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="RefreshjMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Refresh User List"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="LogoutjMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutAction"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -394,7 +405,7 @@
                     <Property name="text" type="java.lang.String" value="Login"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginjButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginAction"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
