@@ -251,6 +251,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Refresh User List"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RefreshUserListAction"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="LogoutjMenuItem">
               <Properties>

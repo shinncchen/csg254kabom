@@ -219,6 +219,11 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenu.setEnabled(false);
 
         RefreshjMenuItem.setText("Refresh User List");
+        RefreshjMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshUserListAction(evt);
+            }
+        });
         ActionjMenu.add(RefreshjMenuItem);
 
         LogoutjMenuItem.setText("Logout");
@@ -297,6 +302,10 @@ public class ClientIM extends javax.swing.JFrame {
         SetLogout();
     }//GEN-LAST:event_LogoutAction
 
+    private void RefreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshUserListAction
+        LoginjPanel.removeAll();
+    }//GEN-LAST:event_RefreshUserListAction
+
     private JButton CreateUserButton(String username) {
         JButton userjButton = new javax.swing.JButton();
 
@@ -308,6 +317,11 @@ public class ClientIM extends javax.swing.JFrame {
         });
 
         return userjButton;
+    }
+
+    private void CreateChatWindow(String thisuser, String guestuser) {
+        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
+        chatwindow.setVisible(true);
     }
 
     /**
