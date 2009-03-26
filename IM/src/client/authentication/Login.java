@@ -39,5 +39,13 @@ public class Login {
     public void receiveRid20(TransportData transportData) {
         System.out.println("RID 20 response: "+new String(transportData.getMDataReceive()));
     }
+    
+    public void receiveRid21(TransportData transportData) {
+        System.out.println("RID 21 response: "+new String(transportData.getMDataReceive()));
+    }
+    
+    public void receiveRid22(TransportData transportData) {
+        System.out.println("RID 22 response: "+new String(transportData.getMDataReceive()));
+    }
 
 }

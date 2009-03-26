@@ -10,14 +10,14 @@ import java.security.Key;
 
 public class PeerDetails {
 	
-	String username;		// username of the peer whom u want to chat with or .. who initiated the chat
-	String peerIP;			// peer's IP address
-	byte[] ticket;			// this is the ticket the server sent to initiate chat
-	Key peerPublicKey;		// peers public key, this will be extracted out from the ticket
+	private String username;		// username of the peer whom u want to chat with or .. who initiated the chat
+	private String peerIP;			// peer's IP address
+	private byte[] ticket;			// this is the ticket the server sent to initiate chat
+	private Key peerPublicKey;		// peers public key, this will be extracted out from the ticket
 	
 	// aDH;					// I AM NOT SURE IF WE NEED THIS HERE .. can add it later
 	
-	Key peerDH;				// established DH key between client(me)-peer
+	private Key peerDH;				// established DH key between client(me)-peer
 
 	/**
 	 * @return the username
@@ -88,6 +88,7 @@ public class PeerDetails {
 	public void setPeerDH(Key peerDH) {
 		this.peerDH = peerDH;
 	}
+
 	
 
 }
