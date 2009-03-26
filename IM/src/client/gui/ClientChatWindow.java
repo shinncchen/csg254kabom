@@ -66,7 +66,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
         SendjButton.setText("Send");
         SendjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SendjButtonActionPerformed(evt);
+                sendjButtonActionPerformed(evt);
             }
         });
         jPanel1.add(SendjButton, java.awt.BorderLayout.EAST);
@@ -86,19 +86,19 @@ public class ClientChatWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendjButtonActionPerformed
+    private void sendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendjButtonActionPerformed
         String message = MessagejTextArea.getText();
 
         if(!message.equals("")) {
-            AddChat(mThisUser, message);
+            addChatHistory(mThisUser, message);
         }
-    }//GEN-LAST:event_SendjButtonActionPerformed
+}//GEN-LAST:event_sendjButtonActionPerformed
 
-    public void ReceiveMessageAction(String message) {
-        AddChat(mGuestUser, message);
+    public void receiveMessageAction(String message) {
+        addChatHistory(mGuestUser, message);
     }
 
-    private void AddChat(String user, String message) {
+    private void addChatHistory(String user, String message) {
         mChatHistory.append(user+" > "+message+"\n");
         ChatHistjTextArea.setText(mChatHistory.toString());
     }
