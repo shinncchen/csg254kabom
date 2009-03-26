@@ -5,6 +5,8 @@ import javax.swing.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
+    private String username = "";
+
     /** Creates new form ClientIM */
     public ClientIM() {
         initComponents();
@@ -245,7 +247,7 @@ public class ClientIM extends javax.swing.JFrame {
      * Initialize IM client state
      */
     private void initClientIM() {
-        SetLogout();
+        setLogout();
     }
 
     private void SelectAllUser(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SelectAllUser
@@ -259,7 +261,7 @@ public class ClientIM extends javax.swing.JFrame {
     /**
      * Set IM client to logout state
      */
-    private void SetLogout() {
+    private void setLogout() {
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
         ActionjMenuBar.setEnabled(false);
@@ -270,7 +272,7 @@ public class ClientIM extends javax.swing.JFrame {
     /**
      * Set IM client to login state
      */
-    private void SetLogin() {
+    private void setLogin() {
         LogoutjPanel.setVisible(false);
         LoginjPanel.setVisible(true);
         ActionjMenuBar.setEnabled(true);
@@ -288,7 +290,7 @@ public class ClientIM extends javax.swing.JFrame {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "loginCard");
-        SetLogin();
+        setLogin();
 }//GEN-LAST:event_LoginAction
 
     /**
@@ -299,17 +301,17 @@ public class ClientIM extends javax.swing.JFrame {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "logoutCard");
-        SetLogout();
+        setLogout();
     }//GEN-LAST:event_LogoutAction
 
     private void RefreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshUserListAction
         LoginjPanel.removeAll();
     }//GEN-LAST:event_RefreshUserListAction
 
-    private JButton CreateUserButton(String username) {
+    private JButton createUserButton(String guestusername) {
         JButton userjButton = new javax.swing.JButton();
 
-        userjButton.setText(username);
+        userjButton.setText(guestusername);
         userjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 // CreateChatWindow(evt);
@@ -319,16 +321,16 @@ public class ClientIM extends javax.swing.JFrame {
         return userjButton;
     }
 
-    private void PopulateUserList(String[] userlist) {
+    private void populateUserList(String[] userlist) {
         int i = 0;
 
         while(userlist[i] != null) {
-            LoginjPanel.add(CreateUserButton(userlist[i]));
+            LoginjPanel.add(createUserButton(userlist[i]));
         }
         LoginjPanel.repaint();
     }
 
-    private void CreateChatWindow(String thisuser, String guestuser) {
+    private void createChatWindow(String thisuser, String guestuser) {
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
         chatwindow.setVisible(true);
     }
