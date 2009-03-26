@@ -45,6 +45,7 @@ public class ClientIM extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         LogoutjPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -150,16 +151,15 @@ public class ClientIM extends javax.swing.JFrame {
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout LoginjPanelLayout = new javax.swing.GroupLayout(LoginjPanel);
-        LoginjPanel.setLayout(LoginjPanelLayout);
-        LoginjPanelLayout.setHorizontalGroup(
-            LoginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-        );
-        LoginjPanelLayout.setVerticalGroup(
-            LoginjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
-        );
+        LoginjPanel.setLayout(new java.awt.GridLayout(10, 0));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateChatWindow(evt);
+            }
+        });
+        LoginjPanel.add(jButton1);
 
         ContentjPanel.add(LoginjPanel, "loginCard");
 
@@ -253,6 +253,10 @@ public class ClientIM extends javax.swing.JFrame {
         jPasswordField.selectAll();
     }//GEN-LAST:event_SelectAllPass
 
+    /**
+     * Login to the IM
+     * @param evt
+     */
     private void LoginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginAction
         String username = UsernamejTextField.getText();
         String password = new String(jPasswordField.getPassword());
@@ -261,11 +265,20 @@ public class ClientIM extends javax.swing.JFrame {
         SetLogin();
 }//GEN-LAST:event_LoginAction
 
+    /**
+     * Logout from the IM
+     * @param evt
+     */
     private void LogoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutAction
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
         cl.show(ContentjPanel, "logoutCard");
         SetLogout();
     }//GEN-LAST:event_LogoutAction
+
+    private void CreateChatWindow(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateChatWindow
+        ClientChatWindow chatwindow = new ClientChatWindow();
+        chatwindow.setVisible(true);
+    }//GEN-LAST:event_CreateChatWindow
 
     /**
      * Initialize IM client state
@@ -331,6 +344,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JToolBar StatusjToolBar;
     private javax.swing.JLabel UsernamejLabel;
     private javax.swing.JTextField UsernamejTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
