@@ -10,18 +10,19 @@ import java.security.Key;
 
 public class ClientDetails {
 	
-	String username;		
-	String pwdHash;			// hash of the password entered
-	String myIP;			// clients IP address
-	Key publicKey;			// new public key ... generated everytime client program is run
-	Key privateKey;			// new private key
+	private String username;		
+	private String pwdHash;			// hash of the password entered
+	private String myIP;			// clients IP address
+	private Key publicKey;			// new public key ... generated everytime client program is run
+	private Key privateKey;			// new private key
 	
 	// aDH;					// I AM NOT SURE IF WE NEED THIS HERE .. can add it later
 	// gbModP;				// CAUSE THE DH ALGORITH SHOULD TAKE CARE OF THIS
 	
-	Key serverDH;			// session key established between client-server
-	byte[] onlineContacts;	// array sent by server
-	int sConv;  			// number of simultaneous conversations. 0 when not chatting with anyone
+	private Key serverDH;			// session key established between client-server
+	private byte[] onlineContacts;	// array sent by server
+	private int sConv;  			// number of simultaneous conversations. 0 when not chatting with anyone
+	
 	
 	/**
 	 * @return the username
