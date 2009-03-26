@@ -6,6 +6,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
     private String mGuestUser = "";
     private String mThisUser = "";
 
+
     /** Creates new form ClientChatWindow */
     public ClientChatWindow(String thisuser, String guestuser) {
         initComponents();
@@ -102,16 +103,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
         mChatHistory.append(user+" > "+message+"\n");
         ChatHistjTextArea.setText(mChatHistory.toString());
     }
-
-    /*
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClientChatWindow().setVisible(true);
-            }
-        });
-    }
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea ChatHistjTextArea;
