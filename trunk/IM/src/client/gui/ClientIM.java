@@ -319,6 +319,15 @@ public class ClientIM extends javax.swing.JFrame {
         return userjButton;
     }
 
+    private void PopulateUserList(String[] userlist) {
+        int i = 0;
+
+        while(userlist[i] != null) {
+            LoginjPanel.add(CreateUserButton(userlist[i]));
+        }
+        LoginjPanel.repaint();
+    }
+
     private void CreateChatWindow(String thisuser, String guestuser) {
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
         chatwindow.setVisible(true);
