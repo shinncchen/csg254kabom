@@ -150,6 +150,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IM Client");
+        setMinimumSize(new java.awt.Dimension(150, 400));
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
