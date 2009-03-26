@@ -176,7 +176,7 @@ public class ClientIM extends javax.swing.JFrame {
         UsernamejTextField.setMinimumSize(new java.awt.Dimension(15, 20));
         UsernamejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                SelectAllUser(evt);
+                selectAllUser(evt);
             }
         });
         jPanel7.add(UsernamejTextField);
@@ -185,7 +185,7 @@ public class ClientIM extends javax.swing.JFrame {
         jPasswordField.setMinimumSize(new java.awt.Dimension(15, 20));
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                SelectAllPass(evt);
+                selectAllPass(evt);
             }
         });
         jPanel7.add(jPasswordField);
@@ -195,7 +195,7 @@ public class ClientIM extends javax.swing.JFrame {
         LoginjButton.setText("Login");
         LoginjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginAction(evt);
+                loginAction(evt);
             }
         });
         jPanel1.add(LoginjButton, java.awt.BorderLayout.SOUTH);
@@ -223,7 +223,7 @@ public class ClientIM extends javax.swing.JFrame {
         RefreshjMenuItem.setText("Refresh User List");
         RefreshjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshUserListAction(evt);
+                refreshUserListAction(evt);
             }
         });
         ActionjMenu.add(RefreshjMenuItem);
@@ -231,7 +231,7 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjMenuItem.setText("Logout");
         LogoutjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutAction(evt);
+                logoutAction(evt);
             }
         });
         ActionjMenu.add(LogoutjMenuItem);
@@ -250,13 +250,13 @@ public class ClientIM extends javax.swing.JFrame {
         setLogout();
     }
 
-    private void SelectAllUser(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SelectAllUser
+    private void selectAllUser(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectAllUser
         UsernamejTextField.selectAll();
-}//GEN-LAST:event_SelectAllUser
+}//GEN-LAST:event_selectAllUser
 
-    private void SelectAllPass(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SelectAllPass
+    private void selectAllPass(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectAllPass
         jPasswordField.selectAll();
-    }//GEN-LAST:event_SelectAllPass
+}//GEN-LAST:event_selectAllPass
 
     /**
      * Set IM client to logout state
@@ -284,29 +284,29 @@ public class ClientIM extends javax.swing.JFrame {
      * Login to the IM
      * @param evt
      */
-    private void LoginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginAction
+    private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
         String username = UsernamejTextField.getText();
         String password = new String(jPasswordField.getPassword());
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "loginCard");
         setLogin();
-}//GEN-LAST:event_LoginAction
+}//GEN-LAST:event_loginAction
 
     /**
      * Logout from the IM
      * @param evt
      */
-    private void LogoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutAction
+    private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "logoutCard");
         setLogout();
-    }//GEN-LAST:event_LogoutAction
+}//GEN-LAST:event_logoutAction
 
-    private void RefreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshUserListAction
+    private void refreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshUserListAction
         LoginjPanel.removeAll();
-    }//GEN-LAST:event_RefreshUserListAction
+}//GEN-LAST:event_refreshUserListAction
 
     private JButton createUserButton(String guestusername) {
         JButton userjButton = new javax.swing.JButton();
