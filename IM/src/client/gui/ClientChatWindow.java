@@ -38,8 +38,8 @@ public class ClientChatWindow extends javax.swing.JFrame {
         jToolBar2 = new javax.swing.JToolBar();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(80, 200));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(80, 400));
 
         jToolBar1.setRollover(true);
 
