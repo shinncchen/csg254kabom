@@ -12,10 +12,13 @@ public class PeerDetails {
 	
 	private String username;		// username of the peer whom u want to chat with or .. who initiated the chat
 	private String peerIP;			// peer's IP address
+	private int port;
 	private String firstname;
 	private String lastname;
 	private Key peerPublicKey;		// peers public key, this will be extracted out from the ticket
-	private Key peerDH;				// established DH key between client(me)-peer
+	private Key peerSessionKey;				// established DH key between client(me)-peer
+	private byte[] timeT1;
+	private byte[] timeT2;
 	private byte[] timeTk;
 	
 	

@@ -17,6 +17,7 @@ public class ClientDetails {
 	private Key privateKey;			// new private key
 	private Key sessionKey;			// session key established between client-server
 	private int sConv;			// number of simultaneous conversations. 0 when not chatting with anyone
+	private byte[] timeT1;
 	
 }
 	

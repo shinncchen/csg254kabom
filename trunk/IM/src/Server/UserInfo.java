@@ -9,7 +9,7 @@ public class UserInfo {
 	private String firstname;
 	private String lastname;
 	private String IP;
-	private String port;
+	private int port;
 	private Key publicKey;
 	private Key sessionKey;
 	private int currentState;
