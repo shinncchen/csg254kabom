@@ -1,17 +1,19 @@
 package client.gui;
+import java.security.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
     private StringBuffer mChatHistory = new StringBuffer();
     private String mGuestUser = "";
     private String mThisUser = "";
+    private Key mUserKey;
 
 
     /** Creates new form ClientChatWindow */
     public ClientChatWindow(String thisuser, String guestuser) {
         initComponents();
         this.mGuestUser = guestuser;
-        UserjTextField.setText(guestuser);
+        this.UserjTextField.setText(guestuser);
         this.mThisUser = thisuser;
     }
 
@@ -37,6 +39,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(80, 200));
 
         jToolBar1.setRollover(true);
 
@@ -59,6 +62,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         MessagejTextArea.setColumns(20);
+        MessagejTextArea.setLineWrap(true);
         MessagejTextArea.setRows(5);
         jScrollPane2.setViewportView(MessagejTextArea);
 

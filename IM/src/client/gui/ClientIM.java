@@ -150,7 +150,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IM Client");
-        setMinimumSize(new java.awt.Dimension(150, 400));
+        setMinimumSize(new java.awt.Dimension(200, 400));
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
@@ -248,13 +248,21 @@ public class ClientIM extends javax.swing.JFrame {
      * Initialize IM client state
      */
     private void initClientIM() {
-        setLogout();
+        setLogoutState();
     }
 
+    /**
+     * Select all user textbox
+     * @param evt
+     */
     private void selectAllUser(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectAllUser
         UsernamejTextField.selectAll();
 }//GEN-LAST:event_selectAllUser
 
+    /**
+     * Select all password textbox
+     * @param evt
+     */
     private void selectAllPass(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectAllPass
         jPasswordField.selectAll();
 }//GEN-LAST:event_selectAllPass
@@ -262,7 +270,7 @@ public class ClientIM extends javax.swing.JFrame {
     /**
      * Set IM client to logout state
      */
-    private void setLogout() {
+    private void setLogoutState() {
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
         ActionjMenuBar.setEnabled(false);
@@ -273,12 +281,17 @@ public class ClientIM extends javax.swing.JFrame {
     /**
      * Set IM client to login state
      */
-    private void setLogin() {
+    private void setLoginState() {
         LogoutjPanel.setVisible(false);
         LoginjPanel.setVisible(true);
         ActionjMenuBar.setEnabled(true);
         ActionjMenu.setEnabled(true);
         StatusjTextField.setText("Connected");
+
+        String[] users = new String[2];
+        users[0] = "sdfdsf";
+        users[1] = "ytkuypou";
+        populateUserList(users);
     }
 
     /**
@@ -291,7 +304,7 @@ public class ClientIM extends javax.swing.JFrame {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "loginCard");
-        setLogin();
+        setLoginState();
 }//GEN-LAST:event_loginAction
 
     /**
@@ -302,35 +315,58 @@ public class ClientIM extends javax.swing.JFrame {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         cl.show(ContentjPanel, "logoutCard");
-        setLogout();
+        setLogoutState();
 }//GEN-LAST:event_logoutAction
 
+    /**
+     * Refresh user list in IM window
+     * @param evt
+     */
     private void refreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshUserListAction
         LoginjPanel.removeAll();
+        LoginjPanel.repaint();
+
+        // TODO some funtion to get the list of user
+        String[] userlist = null;
+        populateUserList(userlist);
 }//GEN-LAST:event_refreshUserListAction
 
+    /**
+     * Create a button for a single user
+     * @param guestusername
+     * @return
+     */
     private JButton createUserButton(String guestusername) {
-        JButton userjButton = new javax.swing.JButton();
+        JButton userjButton = new JButton();
 
         userjButton.setText(guestusername);
+        userjButton.setActionCommand(guestusername);
         userjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // CreateChatWindow(evt);
+                createChatWindow(username, evt.getActionCommand());
             }
         });
 
         return userjButton;
     }
 
+    /**
+     * Create buttons to the IM given a list of user
+     * @param userlist
+     */
     private void populateUserList(String[] userlist) {
         int i = 0;
 
         while(userlist[i] != null) {
-            LoginjPanel.add(createUserButton(userlist[i]));
+            LoginjPanel.add(createUserButton(userlist[i++]));
         }
-        LoginjPanel.repaint();
     }
 
+    /**
+     * Create a chat window between this and the guest user
+     * @param thisuser
+     * @param guestuser
+     */
     private void createChatWindow(String thisuser, String guestuser) {
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
         chatwindow.setVisible(true);
