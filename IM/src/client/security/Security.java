@@ -67,25 +67,17 @@ public class Security {
 	 * test driver
 	 */
 	public static void main(String[] args) {
-		/*RSAKeys keys;
+		RSAKeys keys;
 		Security security = new Security();
 		keys = security.generateRSAKeys();
-		System.out.println("Generated");
-		byte[] encrypted = security.RSAEncrypt(keys.getPublicKey(), keys.getPublicKey());
-		System.out.println("Encrypted: " + new String(encrypted));
-		
-		//System.out.println("Do i reach here????");
-		//security.RSADecrypt(keys.getPrivateKey(), encrypted);
+		byte[] encrypted = security.RSAEncrypt(keys.getPublicKey(), "i love this stuff a lot".getBytes());
 		byte[] decrypted = security.RSADecrypt(keys.getPrivateKey(), encrypted);
-		//System.out.println(decrypted==null);
-		System.out.println("Decrypted: " + new String(decrypted));*/
-
-		Security security = new Security();
+		System.out.println("Decrypted: " + new String(decrypted));
 		
 		byte[] AESkey = security.generateAESKey();
-		byte[] encrypted = security.AESEncrypt(AESkey, "don't you just love this man".getBytes());
-		byte[] decrypted = security.AESDecrypt(AESkey, encrypted);
-		System.out.println("Decrypted message is: " + new String(decrypted));
+		byte[] encrypted1 = security.AESEncrypt(AESkey, "don't you just love this man".getBytes());
+		byte[] decrypted2 = security.AESDecrypt(AESkey, encrypted1);
+		System.out.println("Decrypted message is: " + new String(decrypted2));
 		
 		
 	}

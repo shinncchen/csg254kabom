@@ -33,7 +33,6 @@ public class RSA {
 			out = new ObjectOutputStream(baos);
 			//writing private key to stream
 			out.writeObject(keyPair.getPrivate());
-			System.out.println("private key written: " + keyPair.getPrivate());
 			out.flush();    
 			keys.setPrivateKey(baos.toByteArray());
 			return keys;
@@ -51,42 +50,69 @@ public class RSA {
 			Key pKey = (Key) keyIn.readObject();
 			keyIn.close();
             //setup Cipher object to encrypt using RSA
-            Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
-            cipher.init(Cipher.ENCRYPT_MODE, pKey);
-            return cipher.doFinal(messageToEncrypt);
-            /*System.out.println("blocksize11: " + cipher.getBlockSize());
-            //setup Input and Outputstreams to encrypt
-            ByteArrayInputStream bais = new ByteArrayInputStream(messageToEncrypt);
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.WRAP_MODE, pKey);
+            
+            //generate new AES key to encrypt the rest of the message
+            byte[] AESKey = new Security().generateAESKey();
+            
+            //read it into a key and encrypt it using RSA
+            ByteArrayInputStream bais = new ByteArrayInputStream(AESKey);
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            SecretKey sKey = (SecretKey)ois.readObject();
+            ois.close();
+            
+            //wrap key with RSA
+            byte[] wrappedKey = cipher.wrap(sKey);
+            
+            //write to objectoutputstream that wrapped key.
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            DataInputStream dis = new DataInputStream(bais);
-            System.out.println("Datainputstream size: " + dis.available());
-            DataOutputStream out = new DataOutputStream(baos);
-            System.out.println("Before crypt");
-            //out.write(cipher.getIV());
-            crypt(dis, out, cipher);
-            System.out.println("After crypt");
-            out.flush();
-            return baos.toByteArray();*/
+            ObjectOutputStream ous = new ObjectOutputStream(baos);
+            ous.writeObject(wrappedKey);
+            
+            byte[] encryptedData = new AES().AESEncrypt(AESKey, messageToEncrypt);
+            ous.writeObject(encryptedData);
+            ous.flush();
+            return baos.toByteArray();
 
 		} catch (Exception e) {
 			System.err.println("Problem at RSAEncrypt" + e);
 		}
-		return "loved".getBytes();
+		return null;
 	}
 	
 	public byte[] RSADecrypt(byte[] privateKey, byte[] messageToDecrypt) {
 		
-		System.out.println("RSA DEcrypt");
+		//System.out.println("RSA DEcrypt");
 		
 		//retrieve the RSA private key from byte array
 		try {
 			ObjectInputStream keyIn = new ObjectInputStream(new ByteArrayInputStream(privateKey));
 			Key pKey = (Key) keyIn.readObject();
-			System.out.println("read private key:" + pKey);
-            //setup Cipher object to encrypt using RSA
-            Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
-            cipher.init(Cipher.DECRYPT_MODE, pKey);
-            return cipher.doFinal(messageToDecrypt);
+			//System.out.println("read private key:" + pKey);
+            
+			//setup Cipher object to encrypt using RSA
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.UNWRAP_MODE, pKey);
+            
+            //unwrap AES key
+            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(messageToDecrypt));
+            byte[] wrappedKey = (byte[]) ois.readObject();
+            
+            Key sKey = cipher.unwrap(wrappedKey, "AES", Cipher.SECRET_KEY);;
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(sKey);
+            oos.flush(); oos.close();
+            
+            byte[] AESKey = baos.toByteArray();
+            
+            byte[] message = (byte[])ois.readObject();
+            
+            return new AES().AESDecrypt(AESKey, message);
+            
+            //return cipher.doFinal(messageToDecrypt);
             /*
             //setup Input and Outputstreams to encrypt
             ByteArrayInputStream bais = new ByteArrayInputStream(messageToDecrypt);
@@ -98,9 +124,9 @@ public class RSA {
             return baos.toByteArray();*/
 
 		} catch (Exception e) {
-			System.err.println("Problem at RSADecrypt");
+			System.err.println("Problem at RSADecrypt: " + e);
 		}
-		return "Greatness".getBytes();
+		return null;
 	}
 	
 }

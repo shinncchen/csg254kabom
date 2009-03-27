@@ -106,7 +106,7 @@ public class AES {
             dos.flush();
             return baos.toByteArray();
 		} catch (Exception e) {
-			System.err.println("AESEncrypt error");
+			System.err.println("AESEncrypt error: " + e);
 		}
 		return null;
 	}
