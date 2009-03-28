@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
-    private String username = "";
+    private String mUsername = "";
 
     /** Creates new form ClientIM */
     public ClientIM() {
@@ -272,6 +272,7 @@ public class ClientIM extends javax.swing.JFrame {
      * Set IM client to logout state
      */
     private void setLogoutState() {
+        this.mUsername = "";
         LogoutjPanel.setVisible(true);
         LoginjPanel.setVisible(false);
         ActionjMenuBar.setEnabled(false);
@@ -289,11 +290,16 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenu.setEnabled(true);
         StatusjTextField.setText("Connected");
 
+        // TODO - need function to retrieve user list from server
+    
         String[] users = new String[2];
         users[0] = "sdfdsf";
         users[1] = "ytkuypou";
+
+        // populate users on login panel
         populateUserList(users);
     }
+
 
     /**
      * Login to the IM
@@ -302,11 +308,17 @@ public class ClientIM extends javax.swing.JFrame {
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
         String username = UsernamejTextField.getText();
         String password = new String(jPasswordField.getPassword());
+
+        // TODO - test username + password (RID_20, RID_21, RID_22)
+
+        // switch cardlayout to login panel
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
+        this.mUsername = username;
         cl.show(ContentjPanel, "loginCard");
         setLoginState();
 }//GEN-LAST:event_loginAction
+
 
     /**
      * Logout from the IM
@@ -315,22 +327,30 @@ public class ClientIM extends javax.swing.JFrame {
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
+        // TODO - need to send logout request (RID_80)
+
+        // switch cardlayout to logout panel
         cl.show(ContentjPanel, "logoutCard");
         setLogoutState();
 }//GEN-LAST:event_logoutAction
+
 
     /**
      * Refresh user list in IM window
      * @param evt
      */
     private void refreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshUserListAction
+        // clear existing user list from login panel
         LoginjPanel.removeAll();
         LoginjPanel.repaint();
 
-        // TODO some funtion to get the list of user
+        // TODO - some funtion to get the list of user (RID_30)
+
+        // repopulate new user list
         String[] userlist = null;
         populateUserList(userlist);
 }//GEN-LAST:event_refreshUserListAction
+
 
     /**
      * Create a button for a single user
@@ -340,16 +360,20 @@ public class ClientIM extends javax.swing.JFrame {
     private JButton createUserButton(String guestusername) {
         JButton userjButton = new JButton();
 
+        // set button properties
         userjButton.setText(guestusername);
         userjButton.setActionCommand(guestusername);
+
+        // add action listener for the button to create a chat window
         userjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createChatWindow(username, evt.getActionCommand());
+                createChatWindow(mUsername, evt.getActionCommand());
             }
         });
 
         return userjButton;
     }
+
 
     /**
      * Create buttons to the IM given a list of user
@@ -363,15 +387,18 @@ public class ClientIM extends javax.swing.JFrame {
         }
     }
 
+
     /**
-     * Create a chat window between this and the guest user
+     * Create a chat window between user and the guest user
      * @param thisuser
      * @param guestuser
      */
     private void createChatWindow(String thisuser, String guestuser) {
+        // TODO - need to perform (RID_50, RID_60, RID_61)
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
         chatwindow.setVisible(true);
     }
+
 
     /**
     * @param args the command line arguments

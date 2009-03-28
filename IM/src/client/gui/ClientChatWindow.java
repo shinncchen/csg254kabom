@@ -91,18 +91,36 @@ public class ClientChatWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    /**
+     * Send message to guest user
+     * @param evt
+     */
     private void sendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendjButtonActionPerformed
         String message = MessagejTextArea.getText();
 
         if(!message.equals("")) {
+            // TODO - need to encrypt message (RID_70)
             addChatHistory(mThisUser, message);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
+
+    /**
+     * Receive message from guest user
+     * @param message
+     */
     public void receiveMessageAction(String message) {
+        // TODO - need to decrypt message (RID_70)
         addChatHistory(mGuestUser, message);
     }
 
+
+    /**
+     * Add conversation to history
+     * @param user
+     * @param message
+     */
     private void addChatHistory(String user, String message) {
         mChatHistory.append(user+" > "+message+"\n");
         ChatHistjTextArea.setText(mChatHistory.toString());
