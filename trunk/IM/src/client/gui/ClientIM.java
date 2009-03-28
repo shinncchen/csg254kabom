@@ -152,6 +152,11 @@ public class ClientIM extends javax.swing.JFrame {
         setTitle("IM Client");
         setMinimumSize(new java.awt.Dimension(250, 400));
         setName("IM Window"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                closeIMWindowAction(evt);
+            }
+        });
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
@@ -350,6 +355,10 @@ public class ClientIM extends javax.swing.JFrame {
         String[] userlist = null;
         populateUserList(userlist);
 }//GEN-LAST:event_refreshUserListAction
+
+    private void closeIMWindowAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeIMWindowAction
+        // TODO - need to send logout request (RID_80)
+}//GEN-LAST:event_closeIMWindowAction
 
 
     /**
