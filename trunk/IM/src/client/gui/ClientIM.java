@@ -2,10 +2,12 @@ package client.gui;
 
 import java.awt.CardLayout;
 import javax.swing.*;
+import client.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
     private String mUsername = "";
+    private ChatMaster chatmaster = new ChatMaster();
 
     /** Creates new form ClientIM */
     public ClientIM() {
