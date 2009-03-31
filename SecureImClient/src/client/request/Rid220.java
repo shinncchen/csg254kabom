@@ -32,9 +32,8 @@ public class Rid220 extends Request {
 
                 int challengeLengthRead = bais.read(challenge, 4, challenge.length);
 
-                if(challengeLengthRead == challengeLength) {
+                if(challengeLengthRead == challengeLength) { //Just in case, not useful atleast for now
                     //Rid230 rid230 = new Rid230();
-                    
                 }
 
             }

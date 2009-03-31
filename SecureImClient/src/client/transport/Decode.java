@@ -41,7 +41,7 @@ public class Decode {
         Request request = (Request) requestClass.newInstance();
         
         // Set the Ip address of the sender
-        request.setSenderIp(new String(datagramPacket.getAddress().getAddress()));
+        request.setSenderIp(new String(datagramPacket.getAddress().getHostAddress()));
         
         // Set the Request Id
         request.setRequestId(requestId);

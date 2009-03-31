@@ -37,11 +37,13 @@ public class Listener implements Runnable {
                 // Wait to receive a datagram
                 datagramSocket.receive(datagramPacket);
                 
-                try { 
+                System.out.println("Received a datagram pkt...");
+                try {
                     // Decode the reveived packet and create an event object
                     Decode decode = new Decode();
                     TransportEvent transportEvent = decode.getTransportEventFromDatagram(datagramPacket);
-                    
+                    System.out.println("\tfrom: "+transportEvent.getRequestRecieved().getSenderIp());
+                    System.out.println("\tRID: "+transportEvent.getRequestRecieved().getRequestId());
                     // Call the master event handler with the transport event
                     ChatMaster.handle(transportEvent);
                 } catch (Exception processException) {

@@ -7,8 +7,6 @@ package client.request;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +27,8 @@ public abstract class Request {
     public Request(int requestId) {
         this.requestId = requestId;
         try {
-            this.senderIp = new String(InetAddress.getLocalHost().getAddress());
+            this.senderIp = new String(InetAddress.getLocalHost().getHostAddress());
+            //System.out.println("localIP: "+this.senderIp);
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         }
