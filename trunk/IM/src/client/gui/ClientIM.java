@@ -291,7 +291,7 @@ public class ClientIM extends javax.swing.JFrame {
         String guestuser = (String)UserListjList.getSelectedValue();
         Key sharedKey = null;
 
-        if(guestuser.trim() != "") {
+        if(!guestuser.trim().equals("")) {
             // TODO - client select an user to talk (RID_410)
             //        get ticket from the server
             UserListjFrame.setVisible(false);
