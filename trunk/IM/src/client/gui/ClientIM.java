@@ -1,6 +1,7 @@
 package client.gui;
 
 import java.awt.CardLayout;
+import java.security.Key;
 
 public class ClientIM extends javax.swing.JFrame {
 
@@ -288,12 +289,13 @@ public class ClientIM extends javax.swing.JFrame {
      */
     private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
         String guestuser = (String)UserListjList.getSelectedValue();
+        Key sharedKey = null;
 
         if(guestuser.trim() != "") {
             // TODO - client select an user to talk (RID_410)
             //        get ticket from the server
             UserListjFrame.setVisible(false);
-            createChatWindow(mUsername, guestuser);
+            createChatWindow(mUsername, guestuser, sharedKey);
             this.setEnabled(true);
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
@@ -304,9 +306,9 @@ public class ClientIM extends javax.swing.JFrame {
      * @param thisuser
      * @param guestuser
      */
-    private void createChatWindow(String thisuser, String guestuser) {
+    private void createChatWindow(String thisuser, String guestuser, Key sharedKey) {
         // TODO - need to perform for P2P authentification (RID_510, RID_530)
-        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
+        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser, sharedKey);
         chatwindow.setVisible(true);
     }
 
