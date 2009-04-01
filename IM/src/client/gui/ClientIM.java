@@ -1,13 +1,10 @@
 package client.gui;
 
 import java.awt.CardLayout;
-import javax.swing.*;
-import client.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
     private String mUsername = "";
-    private ChatMaster chatmaster = new ChatMaster();
 
     /** Creates new form ClientIM */
     public ClientIM() {
@@ -27,6 +24,8 @@ public class ClientIM extends javax.swing.JFrame {
         UserListjFrame = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         UserListjList = new javax.swing.JList();
+        jPanel2 = new javax.swing.JPanel();
+        PickUserjButton = new javax.swing.JButton();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
         UserListjButton = new javax.swing.JButton();
@@ -60,14 +59,19 @@ public class ClientIM extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         UserListjList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        UserListjList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UserSelectedAction(evt);
-            }
-        });
         jScrollPane1.setViewportView(UserListjList);
 
         UserListjFrame.getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        PickUserjButton.setText("OK");
+        PickUserjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PickUserjButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(PickUserjButton);
+
+        UserListjFrame.getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IM Client");
@@ -214,15 +218,6 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenuBar.setEnabled(true);
         ActionjMenu.setEnabled(true);
         StatusjTextField.setText("Connected");
-
-        // TODO - need function to retrieve user list from server
-    
-        String[] users = new String[2];
-        users[0] = "sdfdsf";
-        users[1] = "ytkuypou";
-
-        // populate users on login panel
-        populateUserList(users);
     }
 
 
@@ -234,7 +229,7 @@ public class ClientIM extends javax.swing.JFrame {
         String username = UsernamejTextField.getText();
         String password = new String(jPasswordField.getPassword());
 
-        // TODO - test username + password (RID_20, RID_21, RID_22)
+        // TODO - test username + password (RID_210, RID_230, RID_250)
 
         // switch cardlayout to login panel
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
@@ -252,7 +247,7 @@ public class ClientIM extends javax.swing.JFrame {
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
-        // TODO - need to send logout request (RID_80)
+        // TODO - need to send logout request (RID_710, RID_720)
 
         // switch cardlayout to logout panel
         cl.show(ContentjPanel, "logoutCard");
@@ -265,13 +260,14 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        // TODO - need function to retrieve user list from server
+        // TODO - need function to retrieve user list from server (RID_310, RID_320)
+
         String[] users = new String[2];
         users[0] = "sdfdsf";
         users[1] = "ytkuypou";
 
         // populate users on login panel
-        populateUserList(users);
+        UserListjList.setListData(users);
         UserListjFrame.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_UserListjButtonActionPerformed
@@ -284,43 +280,23 @@ public class ClientIM extends javax.swing.JFrame {
         this.setEnabled(true);
     }//GEN-LAST:event_UserListClosingAction
 
-    private void UserSelectedAction(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserSelectedAction
-
-    }//GEN-LAST:event_UserSelectedAction
-
 
     /**
-     * Create a button for a single user
-     * @param guestusername
-     * @return
+     * Action when user request a chat with another user.
+     * It creates a new chat window
+     * @param evt
      */
-    private JButton createUserButton(String guestusername) {
-        JButton userjButton = new JButton();
+    private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
+        String guestuser = (String)UserListjList.getSelectedValue();
 
-        // set button properties
-        userjButton.setText(guestusername);
-        userjButton.setActionCommand(guestusername);
-
-        // add action listener for the button to create a chat window
-        userjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createChatWindow(mUsername, evt.getActionCommand());
-            }
-        });
-
-        return userjButton;
-    }
-
-
-    /**
-     * Create buttons to the IM given a list of user
-     * @param userlist
-     */
-    private void populateUserList(String[] userlist) {
-        UserListjList.setListData(userlist);
-
-
-    }
+        if(guestuser.trim() != "") {
+            // TODO - client select an user to talk (RID_410)
+            //        get ticket from the server
+            UserListjFrame.setVisible(false);
+            createChatWindow(mUsername, guestuser);
+            this.setEnabled(true);
+        }
+    }//GEN-LAST:event_PickUserjButtonActionPerformed
 
 
     /**
@@ -329,7 +305,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param guestuser
      */
     private void createChatWindow(String thisuser, String guestuser) {
-        // TODO - need to perform (RID_50, RID_60, RID_61)
+        // TODO - need to perform for P2P authentification (RID_510, RID_530)
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser);
         chatwindow.setVisible(true);
     }
@@ -355,6 +331,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JMenuItem LogoutjMenuItem;
     private javax.swing.JPanel LogoutjPanel;
     private javax.swing.JLabel PasswordjLabel;
+    private javax.swing.JButton PickUserjButton;
     private javax.swing.JTextField StatusjTextField;
     private javax.swing.JToolBar StatusjToolBar;
     private javax.swing.JButton UserListjButton;
@@ -363,6 +340,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JLabel UsernamejLabel;
     private javax.swing.JTextField UsernamejTextField;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField;
