@@ -3,19 +3,20 @@ import java.security.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
+    private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
     private String mGuestUser = "";
     private String mThisUser = "";
-    private Key mSharedKey;
+    private Key mSharedKey = null;
     private int mNounce = 0;
 
 
     /** Creates new form ClientChatWindow */
     public ClientChatWindow(String thisuser, String guestuser, Key sharedKey) {
         initComponents();
+        this.mThisUser = thisuser;
         this.mGuestUser = guestuser;
         this.UserjTextField.setText(guestuser);
-        this.mThisUser = thisuser;
         this.mSharedKey = sharedKey;
     }
 
@@ -103,6 +104,10 @@ public class ClientChatWindow extends javax.swing.JFrame {
 
         if(!message.equals("")) {
             // TODO - need to encrypt message (RID_70)
+
+            // we need to set the buffer size for the message
+            // otherwise RSA encrypt will have some problem
+            message = message.substring(0, MAXBUFFER);
             addChatHistory(mThisUser, message);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
