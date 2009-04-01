@@ -216,7 +216,6 @@ public class ClientIM extends javax.swing.JFrame {
         // switch cardlayout to logout panel
         cl.show(ContentjPanel, "logoutCard");
         // disable menubar
-        ActionjMenuBar.setEnabled(false);
         ActionjMenu.setEnabled(false);
         // set status to disconnect
         StatusjTextField.setText("Disconnected");
@@ -236,7 +235,6 @@ public class ClientIM extends javax.swing.JFrame {
         // switch cardlayout to login panel
         cl.show(ContentjPanel, "loginCard");
         // enable menu bar
-        ActionjMenuBar.setEnabled(true);
         ActionjMenu.setEnabled(true);
         // set status to connected
         StatusjTextField.setText("Connected");
@@ -254,7 +252,6 @@ public class ClientIM extends javax.swing.JFrame {
         String password = new String(jPasswordField.getPassword());
 
         // TODO - test username + password (RID_210, RID_230, RID_250)
-
         // set IM widgets to login state
         setLoginState(username);
 }//GEN-LAST:event_loginAction
@@ -266,7 +263,6 @@ public class ClientIM extends javax.swing.JFrame {
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         // TODO - need to send logout request (RID_710, RID_720)
-
         // set logout state for IM
         setLogoutState();
 }//GEN-LAST:event_logoutAction
@@ -277,7 +273,6 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-
         // TODO - need function to retrieve user list from server (RID_310, RID_320)
         String[] users = new String[2];
 
