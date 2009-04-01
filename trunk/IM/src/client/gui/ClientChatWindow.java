@@ -6,15 +6,17 @@ public class ClientChatWindow extends javax.swing.JFrame {
     private StringBuffer mChatHistory = new StringBuffer();
     private String mGuestUser = "";
     private String mThisUser = "";
-    private Key mUserKey;
+    private Key mSharedKey;
+    private int mNounce = 0;
 
 
     /** Creates new form ClientChatWindow */
-    public ClientChatWindow(String thisuser, String guestuser) {
+    public ClientChatWindow(String thisuser, String guestuser, Key sharedKey) {
         initComponents();
         this.mGuestUser = guestuser;
         this.UserjTextField.setText(guestuser);
         this.mThisUser = thisuser;
+        this.mSharedKey = sharedKey;
     }
 
     /** This method is called from within the constructor to
