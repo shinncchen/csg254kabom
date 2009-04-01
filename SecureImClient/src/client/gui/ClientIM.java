@@ -253,7 +253,9 @@ public class ClientIM extends javax.swing.JFrame {
 
         // TODO - test username + password (RID_210, RID_230, RID_250)
         // set IM widgets to login state
-        setLoginState(username);
+        if(true) {
+            setLoginState(username);
+        }
 }//GEN-LAST:event_loginAction
 
 
@@ -264,7 +266,9 @@ public class ClientIM extends javax.swing.JFrame {
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         // TODO - need to send logout request (RID_710, RID_720)
         // set logout state for IM
-        setLogoutState();
+        if(true) {
+            setLogoutState();
+        }
 }//GEN-LAST:event_logoutAction
 
 
