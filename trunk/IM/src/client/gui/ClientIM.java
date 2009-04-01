@@ -1,10 +1,12 @@
 package client.gui;
 
-import java.awt.CardLayout;
-import java.security.Key;
+import java.awt.*;
+import java.security.*;
+import client.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
+    private ChatMaster chatMaster = null;
     private String mUsername = "";
 
     /** Creates new form ClientIM */
@@ -202,23 +204,38 @@ public class ClientIM extends javax.swing.JFrame {
      * Set IM client to logout state
      */
     private void setLogoutState() {
+        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
+
+        // clear username
         this.mUsername = "";
-        LogoutjPanel.setVisible(true);
-        LoginjPanel.setVisible(false);
+        // switch cardlayout to logout panel
+        cl.show(ContentjPanel, "logoutCard");
+        // disable menubar
         ActionjMenuBar.setEnabled(false);
         ActionjMenu.setEnabled(false);
+        // set status to disconnect
         StatusjTextField.setText("Disconnected");
+        // discard ChatMaster
+        chatMaster = null;
     }
 
     /**
      * Set IM client to login state
      */
-    private void setLoginState() {
-        LogoutjPanel.setVisible(false);
-        LoginjPanel.setVisible(true);
+    private void setLoginState(String username) {
+        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
+
+        // set username
+        this.mUsername = username;
+        // switch cardlayout to login panel
+        cl.show(ContentjPanel, "loginCard");
+        // enable menu bar
         ActionjMenuBar.setEnabled(true);
         ActionjMenu.setEnabled(true);
+        // set status to connected
         StatusjTextField.setText("Connected");
+        // initialize chatMaster
+        // chatMaster.initialize();
     }
 
 
@@ -232,12 +249,8 @@ public class ClientIM extends javax.swing.JFrame {
 
         // TODO - test username + password (RID_210, RID_230, RID_250)
 
-        // switch cardlayout to login panel
-        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
-
-        this.mUsername = username;
-        cl.show(ContentjPanel, "loginCard");
-        setLoginState();
+        // set IM widgets to login state
+        setLoginState(username);
 }//GEN-LAST:event_loginAction
 
 
@@ -246,12 +259,9 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
-        CardLayout cl = (CardLayout)ContentjPanel.getLayout();
-
         // TODO - need to send logout request (RID_710, RID_720)
 
-        // switch cardlayout to logout panel
-        cl.show(ContentjPanel, "logoutCard");
+        // set logout state for IM
         setLogoutState();
 }//GEN-LAST:event_logoutAction
 
@@ -270,6 +280,7 @@ public class ClientIM extends javax.swing.JFrame {
         // populate users on login panel
         UserListjList.setListData(users);
         UserListjFrame.setVisible(true);
+        // disable IM window to be focused
         this.setEnabled(false);
     }//GEN-LAST:event_UserListjButtonActionPerformed
 
@@ -278,6 +289,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListClosingAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_UserListClosingAction
+        // enable IM window to be focused
         this.setEnabled(true);
     }//GEN-LAST:event_UserListClosingAction
 
@@ -294,6 +306,7 @@ public class ClientIM extends javax.swing.JFrame {
         if(!guestuser.trim().equals("")) {
             // TODO - client select an user to talk (RID_410)
             //        get ticket from the server
+
             UserListjFrame.setVisible(false);
             createChatWindow(mUsername, guestuser, sharedKey);
             this.setEnabled(true);
