@@ -24,32 +24,12 @@ public class ClientIM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RegisterjFrame = new javax.swing.JFrame();
-        ButtonjPanelR = new javax.swing.JPanel();
-        OKjButtonR = new javax.swing.JButton();
-        ClearjButtonR = new javax.swing.JButton();
-        RContentjPanel = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        LoginjFrame = new javax.swing.JFrame();
-        ButtonjPanelR1 = new javax.swing.JPanel();
-        OKjButtonR1 = new javax.swing.JButton();
-        ClearjButtonR1 = new javax.swing.JButton();
-        RContentjPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        UserListjFrame = new javax.swing.JFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        UserListjList = new javax.swing.JList();
         ContentjPanel = new javax.swing.JPanel();
         LoginjPanel = new javax.swing.JPanel();
+        UserListjButton = new javax.swing.JButton();
         LogoutjPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -63,106 +43,50 @@ public class ClientIM extends javax.swing.JFrame {
         StatusjTextField = new javax.swing.JTextField();
         ActionjMenuBar = new javax.swing.JMenuBar();
         ActionjMenu = new javax.swing.JMenu();
-        RefreshjMenuItem = new javax.swing.JMenuItem();
         LogoutjMenuItem = new javax.swing.JMenuItem();
 
-        RegisterjFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        RegisterjFrame.setTitle("Registration");
-        RegisterjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
-        RegisterjFrame.setResizable(false);
-
-        ButtonjPanelR.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
-
-        OKjButtonR.setText("OK");
-        ButtonjPanelR.add(OKjButtonR);
-
-        ClearjButtonR.setText("Cancel");
-        ButtonjPanelR.add(ClearjButtonR);
-
-        RegisterjFrame.getContentPane().add(ButtonjPanelR, java.awt.BorderLayout.SOUTH);
-
-        RContentjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Registration", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        RContentjPanel.setPreferredSize(new java.awt.Dimension(300, 100));
-        RContentjPanel.setLayout(new java.awt.BorderLayout(5, 5));
-
-        jPanel2.setLayout(new java.awt.GridLayout(3, 1));
-
-        jLabel1.setText("Name");
-        jPanel2.add(jLabel1);
-
-        jLabel3.setText("Username");
-        jPanel2.add(jLabel3);
-
-        jLabel2.setText("Password");
-        jPanel2.add(jLabel2);
-
-        RContentjPanel.add(jPanel2, java.awt.BorderLayout.WEST);
-
-        jPanel4.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
-        jPanel4.add(jTextField1);
-        jPanel4.add(jTextField3);
-        jPanel4.add(jPasswordField1);
-
-        RContentjPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        RegisterjFrame.getContentPane().add(RContentjPanel, java.awt.BorderLayout.NORTH);
-
-        RegisterjFrame.getAccessibleContext().setAccessibleParent(this);
-
-        LoginjFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        LoginjFrame.setTitle("User Login");
-        LoginjFrame.setMinimumSize(new java.awt.Dimension(300, 175));
-        LoginjFrame.setResizable(false);
-
-        ButtonjPanelR1.setLayout(new java.awt.GridLayout(1, 3, 5, 0));
-
-        OKjButtonR1.setText("OK");
-        ButtonjPanelR1.add(OKjButtonR1);
-
-        ClearjButtonR1.setText("Cancel");
-        ButtonjPanelR1.add(ClearjButtonR1);
-
-        LoginjFrame.getContentPane().add(ButtonjPanelR1, java.awt.BorderLayout.SOUTH);
-
-        RContentjPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Register To The Server", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        RContentjPanel1.setPreferredSize(new java.awt.Dimension(300, 100));
-        RContentjPanel1.setLayout(new java.awt.BorderLayout(5, 5));
-
-        jPanel3.setLayout(new java.awt.GridLayout(3, 1));
-
-        jLabel5.setText("Username");
-        jPanel3.add(jLabel5);
-
-        jLabel6.setText("Password");
-        jPanel3.add(jLabel6);
-
-        RContentjPanel1.add(jPanel3, java.awt.BorderLayout.WEST);
-
-        jPanel5.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
-
-        jTextField4.setText("jTextField1");
-        jPanel5.add(jTextField4);
-
-        jPasswordField2.setText("jPasswordField1");
-        jPanel5.add(jPasswordField2);
-
-        RContentjPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
-
-        LoginjFrame.getContentPane().add(RContentjPanel1, java.awt.BorderLayout.NORTH);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("IM Client");
-        setMinimumSize(new java.awt.Dimension(250, 400));
-        setName("IM Window"); // NOI18N
-        addWindowListener(new java.awt.event.WindowAdapter() {
+        UserListjFrame.setAlwaysOnTop(true);
+        UserListjFrame.setMinimumSize(new java.awt.Dimension(150, 250));
+        UserListjFrame.setResizable(false);
+        UserListjFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                closeIMWindowAction(evt);
+                UserListClosingAction(evt);
             }
         });
 
+        UserListjList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        UserListjList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        UserListjList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UserSelectedAction(evt);
+            }
+        });
+        jScrollPane1.setViewportView(UserListjList);
+
+        UserListjFrame.getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("IM Client");
+        setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(250, 400));
+        setName("IM Window"); // NOI18N
+
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
-        LoginjPanel.setLayout(new java.awt.GridLayout(10, 0));
+        LoginjPanel.setLayout(new java.awt.GridBagLayout());
+
+        UserListjButton.setText("User List");
+        UserListjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserListjButtonActionPerformed(evt);
+            }
+        });
+        LoginjPanel.add(UserListjButton, new java.awt.GridBagConstraints());
+
         ContentjPanel.add(LoginjPanel, "loginCard");
 
         LogoutjPanel.setLayout(new java.awt.GridBagLayout());
@@ -229,14 +153,6 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenu.setText("Action");
         ActionjMenu.setEnabled(false);
 
-        RefreshjMenuItem.setText("Refresh User List");
-        RefreshjMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshUserListAction(evt);
-            }
-        });
-        ActionjMenu.add(RefreshjMenuItem);
-
         LogoutjMenuItem.setText("Logout");
         LogoutjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +164,8 @@ public class ClientIM extends javax.swing.JFrame {
         ActionjMenuBar.add(ActionjMenu);
 
         setJMenuBar(ActionjMenuBar);
+
+        getAccessibleContext().setAccessibleParent(this);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -343,24 +261,32 @@ public class ClientIM extends javax.swing.JFrame {
 
 
     /**
-     * Refresh user list in IM window
+     * Display user list in window + disable IM window focus
      * @param evt
      */
-    private void refreshUserListAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshUserListAction
-        // clear existing user list from login panel
-        LoginjPanel.removeAll();
-        LoginjPanel.repaint();
+    private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
+        // TODO - need function to retrieve user list from server
+        String[] users = new String[2];
+        users[0] = "sdfdsf";
+        users[1] = "ytkuypou";
 
-        // TODO - some funtion to get the list of user (RID_30)
+        // populate users on login panel
+        populateUserList(users);
+        UserListjFrame.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_UserListjButtonActionPerformed
 
-        // repopulate new user list
-        String[] userlist = null;
-        populateUserList(userlist);
-}//GEN-LAST:event_refreshUserListAction
+    /**
+     * Enable IM window focus
+     * @param evt
+     */
+    private void UserListClosingAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_UserListClosingAction
+        this.setEnabled(true);
+    }//GEN-LAST:event_UserListClosingAction
 
-    private void closeIMWindowAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeIMWindowAction
-        // TODO - need to send logout request (RID_80)
-}//GEN-LAST:event_closeIMWindowAction
+    private void UserSelectedAction(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserSelectedAction
+
+    }//GEN-LAST:event_UserSelectedAction
 
 
     /**
@@ -391,11 +317,9 @@ public class ClientIM extends javax.swing.JFrame {
      * @param userlist
      */
     private void populateUserList(String[] userlist) {
-        int i = 0;
+        UserListjList.setListData(userlist);
 
-        while(userlist[i] != null) {
-            LoginjPanel.add(createUserButton(userlist[i++]));
-        }
+
     }
 
 
@@ -425,45 +349,24 @@ public class ClientIM extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ActionjMenu;
     private javax.swing.JMenuBar ActionjMenuBar;
-    private javax.swing.JPanel ButtonjPanelR;
-    private javax.swing.JPanel ButtonjPanelR1;
-    private javax.swing.JButton ClearjButtonR;
-    private javax.swing.JButton ClearjButtonR1;
     private javax.swing.JPanel ContentjPanel;
     private javax.swing.JButton LoginjButton;
-    private javax.swing.JFrame LoginjFrame;
     private javax.swing.JPanel LoginjPanel;
     private javax.swing.JMenuItem LogoutjMenuItem;
     private javax.swing.JPanel LogoutjPanel;
-    private javax.swing.JButton OKjButtonR;
-    private javax.swing.JButton OKjButtonR1;
     private javax.swing.JLabel PasswordjLabel;
-    private javax.swing.JPanel RContentjPanel;
-    private javax.swing.JPanel RContentjPanel1;
-    private javax.swing.JMenuItem RefreshjMenuItem;
-    private javax.swing.JFrame RegisterjFrame;
     private javax.swing.JTextField StatusjTextField;
     private javax.swing.JToolBar StatusjToolBar;
+    private javax.swing.JButton UserListjButton;
+    private javax.swing.JFrame UserListjFrame;
+    private javax.swing.JList UserListjList;
     private javax.swing.JLabel UsernamejLabel;
     private javax.swing.JTextField UsernamejTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
 }
