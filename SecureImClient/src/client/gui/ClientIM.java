@@ -244,7 +244,7 @@ public class ClientIM extends javax.swing.JFrame {
 
 
     /**
-     * Login to the IM
+     * Login action for IM
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
@@ -260,7 +260,7 @@ public class ClientIM extends javax.swing.JFrame {
 
 
     /**
-     * Logout from the IM
+     * Logout action for IM
      * @param evt
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
