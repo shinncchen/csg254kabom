@@ -12,7 +12,7 @@ public class ClientIM extends javax.swing.JFrame {
     /** Creates new form ClientIM */
     public ClientIM() {
         initComponents();
-        initClientIM();
+        setLogoutState();
     }
 
 
@@ -178,15 +178,6 @@ public class ClientIM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    /**
-     * Initialize IM client state
-     */
-    private void initClientIM() {
-        setLogoutState();
-    }
-
-
     /**
      * Select all user textbox
      * @param evt
@@ -195,7 +186,6 @@ public class ClientIM extends javax.swing.JFrame {
         UsernamejTextField.selectAll();
 }//GEN-LAST:event_selectAllUser
 
-
     /**
      * Select all password textbox
      * @param evt
@@ -203,7 +193,6 @@ public class ClientIM extends javax.swing.JFrame {
     private void selectAllPass(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_selectAllPass
         jPasswordField.selectAll();
 }//GEN-LAST:event_selectAllPass
-
 
     /**
      * Set IM client to logout state
@@ -223,7 +212,6 @@ public class ClientIM extends javax.swing.JFrame {
         chatMaster = null;
     }
 
-
     /**
      * Set IM client to login state
      */
@@ -242,7 +230,6 @@ public class ClientIM extends javax.swing.JFrame {
         chatMaster.initialize();
     }
 
-
     /**
      * Login action for IM
      * @param evt
@@ -258,7 +245,6 @@ public class ClientIM extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_loginAction
 
-
     /**
      * Logout action for IM
      * @param evt
@@ -270,7 +256,6 @@ public class ClientIM extends javax.swing.JFrame {
             setLogoutState();
         }
 }//GEN-LAST:event_logoutAction
-
 
     /**
      * Display user list in window + disable IM window focus
@@ -288,7 +273,6 @@ public class ClientIM extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_UserListjButtonActionPerformed
 
-
     /**
      * Enable IM window focus
      * @param evt
@@ -297,7 +281,6 @@ public class ClientIM extends javax.swing.JFrame {
         // enable IM window to be focused
         this.setEnabled(true);
     }//GEN-LAST:event_UserListClosingAction
-
 
     /**
      * Action when user request a chat with another user.
@@ -318,7 +301,6 @@ public class ClientIM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
 
-
     /**
      * Create a chat window between user and the guest user
      * @param thisuser
@@ -329,7 +311,6 @@ public class ClientIM extends javax.swing.JFrame {
         ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser, sharedKey);
         chatwindow.setVisible(true);
     }
-
 
     /**
     * @param args the command line arguments

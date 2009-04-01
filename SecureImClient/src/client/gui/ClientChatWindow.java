@@ -94,7 +94,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     /**
      * Send message to guest user
      * @param evt
@@ -112,7 +111,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
-
     /**
      * Receive message from guest user
      * @param message
@@ -121,7 +119,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
         // TODO - need to decrypt message (RID_70)
         addChatHistory(mGuestUser, message);
     }
-
 
     /**
      * Add conversation to history
