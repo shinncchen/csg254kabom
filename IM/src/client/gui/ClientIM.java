@@ -271,14 +271,13 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        // TODO - need function to retrieve user list from server (RID_310, RID_320)
 
+        // TODO - need function to retrieve user list from server (RID_310, RID_320)
         String[] users = new String[2];
-        users[0] = "sdfdsf";
-        users[1] = "ytkuypou";
 
         // populate users on login panel
         UserListjList.setListData(users);
+        // display user list window
         UserListjFrame.setVisible(true);
         // disable IM window to be focused
         this.setEnabled(false);
