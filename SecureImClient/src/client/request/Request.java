@@ -14,11 +14,28 @@ import java.net.UnknownHostException;
  */
 public abstract class Request {
     
-    public static final int RID_210 = 210;
+    //LOGIN
+	public static final int RID_210 = 210;
     public static final int RID_220 = 220;
     public static final int RID_230 = 230;
     public static final int RID_240 = 240;
     public static final int RID_250 = 250;
+    //LIST
+    public static final int RID_310 = 310;
+    public static final int RID_320 = 320;
+    //PERMIT
+    public static final int RID_410 = 410;
+    public static final int RID_420 = 420;
+    //P2P AUTHENTICATION
+    public static final int RID_510 = 510;
+    public static final int RID_520 = 520;
+    public static final int RID_530 = 530;
+    //P2P MESSAGE EXCHANGE
+    public static final int RID_610 = 610;
+    public static final int RID_620 = 620;
+    //LOGOUT
+    public static final int RID_710 = 710;
+    public static final int RID_720 = 720;
     
     protected int requestId;
     protected String senderIp;
