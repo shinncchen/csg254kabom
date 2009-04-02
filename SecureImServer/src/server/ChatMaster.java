@@ -122,6 +122,31 @@ public class ChatMaster {
                             }
                             break;
                         }
+                        
+                        // This same case can be used for PERMIT or LIST or LOGOUT 
+                        case UserInfo.STATE_LOGIN: {
+                            if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                                transportEvent = (TransportEvent) imEvent;
+                                request = transportEvent.getRequestRecieved();
+                                if(request.getRequestId() == Request.RID_310) {
+                                	System.out.println("310 LIST");
+                                    request.processRequest(currentUser, null);
+                                    
+                                } 
+                                else if (request.getRequestId() == Request.RID_410){
+                                	System.out.println("410 PERMIT");
+                                    request.processRequest(currentUser, null);
+                                }
+                                else if (request.getRequestId() == Request.RID_510){
+                                	System.out.println("510 LOGOUT");
+                                    request.processRequest(currentUser, null);
+                                }
+                                else {}
+                            }
+                            break;
+                        }
+                        
+                        
                 }
             }
         }
