@@ -7,6 +7,7 @@ package server.request;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.util.Iterator;
 import server.ChatMaster;
 import server.UserInfo;
 import server.security.Security;
@@ -32,7 +33,7 @@ public class Rid410 extends Request {
             	ois = new ObjectInputStream(bais);
             	//get rid of RID and PERMIT
             	ois.readInt();
-            	ois.readInt();
+            	ois.readObject();
             	String usr = (String)ois.readObject();
             	//check valid username
 	            if (ChatMaster.usersDB.isUserValid(usr)){
@@ -42,18 +43,27 @@ public class Rid410 extends Request {
 					ObjectInputStream ois2 = new ObjectInputStream(bais2);
 					//store T1
 					userInfo.setTimeT1((byte[])ois2.readObject());
-					//calcualte delta for that client
-	            	userInfo.setDelta(new Security().clcDelta(new Security().getTimestamp(), userInfo.getTimeT1()));
-	            	//if skew is correct
+					//if skew is correct
 	            	if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta())){
+	            		//Check Ua is same 
+	            		String userBIp = null;
 	            		if (usr.equals((String)ois2.readObject())){
-	            			// I AM LOST ... HELP !!
-	            			//String Ub = (String)ois2.readObject();
-		            		//if (Ub is online){
-		            		//	Request rid420 = new Rid420();
-		        			//  rid420.sendRequest(userInfo, null);
-		            		//}
-		            	    //else (System.out.println("Ub is not online"));
+	            			String Ub = (String)ois2.readObject();
+	            			Iterator iterator = ChatMaster.users.entrySet().iterator();
+	            			while (iterator.hasNext()) {
+	            				if(Ub.equalsIgnoreCase(((UserInfo)iterator.next()).getUsername())){
+	            					userBIp = ((UserInfo)iterator).getIpAdress();
+	            					break;
+	            				}
+	            			}
+	            			UserInfo userBInfo = (UserInfo) ChatMaster.users.get(userBIp);
+	            			if(userBInfo.isLoggedIn()){
+	            				Request rid420 = new Rid420();
+	            				Object[] objects = new Object[1];
+	            				objects[0] = (UserInfo)userBInfo;
+	            				rid420.sendRequest(userInfo, objects);
+	            			}
+	            	  	    else {System.out.println("Ub is not online");}
 	            		}
 	            		else{} //ignore
 		            	}
@@ -64,5 +74,8 @@ public class Rid410 extends Request {
             
         }
     }
+    
+    
+    
     
 }
