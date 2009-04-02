@@ -8,10 +8,16 @@ import client.event.GuiEvent;
 
 public class ClientIM extends javax.swing.JFrame {
 
-
-    private final int LOGIN = 0;
-    private final int LOGOUT = 1;
-    private final int LIST = 2;
+    //LOGIN
+    public static final int STATE_RID210 = 210;
+    //LIST
+    public static final int STATE_RID310 = 310;
+    //PERMIT
+    public static final int STATE_RID410 = 410;
+    //P2P AUTHENTICATION
+    public static final int STATE_RID510 = 510;
+    //P2P MESSAGE EXCHANGE
+    public static final int STATE_RID610 = 610;
 
 
     /** Creates new form ClientIM */
@@ -228,7 +234,7 @@ public class ClientIM extends javax.swing.JFrame {
     /**
      * Set IM client to login state
      */
-    private void setLoginState(String username) {
+    private void setLoginState() {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
         // switch cardlayout to login panel
@@ -246,18 +252,20 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        String[] parameter = new String[2];
+        String[] parameter = new String[3];
         parameter[0] = UsernamejTextField.getText();
         parameter[1] = new String(jPasswordField.getPassword());
 
+        // create gui event for login
         GuiEvent guiEvent = new GuiEvent();
+        // set parameter for the gui event
         guiEvent.setParameter(parameter);
-        guiEvent.setProtocolType(LOGIN);
-
+        // set ChatMaster state for LOGIN
+        ChatMaster.changeState(STATE_RID210);
         ChatMaster.handle(guiEvent);
 
         if(ChatMaster.clientData.getIsLogin()) {
-            setLoginState(parameter[0]);
+            setLoginState();
         }
 }//GEN-LAST:event_loginAction
 
