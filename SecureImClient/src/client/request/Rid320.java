@@ -39,12 +39,12 @@ public class Rid320 extends Request {
 
 	                //if timestamp matches
 	                if (Arrays.equals(ChatMaster.clientData.getTimeT1(), (byte[])ois2.readObject())) {
-                        ChatMaster.clientData.setTimeT2((byte[])ois2.readObject());
-                        ChatMaster.clientData.setSessionKey((byte[])ois2.readObject());
+                        // get userlist from server
+                        String[] userlist = (new String((byte[])ois2.readObject())).split(",");
+                        // set userlist
+                        ChatMaster.clientIM.setUserList(userlist);
 
                         ois2.close();
-                        //create Rid250 to send back to server
-
 	                }
 				} catch (Exception e) { }
             }
