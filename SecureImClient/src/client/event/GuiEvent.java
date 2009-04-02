@@ -17,7 +17,7 @@ public class GuiEvent implements ImEvent {
     private int protocol_type;
     private String[] parameter = null;
 
-    public String[] getValue() {
+    public String[] getParameter() {
         return parameter;
     }
 
