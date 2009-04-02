@@ -8,7 +8,7 @@ package client.transport;
 import client.event.TransportEvent;
 import client.request.Request;
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
+import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 
@@ -28,15 +28,17 @@ public class Decode {
         
         // Create Byte and Data streams from the received data to retrieve data from
         ByteArrayInputStream bais = new ByteArrayInputStream(receivedData);
-        DataInputStream dis = new DataInputStream(bais);
+        ObjectInputStream dis = new ObjectInputStream(bais);
         
         // Retrieve the request id from the received data as it is the first peice of info
         int requestId = dis.readInt();
         
         // Try to create a class from the request Id
         String className = "client.request.Rid" + requestId;
-        Class requestClass = Class.forName(className);
-        
+        Class requestClass = null;
+        try {
+        	requestClass = Class.forName(className);
+        } catch (Exception e) { System.err.println("Invalid RID"); return null; }
         // Create a new object of that request class and load the data into it
         Request request = (Request) requestClass.newInstance();
         
@@ -51,7 +53,6 @@ public class Decode {
         
         transportEvent.setRequestRecieved(request);
         
-        dis.reset();
         dis.close();
         
         // Return the updated transport event

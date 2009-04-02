@@ -29,7 +29,7 @@ public class Sender {
         
         // Initialize a datagram packet with data and address
         DatagramPacket datagramPacket = new DatagramPacket(message, message.length, remoteInetAddress, remotePort);
-        
+
         // Initialize a Datagram socket
         DatagramSocket datagramSocket = new DatagramSocket();
         

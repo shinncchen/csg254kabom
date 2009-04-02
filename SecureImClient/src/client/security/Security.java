@@ -136,7 +136,14 @@ public class Security {
 	    }
 	    return data;
 	}
-
+	
+	/*
+	 * calculate delta
+	 */
+	public Long clcDelta(byte[] localTime, byte[] remoteTime) {
+		return this.getLongOfTimestamp(localTime)-this.getLongOfTimestamp(remoteTime);
+	}
+	
 	/*
 	 * test driver
 	 */

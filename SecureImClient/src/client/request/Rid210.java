@@ -36,6 +36,7 @@ public class Rid210 extends Request {
             
             oos.writeInt(Request.RID_210);
             oos.writeObject("LOGIN");
+            oos.writeInt(ChatMaster.LOCAL_PORT);
             
             oos.flush();
             

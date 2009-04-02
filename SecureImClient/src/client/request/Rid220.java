@@ -6,9 +6,7 @@
 package client.request;
 
 import client.ChatMaster;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,16 +24,20 @@ public class Rid220 extends Request {
         if(super.senderIp.equalsIgnoreCase(ChatMaster.SERVER_IP)) {
             if(super.requestData != null && super.requestData.length > 0) {
                 ByteArrayInputStream bais = new ByteArrayInputStream(super.requestData);
-
-                int challengeLength = super.requestData.length - 4;
-                byte[] challenge = new byte[challengeLength];
-
-                int challengeLengthRead = bais.read(challenge, 4, challenge.length);
-
-                if(challengeLengthRead == challengeLength) { //Just in case, not useful atleast for now
-                    //Rid230 rid230 = new Rid230();
-                }
-
+                ObjectInputStream oia = null;
+                try {
+                	oia = new ObjectInputStream(bais);
+                } catch (IOException e) { }
+                byte[] challenge = null;
+                try {
+                	oia.readInt();
+					challenge = (byte[])oia.readObject();
+				} catch (Exception e) { }
+				Object[] objectsToSend = new Object[1];
+				objectsToSend[0] = challenge;
+				System.out.println("challenge = " + challenge);
+				Request rid230 = new Rid230();
+				rid230.sendRequest(objectsToSend);
             }
         }
     }
