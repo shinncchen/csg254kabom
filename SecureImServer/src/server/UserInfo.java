@@ -13,8 +13,6 @@ public class UserInfo {
     public static final int STATE_LOGIN = 20;
     
     private String username;
-    private String firstname;
-    private String lastname;
     private String ipAdress;
     private int port;
     private byte[] publicKey;
@@ -23,29 +21,15 @@ public class UserInfo {
     private byte[] challenge;
     private byte[] timeT1;
     private byte[] timeT2;
+    private Long delta;
+    private boolean isLoggedIn = false;
 
-    public String getUsername() {
+	public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getIpAdress() {
@@ -111,4 +95,20 @@ public class UserInfo {
     public void setTimeT2(byte[] timeT2) {
         this.timeT2 = timeT2;
     }
+    
+    public Long getDelta() {
+		return delta;
+	}
+
+	public void setDelta(Long delta) {
+		this.delta = delta;
+	}
+
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
 }

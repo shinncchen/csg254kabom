@@ -35,4 +35,5 @@ public class TransportEvent implements ImEvent {
     public String getClientIp() {
         return clientIp;
     }
+    
 }

@@ -35,6 +35,7 @@ public class Decode {
              ois = new ObjectInputStream(bais);
 
              requestId = ois.readInt();
+             System.out.println("requestID: " + requestId);
         } catch (IOException ex) {
         //} catch (ClassNotFoundException ex) {
         }
@@ -46,7 +47,10 @@ public class Decode {
         
         // Try to create a class from the request Id
         String className = "server.request.Rid" + requestId;
-        Class requestClass = Class.forName(className);
+        Class requestClass = null;
+        try {
+        	requestClass = Class.forName(className);
+        } catch (Exception e) { System.err.println("Invalid RID"); return null; }
         
         // Create a new object of that request class and load the data into it
         Request request = (Request) requestClass.newInstance();
@@ -59,11 +63,6 @@ public class Decode {
         
         // Set the received Data
         request.setRequestData(receivedData);
-        
-        System.out.println("d request data length: "+receivedData.length);
-        System.out.println("d request Data: "+new String(receivedData));
-        System.out.println("d request address: "+receivedData);
-        System.out.println("");
         
         transportEvent.setRequestRecieved(request);
         transportEvent.setClientIp(request.getSenderIp());

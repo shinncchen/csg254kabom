@@ -29,11 +29,10 @@ public class Listener implements Runnable {
             // excess will simply be discarded!
             byte[] receiveBuffer = new byte[datagramSocket.getReceiveBufferSize()];
 
-            // Create a packet to receive data into the buffer
-            DatagramPacket datagramPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
-
             // Now loop forever, waiting to receive packets
             while (true) {
+                // Create a packet to receive data into the buffer
+                DatagramPacket datagramPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 // Wait to receive a datagram
                 datagramSocket.receive(datagramPacket);
                 
@@ -42,10 +41,12 @@ public class Listener implements Runnable {
                     // Decode the reveived packet and create an event object
                     Decode decode = new Decode();
                     TransportEvent transportEvent = decode.getTransportEventFromDatagram(datagramPacket);
-                    System.out.println("\tfrom: "+transportEvent.getRequestRecieved().getSenderIp());
-                    System.out.println("\tRID: "+transportEvent.getRequestRecieved().getRequestId());
-                    // Call the master event handler with the transport event
-                    ChatMaster.handle(transportEvent);
+                    if (transportEvent!=null) {
+                    	System.out.println("\tfrom: "+transportEvent.getRequestRecieved().getSenderIp());
+                    	System.out.println("\tRID: "+transportEvent.getRequestRecieved().getRequestId());
+                    	// Call the master event handler with the transport event
+                    	ChatMaster.handle(transportEvent);
+                    }
                 } catch (Exception processException) {
                     processException.printStackTrace();
                 }

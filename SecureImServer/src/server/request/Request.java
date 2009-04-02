@@ -23,6 +23,7 @@ public abstract class Request {
     
     protected int requestId;
     protected String senderIp;
+    protected int senderPort;
     protected byte[] requestData;
     
     public Request(int requestId) {
@@ -55,10 +56,18 @@ public abstract class Request {
         this.senderIp = senderIp;
     }
 
+    public void setSenderPort(int senderPort) {
+    	this.senderPort = senderPort;
+    }
+    
     public String getSenderIp() {
         return this.senderIp;
     }
 
+    public int getSenderPort() {
+    	return this.senderPort;
+    }
+    
     public void setRequestData(byte[] requestData) {
         this.requestData = requestData;
     }

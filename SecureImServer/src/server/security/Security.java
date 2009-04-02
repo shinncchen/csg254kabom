@@ -9,6 +9,8 @@ package server.security;
 
 import java.io.*;
 
+import server.ChatMaster;
+
 /**
  * @author Abdulla Al-Ali
  */
@@ -136,7 +138,14 @@ public class Security {
 	    }
 	    return data;
 	}
-
+	
+	/*
+	 * calculate delta
+	 */
+	public Long clcDelta(byte[] localTime, byte[] remoteTime) {
+		return this.getLongOfTimestamp(localTime)-this.getLongOfTimestamp(remoteTime);
+	}
+	
 	/*
 	 * test driver
 	 */
@@ -146,11 +155,16 @@ public class Security {
 		RSAKeys keys;
 		Security security = new Security();
 		keys = security.generateRSAKeys();
-		System.out.println("HEX of PUBLICKEY: " + Security.byteArrayToHex(keys.getPublicKey()));
+		//System.out.println("HEX of PUBLICKEY: " + Security.byteArrayToHex(keys.getPublicKey()));
+		//System.out.println("HEX of PRIVATEKEY: " + Security.byteArrayToHex(keys.getPrivateKey()));
 		//byte[] encrypted = security.RSAEncrypt(keys.getPublicKey(), "the kaboom is great".getBytes());
 		byte[] encrypted = security.RSAEncrypt(Security.hexToByteArray(Security.byteArrayToHex(keys.getPublicKey())), "the kaboom is great".getBytes());
 		byte[] decrypted = security.RSADecrypt(keys.getPrivateKey(), encrypted);
 		System.out.println("Decrypted: " + new String(decrypted));
+		ChatMaster.initialize();
+		byte[] encrypted11 = security.RSAEncrypt(ChatMaster.publicKeyServer, "love is awful".getBytes());
+		byte[] decrypted22 = security.RSADecrypt(ChatMaster.privateKeyServer, encrypted11);
+		System.out.println("decrypted11: " + new String(decrypted22));
 		
 		//test AES
 		byte[] AESkey = security.generateAESKey();

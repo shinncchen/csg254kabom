@@ -30,11 +30,15 @@ public class Rid210 extends Request {
             ObjectInputStream ois = null;
             
             String string = null;
+            int port = 0;
+            
             try {
                  ois = new ObjectInputStream(bais);
                  
                  ois.readInt();
                  string = (String) ois.readObject();
+                 port = ois.readInt();
+                 
                  System.out.println("string rxd: "+string);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -42,18 +46,19 @@ public class Rid210 extends Request {
                 ex.printStackTrace();
             }
 
-            if(string.equalsIgnoreCase("Login")) {
+            if(string.equalsIgnoreCase("Login") && port!=0) {
 
                 Security security = new Security();
                 byte[] challenge = security.getTimestamp();
-                //String challenge = "CHALLENGE";
 
-                System.out.println("sending challenge to user RID 220");
+                System.out.println("sending challenge to user");
                 Request rid220 = new Rid220();
-                rid220.sendRequest(userInfo, new Object[] {challenge});
 
                 userInfo.setChallenge(challenge);
                 userInfo.setCurrentState(UserInfo.STATE_RID220);
+                userInfo.setPort(port);
+                
+                rid220.sendRequest(userInfo, new Object[] {challenge});
             }
             
         }

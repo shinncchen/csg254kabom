@@ -51,7 +51,7 @@ public class Rid220 extends Request {
         
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
-            
+            System.out.println("ipaddress sent to: " + userInfo.getIpAdress() + " and port: " + userInfo.getPort());
             userInfo.setCurrentState(UserInfo.STATE_RID220);
             System.out.println("sent 220 and changed state...");
             //TODO: timeout setup
