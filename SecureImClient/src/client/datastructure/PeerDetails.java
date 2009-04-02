@@ -1,7 +1,5 @@
 package client.datastructure;
 
-import java.security.Key;
-
 /*
  * An object of this class will be created 
  * when a user wants to initiate a chat with another peer.
