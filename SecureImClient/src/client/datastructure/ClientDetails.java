@@ -12,13 +12,14 @@ public class ClientDetails {
         
         private String username;                
         private byte[] pwdHash;                 // hash of the password entered
-        private int myPort;                             // client port number
-        private byte[] publicKey;                  // new public key ... generated everytime client program is run
-        private byte[] privateKey;                 // new private key
-        private byte[] sessionKey;                 // session key established between client-server
+        private int myPort;                     // client port number
+        private byte[] publicKey;               // new public key ... generated everytime client program is run
+        private byte[] privateKey;              // new private key
+        private byte[] sessionKey;              // session key established between client-server
         private int sConv;                      // number of simultaneous conversations. 0 when not chatting with anyone
         private byte[] timeT1;
         private byte[] timeT2;
+        boolean isLogin = false;
         
 		public String getUsername() {
 			return username;
@@ -74,5 +75,12 @@ public class ClientDetails {
 		public void setTimeT2(byte[] timeT2) {
 			this.timeT2 = timeT2;
 		}
-        
+
+        public boolean getIsLogin() {
+            return isLogin;
+        }
+
+        public void setIsLogin(boolean isLogin) {
+            this.isLogin = isLogin;
+        }
 }
