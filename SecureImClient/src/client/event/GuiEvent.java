@@ -14,7 +14,6 @@ import client.request.Request;
 public class GuiEvent implements ImEvent {
     
     private Request requestRecieved = null;
-    private int protocol_type;
     private String[] parameter = null;
 
     public String[] getParameter() {
@@ -23,14 +22,6 @@ public class GuiEvent implements ImEvent {
 
     public void setParameter(String[] parameter) {
         this.parameter = parameter;
-    }
-
-    public int getProtocolType() {
-        return protocol_type;
-    }
-
-    public void setProtocolType(int protocol) {
-        this.protocol_type = protocol;
     }
 
     public int getEventType() {
