@@ -12,6 +12,7 @@ import client.datastructure.PeerDetails;
 import client.event.GuiEvent;
 import client.event.ImEvent;
 import client.event.TransportEvent;
+import client.gui.ClientIM;
 import client.request.Request;
 import client.request.Rid210;
 import client.request.Rid410;
@@ -45,12 +46,6 @@ public class ChatMaster {
     public static final int STATE_RID610 = 610;
     public static final int STATE_RID620 = 620;
 
-    // GUI EVENT
-    public static final int GUIEVENT_LOGIN = 0;
-    public static final int GUIEVENT_LOGOUT = 1;
-    public static final int GUIEVENT_LIST = 2;
-
-
 
     public static final String SERVER_IP = "127.0.0.1";
     public static final int SERVER_PORT = 4444;
@@ -61,12 +56,14 @@ public class ChatMaster {
     
     public static ClientDetails clientData;
     public static PeerDetails peerData;
+
+    public static ClientIM clientIM = null;
     
     public static void initialize() {
-        ChatMaster.CURRENT_STATE = ChatMaster.STATE_INITAL;
+        // ChatMaster.CURRENT_STATE = ChatMaster.STATE_INITAL;
         clientData = new ClientDetails();
-        clientData.setUsername("Raghu");
-        clientData.setPwdHash(new Security().getHash("ok".getBytes()));
+        // clientData.setUsername("Raghu");
+        // clientData.setPwdHash(new Security().getHash("ok".getBytes()));
         RSAKeys rsaKeys = new Security().generateRSAKeys();
         clientData.setPublicKey(rsaKeys.getPublicKey());
         clientData.setPrivateKey(rsaKeys.getPrivateKey());
@@ -78,7 +75,7 @@ public class ChatMaster {
         listenerThread.start();
         System.out.println("Listener started...");
         
-        ChatMaster.handle(null);
+        // ChatMaster.handle(null);
     }
     
     public synchronized static void handle(ImEvent imEvent) {
@@ -155,4 +152,7 @@ public class ChatMaster {
         ChatMaster.CURRENT_STATE = newState;
     }
 
+    public static void setClientIMObject(ClientIM clientIM) {
+        ChatMaster.clientIM = clientIM;
+    }
 }
