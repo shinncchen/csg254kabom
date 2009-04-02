@@ -39,7 +39,7 @@ public class Rid410 extends Request {
             
             oos.writeInt(Request.RID_410);
             oos.writeObject("PERMIT");
-            oos.writeObject(ChatMaster.peerData.getUsername());
+            oos.writeObject(ChatMaster.clientData.getUsername());
             
             ByteArrayOutputStream ebaos = new ByteArrayOutputStream();
             ObjectOutputStream eoos = new ObjectOutputStream(ebaos);
