@@ -11,7 +11,9 @@ public class UserInfo {
     //LOGIN
     public static final int STATE_LOGIN = 20;
     public static final int STATE_RID210 = 210;
+    public static final int STATE_RID220 = 220;
     public static final int STATE_RID230 = 230;
+    public static final int STATE_RID240 = 240;
     public static final int STATE_RID250 = 250;
     //LIST
     public static final int STATE_RID310 = 310;    
@@ -26,6 +28,9 @@ public class UserInfo {
     //P2P MESSAGE EXCHANGE
     public static final int STATE_RID610 = 610;
     public static final int STATE_RID620 = 620;
+    //LOGOUT
+    public static final int STATE_RID710 = 710;
+    public static final int STATE_RID720 = 720;
     
     private String username;
     private String ipAdress;
