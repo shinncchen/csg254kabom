@@ -18,6 +18,7 @@ public class PeerDetails {
         private byte[] timeT1;
         private byte[] timeT2;
         private byte[] timeTk;
+        private Long delta;
 		
         /**
 		 * @return the username
@@ -114,6 +115,18 @@ public class PeerDetails {
 		 */
 		public void setTimeTk(byte[] timeTk) {
 			this.timeTk = timeTk;
+		}
+		/**
+		 * @return the delta
+		 */
+		public Long getDelta() {
+			return delta;
+		}
+		/**
+		 * @param delta the delta to set
+		 */
+		public void setDelta(Long delta) {
+			this.delta = delta;
 		}
         
         
