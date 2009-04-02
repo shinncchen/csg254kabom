@@ -45,7 +45,6 @@ public class ChatMaster {
     public static final int STATE_RID610 = 610;
     public static final int STATE_RID620 = 620;
 
-
     // GUI EVENT
     public static final int GUIEVENT_LOGIN = 0;
     public static final int GUIEVENT_LOGOUT = 1;
@@ -108,9 +107,10 @@ public class ChatMaster {
                 }
                 else if(imEvent.getEventType() == imEvent.USER_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
+                    // get parameter from the gui event
                     String[] parameters = guiEvent.getParameter();
-                    ChatMaster.clientData.setUsername(parameters[0]);
-                    ChatMaster.clientData.setPwdHash(new Security().getHash(parameters[1].getBytes()));
+                    clientData.setUsername(parameters[0]);
+                    clientData.setPwdHash(new Security().getHash(parameters[1].getBytes()));
 
                     Request rid210 = new Rid210();
                     rid210.sendRequest(null);
