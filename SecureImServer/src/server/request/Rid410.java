@@ -6,6 +6,7 @@
 package server.request;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.Iterator;
 import server.ChatMaster;
@@ -46,17 +47,25 @@ public class Rid410 extends Request {
 					//if skew is correct
 	            	if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta())){
 	            		//Check Ua is same 
-	            		String userBIp = null;
+	            		String userBIp = null,tmp = null;
 	            		if (usr.equals((String)ois2.readObject())){
 	            			String Ub = (String)ois2.readObject();
-	            			Iterator iterator = ChatMaster.users.entrySet().iterator();
+	            			Iterator iterator = (ChatMaster.users.keySet()).iterator();
 	            			while (iterator.hasNext()) {
-	            				if(Ub.equalsIgnoreCase(((UserInfo)iterator.next()).getUsername())){
-	            					userBIp = ((UserInfo)iterator).getIpAdress();
-	            					break;
-	            				}
+	            			//CONFUSED !!
+	            				tmp = (String) iterator.next();
+	            				UserInfo temp = (UserInfo) ChatMaster.users.get(tmp);
+	            				
+	            				if (Ub.equalsIgnoreCase(temp.getUsername())){
+	            					System.out.println("username:" +temp.getUsername());
+	            					userBIp = tmp;
+	            					break; 
+	            				}           					
+	            				
 	            			}
+	            			try{
 	            			UserInfo userBInfo = (UserInfo) ChatMaster.users.get(userBIp);
+	            			
 	            			if(userBInfo.isLoggedIn()){
 	            				Request rid420 = new Rid420();
 	            				Object[] objects = new Object[1];
@@ -64,6 +73,10 @@ public class Rid410 extends Request {
 	            				rid420.sendRequest(userInfo, objects);
 	            			}
 	            	  	    else {System.out.println("Ub is not online");}
+	            			}
+	            			catch(NullPointerException e){
+	            				System.out.println("user" +Ub+ "is not online");
+	            			}
 	            		}
 	            		else{} //ignore
 		            	}

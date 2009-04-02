@@ -95,7 +95,7 @@ public class Rid420 extends Request {
         
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
-            userInfo.setCurrentState(UserInfo.STATE_RID420);
+            userInfo.setCurrentState(UserInfo.STATE_INITAL);
             System.out.println("sent 420 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
