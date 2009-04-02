@@ -3,11 +3,16 @@ package client.gui;
 import java.awt.*;
 import java.security.*;
 import client.*;
+import client.datastructure.*;
+import client.event.GuiEvent;
 
 public class ClientIM extends javax.swing.JFrame {
 
-    private ChatMaster chatMaster = null;
-    private String mUsername = "";
+
+    private final int LOGIN = 0;
+    private final int LOGOUT = 1;
+    private final int LIST = 2;
+
 
     /** Creates new form ClientIM */
     public ClientIM() {
@@ -35,6 +40,7 @@ public class ClientIM extends javax.swing.JFrame {
         UserListjButton = new javax.swing.JButton();
         LogoutjPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        ErrorjTextField = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         UsernamejLabel = new javax.swing.JLabel();
         PasswordjLabel = new javax.swing.JLabel();
@@ -100,6 +106,13 @@ public class ClientIM extends javax.swing.JFrame {
         LogoutjPanel.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout(5, 10));
+
+        ErrorjTextField.setEditable(false);
+        ErrorjTextField.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ErrorjTextField.setForeground(new java.awt.Color(255, 0, 51));
+        ErrorjTextField.setText("Invalid Username or password");
+        ErrorjTextField.setBorder(null);
+        jPanel1.add(ErrorjTextField, java.awt.BorderLayout.NORTH);
 
         jPanel6.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
@@ -200,16 +213,16 @@ public class ClientIM extends javax.swing.JFrame {
     private void setLogoutState() {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
-        // clear username
-        this.mUsername = "";
         // switch cardlayout to logout panel
         cl.show(ContentjPanel, "logoutCard");
         // disable menubar
         ActionjMenu.setEnabled(false);
         // set status to disconnect
         StatusjTextField.setText("Disconnected");
-        // discard ChatMaster
-        chatMaster = null;
+        // hide error text box
+        ErrorjTextField.setVisible(false);
+        // initialize ChatMaster
+        ChatMaster.initialize();
     }
 
     /**
@@ -218,16 +231,14 @@ public class ClientIM extends javax.swing.JFrame {
     private void setLoginState(String username) {
         CardLayout cl = (CardLayout)ContentjPanel.getLayout();
 
-        // set username
-        this.mUsername = username;
         // switch cardlayout to login panel
         cl.show(ContentjPanel, "loginCard");
         // enable menu bar
         ActionjMenu.setEnabled(true);
         // set status to connected
         StatusjTextField.setText("Connected");
-        // initialize chatMaster
-        chatMaster.initialize();
+        // hide error text box
+        ErrorjTextField.setVisible(false);
     }
 
     /**
@@ -235,13 +246,18 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        String username = UsernamejTextField.getText();
-        String password = new String(jPasswordField.getPassword());
+        String[] parameter = new String[2];
+        parameter[0] = UsernamejTextField.getText();
+        parameter[1] = new String(jPasswordField.getPassword());
 
-        // TODO - test username + password (RID_210, RID_230, RID_250)
-        // set IM widgets to login state
-        if(true) {
-            setLoginState(username);
+        GuiEvent guiEvent = new GuiEvent();
+        guiEvent.setParameter(parameter);
+        guiEvent.setProtocolType(LOGIN);
+
+        ChatMaster.handle(guiEvent);
+
+        if(ChatMaster.clientData.getIsLogin()) {
+            setLoginState(parameter[0]);
         }
 }//GEN-LAST:event_loginAction
 
@@ -296,7 +312,7 @@ public class ClientIM extends javax.swing.JFrame {
             //        get ticket from the server
 
             UserListjFrame.setVisible(false);
-            createChatWindow(mUsername, guestuser, sharedKey);
+            createChatWindow(ChatMaster.clientData.getUsername(), guestuser);
             this.setEnabled(true);
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
@@ -306,9 +322,9 @@ public class ClientIM extends javax.swing.JFrame {
      * @param thisuser
      * @param guestuser
      */
-    private void createChatWindow(String thisuser, String guestuser, Key sharedKey) {
+    private void createChatWindow(String thisuser, String guestuser) {
         // TODO - need to perform for P2P authentification (RID_510, RID_530)
-        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, guestuser, sharedKey);
+        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, new PeerDetails());
         chatwindow.setVisible(true);
     }
 
@@ -327,6 +343,7 @@ public class ClientIM extends javax.swing.JFrame {
     private javax.swing.JMenu ActionjMenu;
     private javax.swing.JMenuBar ActionjMenuBar;
     private javax.swing.JPanel ContentjPanel;
+    private javax.swing.JTextField ErrorjTextField;
     private javax.swing.JButton LoginjButton;
     private javax.swing.JPanel LoginjPanel;
     private javax.swing.JMenuItem LogoutjMenuItem;

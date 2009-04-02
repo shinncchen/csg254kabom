@@ -1,23 +1,20 @@
 package client.gui;
-import java.security.*;
+
+import client.ChatMaster;
+import client.datastructure.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
     private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
-    private String mGuestUser = "";
-    private String mThisUser = "";
-    private Key mSharedKey = null;
-    private int mNounce = 0;
+    private PeerDetails peerDetails = null;
 
 
     /** Creates new form ClientChatWindow */
-    public ClientChatWindow(String thisuser, String guestuser, Key sharedKey) {
+    public ClientChatWindow(String thisuser, PeerDetails peerDetails) {
         initComponents();
-        this.mThisUser = thisuser;
-        this.mGuestUser = guestuser;
-        this.UserjTextField.setText(guestuser);
-        this.mSharedKey = sharedKey;
+        this.peerDetails = peerDetails;
+        this.UserjTextField.setText(peerDetails.getUsername());
     }
 
     /** This method is called from within the constructor to
@@ -107,7 +104,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
             // we need to set the buffer size for the message
             // otherwise RSA encrypt will have some problem
             message = message.substring(0, MAXBUFFER);
-            addChatHistory(mThisUser, message);
+            addChatHistory(ChatMaster.clientData.getUsername(), message);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
@@ -117,7 +114,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
      */
     public void receiveMessageAction(String message) {
         // TODO - need to decrypt message (RID_70)
-        addChatHistory(mGuestUser, message);
+        addChatHistory(this.peerDetails.getUsername(), message);
     }
 
     /**
