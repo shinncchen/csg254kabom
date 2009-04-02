@@ -6,11 +6,26 @@ package server;
  */
 public class UserInfo {
 
+	private static int CURRENT_STATE = 0;
     public static final int STATE_INITAL = 10;
-    public static final int STATE_RID220 = 220;
-    public static final int STATE_RID240 = 240;
-    public static final int STATE_RID260 = 260;
+    //LOGIN
     public static final int STATE_LOGIN = 20;
+    public static final int STATE_RID210 = 210;
+    public static final int STATE_RID230 = 230;
+    public static final int STATE_RID250 = 250;
+    //LIST
+    public static final int STATE_RID310 = 310;    
+    public static final int STATE_RID320 = 320;
+    //PERMIT
+    public static final int STATE_RID410 = 410;
+    public static final int STATE_RID420 = 420;
+    //P2P AUTHENTICATION
+    public static final int STATE_RID510 = 510;
+    public static final int STATE_RID520 = 520;
+    public static final int STATE_RID530 = 530;
+    //P2P MESSAGE EXCHANGE
+    public static final int STATE_RID610 = 610;
+    public static final int STATE_RID620 = 620;
     
     private String username;
     private String ipAdress;
