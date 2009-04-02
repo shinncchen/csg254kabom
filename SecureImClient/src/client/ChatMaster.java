@@ -144,8 +144,8 @@ public class ChatMaster {
                 } catch (InterruptedException ex) {}
 
                 peerData = new PeerDetails();
-                // Request rid410 = new Rid410();
-                // rid410.sendRequest(null);
+                Request rid410 = new Rid410();
+                rid410.sendRequest(null);
                 break;
             }
         }
