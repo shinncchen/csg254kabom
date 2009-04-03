@@ -258,20 +258,20 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        String[] parameter = new String[3];
-        parameter[0] = UsernamejTextField.getText();
-        parameter[1] = new String(jPasswordField.getPassword());
+        String[] parameters = new String[3];
+        parameters[0] = UsernamejTextField.getText();
+        parameters[1] = new String(jPasswordField.getPassword());
 
         // create gui event for login
         GuiEvent guiEvent = new GuiEvent();
         // set parameter for the gui event
-        guiEvent.setParameter(parameter);
+        guiEvent.setParameter(parameters);
         // set ChatMaster state for LOGIN
         ChatMaster.changeState(STATE_RID210);
         ChatMaster.handle(guiEvent);
 
         // TODO - need condition to check if login
-        if(true) {
+        if(ChatMaster.isLoginState()) {
             setLoginState();
         }
         else {
