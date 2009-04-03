@@ -8,7 +8,10 @@ package server.request;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
+
 import server.ChatMaster;
 import server.UserInfo;
 import server.security.Security;
@@ -30,12 +33,14 @@ public class Rid410 extends Request {
         if(super.requestData != null && requestData.length > 0) {
             ByteArrayInputStream bais = new ByteArrayInputStream(requestData);
             ObjectInputStream ois = null;
+            System.out.println("im in");
             try {
             	ois = new ObjectInputStream(bais);
             	//get rid of RID and PERMIT
             	ois.readInt();
             	ois.readObject();
             	String usr = (String)ois.readObject();
+            	System.out.println("permit sent by: "+usr);
             	//check valid username
 	            if (ChatMaster.usersDB.isUserValid(usr)){
 	            	byte[] decryptedMsg = new Security().AESDecrypt(userInfo.getSessionKey(), (byte[]) ois.readObject());
@@ -48,25 +53,43 @@ public class Rid410 extends Request {
 	            	if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta()))
 	            	{
 	            		//Check Ua is same 
-	            		String userBIp = null,tmp = null;
-	            		//if (usr.equals((String)ois2.readObject())){
+	            		String userBIp = null;
+	            		UserInfo tmp = null;
+	            		if (usr.equals((String)ois2.readObject())){
 	            			String Ub = (String)ois2.readObject();
-	            			if(usr.equalsIgnoreCase(Ub))
-	            			{
-	            			Iterator iterator = (ChatMaster.users.keySet()).iterator();
+	            			System.out.println(Ub);
+	            			//if(usr.equalsIgnoreCase(Ub))
+	            			//{
+	            			
+	            			//Iterator<String> keyIter = (ChatMaster.users.keySet()).iterator();
+	                       //String userIP = null;
+
+	                        /*while (keyIter.hasNext()) {
+	                            // for each entry
+	                            userIP = keyIter.next();
+	                            System.out.println("inside the while loop:" +userIP);
+	                            // get userInfo
+	                            tmp = (UserInfo) ChatMaster.users.get(userIP);
+	                            if (Ub.equalsIgnoreCase(tmp.getUsername())){
+	            					System.out.println("username:" +tmp.getUsername());
+	            					userBIp = tmp.getIpAdress();
+	            					break; 
+	            				}   
+	                            }
+	                        }*/
+	            			
+	                       Iterator<String> iterator = (ChatMaster.users.keySet()).iterator();
 	            			while (iterator.hasNext()) {
-	            			// reading from hashtable
-	            				tmp = (String) iterator.next();
-	            				UserInfo temp = (UserInfo) ChatMaster.users.get(tmp);
-	            				
-	            				if (Ub.equalsIgnoreCase(temp.getUsername())){
-	            					System.out.println("username:" +temp.getUsername());
-	            					userBIp = tmp;
+	            				tmp = (UserInfo)ChatMaster.users.get(iterator.next());    				
+	            				if (Ub.equalsIgnoreCase(tmp.getUsername())){
+	            					userBIp = tmp.getIpAdress();
 	            					break; 
 	            				}           					
 	            				
 	            			}
 	            			try{
+	            				if(userBIp != null) {
+	            					
 	            			UserInfo userBInfo = (UserInfo) ChatMaster.users.get(userBIp);
 	            			
 	            			if(userBInfo.isLoggedIn()){
@@ -77,9 +100,12 @@ public class Rid410 extends Request {
 	            			}
 	            	  	    else {System.out.println("Ub is not online");}
 	            			}
+	            			}
 	            			catch(NullPointerException e){
 	            				System.out.println("user" +Ub+ "is not online");
 	            			}
+	            			
+	            			
 	            		//}
 	            		//	else{
 	            		//		System.out.println("Requester for a ticket for self !!");

@@ -45,6 +45,8 @@ public class Rid420 extends Request {
             //encrypt data
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
             ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
+            byte[] firstPartData = null;
+            
             //T1
             oos2.writeObject(userInfo.getTimeT1());
             //generate Tt
@@ -63,11 +65,17 @@ public class Rid420 extends Request {
             oos2.flush();
             
             //encrypt with Ua's session key
-            oos.writeObject(new Security().AESEncrypt(userInfo.getSessionKey(), baos2.toByteArray()));
+            firstPartData = baos2.toByteArray();
+            firstPartData = new Security().AESEncrypt(userInfo.getSessionKey(),firstPartData);
+            oos2.close();
+            
+            //oos.writeObject(new Security().AESEncrypt(userInfo.getSessionKey(), baos2.toByteArray()));
             		
             //CREATE TICKET
             ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
             ObjectOutputStream oos3 = new ObjectOutputStream(baos3);
+            byte[] secondPartData = null;
+            
             //Tt
             oos3.writeObject(tT);
             //Ua
@@ -83,7 +91,16 @@ public class Rid420 extends Request {
             oos3.flush();
             
           //encrypt with Ub's session key
-            oos.writeObject(new Security().AESEncrypt(userBInfo.getSessionKey(), baos3.toByteArray()));
+            secondPartData = baos3.toByteArray();
+            secondPartData = new Security().AESEncrypt(userInfo.getSessionKey(), secondPartData);
+            //oos.writeObject(new Security().AESEncrypt(userBInfo.getSessionKey(), baos3.toByteArray()));
+            
+            oos3.close();
+            
+            // write both parts into oos
+            oos.writeObject(firstPartData);
+            oos.writeObject(secondPartData);
+            
             oos.flush();
             System.out.println("TICKET-to-" +userBInfo.getUsername() + " created !!" );
             
@@ -96,7 +113,7 @@ public class Rid420 extends Request {
         
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
-            userInfo.setCurrentState(UserInfo.STATE_INITAL);
+            userInfo.setCurrentState(UserInfo.STATE_LOGIN);
             System.out.println("sent 420 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
