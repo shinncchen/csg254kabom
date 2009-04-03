@@ -120,7 +120,7 @@ public class ClientIM extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout(5, 10));
 
         ErrorjTextField.setEditable(false);
-        ErrorjTextField.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ErrorjTextField.setFont(new java.awt.Font("Tahoma", 1, 11));
         ErrorjTextField.setForeground(new java.awt.Color(255, 0, 51));
         ErrorjTextField.setText("Invalid Username or password");
         ErrorjTextField.setBorder(null);
@@ -139,7 +139,7 @@ public class ClientIM extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
         UsernamejTextField.setText("Raghu");
-        UsernamejTextField.setMinimumSize(new java.awt.Dimension(15, 20));
+        UsernamejTextField.setMinimumSize(new java.awt.Dimension(50, 20));
         UsernamejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 selectAllUser(evt);
@@ -148,7 +148,7 @@ public class ClientIM extends javax.swing.JFrame {
         jPanel7.add(UsernamejTextField);
 
         jPasswordField.setText("ok");
-        jPasswordField.setMinimumSize(new java.awt.Dimension(15, 20));
+        jPasswordField.setMinimumSize(new java.awt.Dimension(50, 20));
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 selectAllPass(evt);
@@ -273,6 +273,9 @@ public class ClientIM extends javax.swing.JFrame {
         // TODO - need condition to check if login
         if(true) {
             setLoginState();
+        }
+        else {
+            ErrorjTextField.setVisible(true);
         }
 }//GEN-LAST:event_loginAction
 

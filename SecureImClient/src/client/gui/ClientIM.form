@@ -238,7 +238,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Raghu"/>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[15, 20]"/>
+                          <Dimension value="[50, 20]"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -249,7 +249,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="ok"/>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[15, 20]"/>
+                          <Dimension value="[50, 20]"/>
                         </Property>
                       </Properties>
                       <Events>
