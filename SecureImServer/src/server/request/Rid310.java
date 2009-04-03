@@ -31,7 +31,8 @@ public class Rid310 extends Request {
             	ois = new ObjectInputStream(bais);
             	//get rid of RID, no need
             	ois.readInt();
-                // get username for LIST request
+                ois.readObject();
+                // get username plain text
                 String usernamePlain = (String)ois.readObject();
 
                 Iterator<String> keyIter = (ChatMaster.users.keySet()).iterator();

@@ -55,6 +55,7 @@ public class Rid320 extends Request {
 
             message = baos.toByteArray();
             oos.close();
+            userInfo.setCurrentState(UserInfo.STATE_LOGIN);
         } catch (IOException ex) {
             ex.printStackTrace();
             //TODO: call error screen
