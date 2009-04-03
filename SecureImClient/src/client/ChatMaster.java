@@ -130,7 +130,7 @@ public class ChatMaster {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
 
-                    request.setRequestData(null);
+                    request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
@@ -152,7 +152,7 @@ public class ChatMaster {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
 
-                    request.setRequestData(null);
+                    request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
