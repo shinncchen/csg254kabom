@@ -30,13 +30,11 @@ public class Rid720 extends Request {
                 try {
                 	oia.readInt();
 					encryptedMsg = (byte[])oia.readObject();
-
 					//decrypt the msg using our private key
 					byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedMsg);
 
 	                ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
 	                ObjectInputStream ois2 = new ObjectInputStream(bais2);
-                    System.out.println("sjdfkdf");
 	                //if timestamp matches
 	                if (Arrays.equals(ChatMaster.clientData.getTimeT1(), (byte[])ois2.readObject())) {
                         // user is logout
@@ -54,5 +52,4 @@ public class Rid720 extends Request {
 
     public void sendRequest(Object[] data) {
     }
-
 }

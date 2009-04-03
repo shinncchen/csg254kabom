@@ -38,7 +38,7 @@ public class Rid720 extends Request {
         try {
             oos = new ObjectOutputStream(baos);
 
-            oos.writeInt(Request.RID_320);
+            oos.writeInt(Request.RID_720);
 
             //encrypt data
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
