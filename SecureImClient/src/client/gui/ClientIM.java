@@ -258,19 +258,11 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        String[] parameters = new String[3];
-        parameters[0] = UsernamejTextField.getText();
-        parameters[1] = new String(jPasswordField.getPassword());
+        String[] parameters = { UsernamejTextField.getText(),
+                                new String (jPasswordField.getPassword()) };
 
-        // create gui event for login
-        GuiEvent guiEvent = new GuiEvent();
-        // set parameter for the gui event
-        guiEvent.setParameter(parameters);
-        // set ChatMaster state for LOGIN
-        ChatMaster.changeState(STATE_RID210);
-        ChatMaster.handle(guiEvent);
-
-        // TODO - need condition to check if login
+        callChatMasterGuiEvent(parameters, STATE_RID210);
+        // TODO - check if user complete LOGIN protocol
         if(ChatMaster.isLoginState()) {
             setLoginState();
         }
@@ -285,7 +277,7 @@ public class ClientIM extends javax.swing.JFrame {
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
         // TODO - need to send logout request (RID_710)
-        // set logout state for IM
+        // callChatMasterGuiEvent(null, STATE_RID710);
         if(true) {
             setLogoutState();
         }
@@ -296,13 +288,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        // create gui event for login
-        GuiEvent guiEvent = new GuiEvent();
-        // set parameter for the gui event
-        guiEvent.setParameter(null);
-        // set ChatMaster state for LOGIN
-        ChatMaster.changeState(STATE_RID310);
-        ChatMaster.handle(guiEvent);
+        callChatMasterGuiEvent(null, STATE_RID310);
 
         // populate users on login panel
         UserListjList.setListData(userList);
@@ -335,31 +321,40 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
-        String guestuser = (String)UserListjList.getSelectedValue();
+        String[] parameters = { (String)UserListjList.getSelectedValue() };
 
-        if(!guestuser.trim().equals("")) {
-            // create gui event for login
-            GuiEvent guiEvent = new GuiEvent();
-            // set parameter for the gui event
-            guiEvent.setParameter(null);
-            // set ChatMaster state for LOGIN
-            ChatMaster.changeState(STATE_RID410);
-            ChatMaster.handle(guiEvent);
+        if(!parameters[0].trim().equals("")) {
+            callChatMasterGuiEvent(parameters, STATE_RID410);
 
             UserListjFrame.setVisible(false);
-            createChatWindow(ChatMaster.clientData.getUsername(), guestuser);
+            createChatWindow(new PeerDetails());
             this.setEnabled(true);
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
+
+    /**
+     * create event for GuiEvent passed to ChatMaster
+     * @param parameters
+     * @param STATE
+     */
+    private void callChatMasterGuiEvent(String[] parameters, int STATE) {
+        // create gui event handle by ChatMaster
+        GuiEvent guiEvent = new GuiEvent();
+        // set parameter for the gui event
+        guiEvent.setParameter(parameters);
+        // set ChatMaster state for STATE
+        ChatMaster.changeState(STATE);
+        ChatMaster.handle(guiEvent);
+    }
 
     /**
      * Create a chat window between user and the guest user
      * @param thisuser
      * @param guestuser
      */
-    private void createChatWindow(String thisuser, String guestuser) {
+    private void createChatWindow(PeerDetails peerDetails) {
         // TODO - need to perform for P2P authentification (RID_510, RID_530)
-        ClientChatWindow chatwindow = new ClientChatWindow(thisuser, new PeerDetails());
+        ClientChatWindow chatwindow = new ClientChatWindow(peerDetails);
         chatwindow.setVisible(true);
     }
 

@@ -2,8 +2,14 @@ package client.gui;
 
 import client.ChatMaster;
 import client.datastructure.*;
+import client.event.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
+
+    //P2P AUTHENTICATION
+    public static final int STATE_RID510 = 510;
+    //P2P MESSAGE EXCHANGE
+    public static final int STATE_RID610 = 610;
 
     private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
@@ -11,7 +17,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
 
 
     /** Creates new form ClientChatWindow */
-    public ClientChatWindow(String thisuser, PeerDetails peerDetails) {
+    public ClientChatWindow(PeerDetails peerDetails) {
         initComponents();
         this.peerDetails = peerDetails;
         this.UserjTextField.setText(peerDetails.getUsername());
@@ -99,12 +105,12 @@ public class ClientChatWindow extends javax.swing.JFrame {
         String message = MessagejTextArea.getText();
 
         if(!message.equals("")) {
-            // TODO - need to encrypt message (RID_70)
-
-            // we need to set the buffer size for the message
-            // otherwise RSA encrypt will have some problem
-            message = message.substring(0, MAXBUFFER);
-            addChatHistory(ChatMaster.clientData.getUsername(), message);
+            // retrieve only text[buffersize] otherwise problem with RSA encrypt
+            String[] parameters = { message.substring(0, MAXBUFFER) };
+            // clear chat box
+            MessagejTextArea.setText("");
+            callChatMasterGuiEvent(parameters, STATE_RID610);
+            // addChatHistory(ChatMaster.clientData.getUsername(), message);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
@@ -122,9 +128,24 @@ public class ClientChatWindow extends javax.swing.JFrame {
      * @param user
      * @param message
      */
-    private void addChatHistory(String user, String message) {
+    public void addChatHistory(String user, String message) {
         mChatHistory.append(user+" > "+message+"\n");
         ChatHistjTextArea.setText(mChatHistory.toString());
+    }
+
+    /**
+     * create event for GuiEvent passed to ChatMaster
+     * @param parameters
+     * @param STATE
+     */
+    private void callChatMasterGuiEvent(String[] parameters, int STATE) {
+        // create gui event for login
+        GuiEvent guiEvent = new GuiEvent();
+        // set parameter for the gui event
+        guiEvent.setParameter(parameters);
+        // set ChatMaster state for STATE
+        ChatMaster.changeState(STATE);
+        ChatMaster.handle(guiEvent);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
