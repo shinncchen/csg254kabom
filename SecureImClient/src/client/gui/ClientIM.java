@@ -338,8 +338,13 @@ public class ClientIM extends javax.swing.JFrame {
         String guestuser = (String)UserListjList.getSelectedValue();
 
         if(!guestuser.trim().equals("")) {
-            // TODO - client select an user to talk (RID_410)
-            //        get ticket from the server
+            // create gui event for login
+            GuiEvent guiEvent = new GuiEvent();
+            // set parameter for the gui event
+            guiEvent.setParameter(null);
+            // set ChatMaster state for LOGIN
+            ChatMaster.changeState(STATE_RID410);
+            ChatMaster.handle(guiEvent);
 
             UserListjFrame.setVisible(false);
             createChatWindow(ChatMaster.clientData.getUsername(), guestuser);
