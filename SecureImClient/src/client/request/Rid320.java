@@ -32,7 +32,7 @@ public class Rid320 extends Request {
 					encryptedMsg = (byte[])oia.readObject();
 
 					//decrypt the msg using our private key
-					byte[] decryptedMsg = new Security().RSADecrypt(ChatMaster.clientData.getPrivateKey(), encryptedMsg);
+					byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedMsg);
 
 	                ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
 	                ObjectInputStream ois2 = new ObjectInputStream(bais2);

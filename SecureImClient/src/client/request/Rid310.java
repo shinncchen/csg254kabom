@@ -44,7 +44,7 @@ public class Rid310 extends Request {
             eoos.writeObject(ChatMaster.clientData.getTimeT1());
             eoos.flush();
 
-            oos.writeObject(new Security().RSAEncrypt(ChatMaster.publicKeyServer, ebaos.toByteArray()));
+            oos.writeObject(new Security().AESEncrypt(ChatMaster.clientData.getSessionKey(), ebaos.toByteArray()));
             eoos.close();
 
             oos.flush();
