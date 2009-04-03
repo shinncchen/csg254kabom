@@ -40,7 +40,7 @@ public class Rid320 extends Request {
 	                //if timestamp matches
 	                if (Arrays.equals(ChatMaster.clientData.getTimeT1(), (byte[])ois2.readObject())) {
                         // get userlist from server
-                        String[] userlist = (new String((byte[])ois2.readObject())).split(",");
+                        String[] userlist = ((String)ois2.readObject()).split(",");
                         // set userlist
                         ChatMaster.clientIM.setUserList(userlist);
                         // display the user list
