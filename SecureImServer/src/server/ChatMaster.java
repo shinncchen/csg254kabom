@@ -137,8 +137,8 @@ public class ChatMaster {
                                 	System.out.println("410 PERMIT");
                                     request.processRequest(currentUser, null);
                                 }
-                                else if (request.getRequestId() == Request.RID_510){
-                                	System.out.println("510 LOGOUT");
+                                else if (request.getRequestId() == Request.RID_710){
+                                	System.out.println("710 LOGOUT");
                                     request.processRequest(currentUser, null);
                                 }
                                 else {}
