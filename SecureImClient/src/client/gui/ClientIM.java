@@ -19,6 +19,8 @@ public class ClientIM extends javax.swing.JFrame {
     //P2P MESSAGE EXCHANGE
     public static final int STATE_RID610 = 610;
 
+    private String[] userList = null;
+
 
     /** Creates new form ClientIM */
     public ClientIM() {
@@ -227,6 +229,8 @@ public class ClientIM extends javax.swing.JFrame {
         StatusjTextField.setText("Disconnected");
         // hide error text box
         ErrorjTextField.setVisible(false);
+        // initialize userlist
+        userList = null;
         // initialize ChatMaster
         ChatMaster.initialize();
     }
@@ -245,6 +249,8 @@ public class ClientIM extends javax.swing.JFrame {
         StatusjTextField.setText("Connected");
         // hide error text box
         ErrorjTextField.setVisible(false);
+        // set ClientIM object to ChatMaster
+        ChatMaster.setClientIMObject(this);
     }
 
     /**
@@ -286,16 +292,22 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        // TODO - need function to retrieve user list from server (RID_310, RID_320)
-        String[] users = new String[2];
 
         // populate users on login panel
-        UserListjList.setListData(users);
+        UserListjList.setListData(userList);
         // display user list window
         UserListjFrame.setVisible(true);
         // disable IM window to be focused
         this.setEnabled(false);
     }//GEN-LAST:event_UserListjButtonActionPerformed
+
+    /**
+     * set the userlist for the IM
+     * @param userlist
+     */
+    public void setUserList(String[] userlist) {
+        this.userList = userlist;
+    }
 
     /**
      * Enable IM window focus
