@@ -5,11 +5,10 @@
 
 package server.request;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import server.UserInfo;
-import server.security.Security;
+import java.io.*;
+import java.util.*;
+import server.*;
+import server.security.*;
 
 /**
  *
@@ -18,7 +17,7 @@ import server.security.Security;
 public class Rid310 extends Request {
 
     public Rid310() {
-        super(Request.RID_210);
+        super(Request.RID_310);
     }
 
     public void sendRequest(UserInfo userInfo, Object[] data) {
@@ -28,40 +27,71 @@ public class Rid310 extends Request {
         if(super.requestData != null && requestData.length > 0) {
             ByteArrayInputStream bais = new ByteArrayInputStream(requestData);
             ObjectInputStream ois = null;
-
-            String string = null;
-            int port = 0;
-
             try {
-                 ois = new ObjectInputStream(bais);
+            	ois = new ObjectInputStream(bais);
+            	//get rid of RID, no need
+            	ois.readInt();
+                // get username for LIST request
+                String usernamePlain = (String)ois.readObject();
 
-                 ois.readInt();
-                 string = (String) ois.readObject();
-                 port = ois.readInt();
+                Iterator<String> keyIter = (ChatMaster.users.keySet()).iterator();
+                boolean isUserFound = false;
+                String userIP = null;
 
-                 System.out.println("string rxd: "+string);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (ClassNotFoundException ex) {
-                ex.printStackTrace();
-            }
+                while (keyIter.hasNext() && !isUserFound) {
+                    // for each entry
+                    userIP = keyIter.next();
+                    // get userInfo
+                    userInfo = (UserInfo) ChatMaster.users.get(userIP);
 
-            if(string.equalsIgnoreCase("Login") && port!=0) {
+                    // check if username is Login
+                    if (usernamePlain.equalsIgnoreCase(userInfo.getUsername())){
+                        System.out.println("username:" +userInfo.getUsername());
+                        isUserFound = true;
+                    }
+                }
 
-                Security security = new Security();
-                byte[] challenge = security.getTimestamp();
+                // decrypt if user is found and login to the server
+                if(isUserFound && userInfo.isLoggedIn()) {
+                    byte[] decryptedMsg = new Security().AESDecrypt(userInfo.getSessionKey(), (byte[])ois.readObject());
 
-                System.out.println("sending challenge to user");
-                Request rid220 = new Rid220();
+                    ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
+                    ObjectInputStream ois2 = new ObjectInputStream(bais2);
+                    
+                    // get username encrypted
+                    String usernameCrypt = (String)ois2.readObject();
+                    // check if user plaintext == user encrypted
+                    if(usernamePlain.equals(usernameCrypt)) {
+                        // get time stamp
+                        userInfo.setTimeT1((byte[])ois2.readObject());
+                        //calcualte delta for that client
+                        userInfo.setDelta(new Security().clcDelta(new Security().getTimestamp(), userInfo.getTimeT1()));
+                        //if skew is correct, get list of user online
+                        if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta())) {
+                            keyIter = (ChatMaster.users.keySet()).iterator();
+                            userIP = null;
+                            StringBuffer userList = new StringBuffer();
 
-                userInfo.setChallenge(challenge);
-                userInfo.setCurrentState(UserInfo.STATE_RID220);
-                userInfo.setPort(port);
+                            while (keyIter.hasNext()) {
+                                // for each entry
+                                userIP = keyIter.next();
+                                // get userInfo
+                                userInfo = (UserInfo) ChatMaster.users.get(userIP);
+                                // check if username is Login and append to user list
+                                if (userInfo.isLoggedIn()){
+                                    userList.append(userInfo.getUsername());
+                                    if(keyIter.hasNext()) {userList.append(",");}
+                                }
+                            }
 
-                rid220.sendRequest(userInfo, new Object[] {challenge});
-            }
-
+                            Request rid320 = new Rid320();
+                            Object[] objects = {userList.toString()};
+                            rid320.sendRequest(userInfo, objects);
+                        }
+                    }
+                }
+            } //end of try catch block
+            catch (Exception e) { System.err.println("Couldn't parse objects, ignoring"); e.printStackTrace(); }
         }
     }
-
 }
