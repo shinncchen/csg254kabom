@@ -57,6 +57,9 @@ public class Rid250 extends Request {
 
             //user logged in, authenticated
             ChatMaster.clientData.setIsLogin(true);
+            // switch IM panel to login
+            ChatMaster.clientIM.setLoginState();
+
             oos.close();
         } catch (IOException ex) {
             ex.printStackTrace();
