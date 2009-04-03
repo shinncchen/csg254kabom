@@ -258,6 +258,16 @@ public class ClientIM extends javax.swing.JFrame {
     }
 
     /**
+     * Display the user list window
+     */
+    public void hideUserList() {
+        // display user list window
+        UserListjFrame.setVisible(false);
+        // disable IM window to be focused
+        this.setEnabled(true);
+    }
+
+    /**
      * Display the chat window
      */
     public void displayChatWindow() {
