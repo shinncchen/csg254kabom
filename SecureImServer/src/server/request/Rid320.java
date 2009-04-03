@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import server.UserInfo;
+import server.security.Security;
 import server.transport.Sender;
 
 /**
@@ -37,9 +38,19 @@ public class Rid320 extends Request {
         try {
             oos = new ObjectOutputStream(baos);
 
-            oos.writeInt(Request.RID_220);
-            oos.writeObject(data[0]); //the challenge
+            oos.writeInt(Request.RID_320);
 
+            //encrypt data
+            ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+            ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
+            //T1
+            oos2.writeObject(userInfo.getTimeT1());
+            // user list
+            oos2.writeObject((String)data[0]);
+            oos2.flush();
+
+            //encrypt with session key
+            oos.writeObject(new Security().AESEncrypt(userInfo.getSessionKey(), baos2.toByteArray()));
             oos.flush();
 
             message = baos.toByteArray();
@@ -52,8 +63,8 @@ public class Rid320 extends Request {
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
             System.out.println("ipaddress sent to: " + userInfo.getIpAdress() + " and port: " + userInfo.getPort());
-            userInfo.setCurrentState(UserInfo.STATE_RID220);
-            System.out.println("sent 220 and changed state...");
+            userInfo.setCurrentState(UserInfo.STATE_RID320);
+            System.out.println("sent 320 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
 

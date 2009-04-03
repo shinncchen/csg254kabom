@@ -83,7 +83,7 @@ public class Rid310 extends Request {
                                     if(keyIter.hasNext()) {userList.append(",");}
                                 }
                             }
-
+                            // create request 320
                             Request rid320 = new Rid320();
                             Object[] objects = {userList.toString()};
                             rid320.sendRequest(userInfo, objects);
