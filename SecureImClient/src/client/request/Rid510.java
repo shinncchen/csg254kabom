@@ -61,7 +61,7 @@ public class Rid510 extends Request {
             System.out.println("sent 510 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
-            
+            ex.printStackTrace();
         }
     }
 

@@ -46,8 +46,9 @@ public class Rid410 extends Request {
             ObjectOutputStream eoos = new ObjectOutputStream(ebaos);
             
             //write timestamp
-            ChatMaster.peerData.setTimeT1(new Security().getTimestamp());
-            eoos.writeObject(ChatMaster.clientData.getTimeT1());
+            byte[] timestamp = new Security().getTimestamp();
+            ChatMaster.peerData.setTimeT1(timestamp);
+            eoos.writeObject(ChatMaster.peerData.getTimeT1());
             //Ua
             eoos.writeObject(ChatMaster.clientData.getUsername());
             //Ub
