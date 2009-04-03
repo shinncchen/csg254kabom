@@ -41,6 +41,7 @@ public class Rid310 extends Request {
             eoos.writeObject(ChatMaster.clientData.getUsername());
             //write timestamp
             ChatMaster.clientData.setTimeT1(new Security().getTimestamp());
+            //T1
             eoos.writeObject(ChatMaster.clientData.getTimeT1());
             eoos.flush();
 
