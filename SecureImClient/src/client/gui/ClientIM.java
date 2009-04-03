@@ -331,6 +331,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         if(!peerUser.trim().equals("")) {
             callChatMasterGuiEvent(ChatMaster.STATE_RID410);
+            hideUserList();
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
 
