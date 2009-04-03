@@ -36,7 +36,7 @@ public class Rid410 extends Request {
             oos = new ObjectOutputStream(baos);
             
             //instead of hard coding "Deepak", please enter the username of requested party
-            ChatMaster.peerData.setUsername("Deepak");
+            //ChatMaster.peerData.setUsername("Deepak");
             
             oos.writeInt(Request.RID_410);
             oos.writeObject("PERMIT");
