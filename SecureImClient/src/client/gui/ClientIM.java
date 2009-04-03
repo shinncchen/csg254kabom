@@ -1,7 +1,6 @@
 package client.gui;
 
 import java.awt.*;
-import java.security.*;
 import client.*;
 import client.datastructure.*;
 import client.event.GuiEvent;
@@ -294,6 +293,13 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
+        // create gui event for login
+        GuiEvent guiEvent = new GuiEvent();
+        // set parameter for the gui event
+        guiEvent.setParameter(null);
+        // set ChatMaster state for LOGIN
+        ChatMaster.changeState(STATE_RID310);
+        ChatMaster.handle(guiEvent);
 
         // populate users on login panel
         UserListjList.setListData(userList);
