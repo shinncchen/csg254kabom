@@ -338,7 +338,9 @@ public class ClientIM extends javax.swing.JFrame {
             case ChatMaster.STATE_RID210 : {
                 ChatMaster.changeState(ChatMaster.STATE_RID210);
                 Request rid210 = new Rid210();
+                // set username
                 ChatMaster.clientData.setUsername(UsernamejTextField.getText());
+                // set hash password
                 ChatMaster.clientData.setPwdHash(new Security().getHash(new String(jPasswordField.getPassword()).getBytes()));
                 guiEvent.setRequestRecieved(rid210);
                 ChatMaster.handle(guiEvent);
