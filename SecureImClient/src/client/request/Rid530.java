@@ -60,6 +60,7 @@ public class Rid530 extends Request {
         try {
             sender.send(message, ChatMaster.peerData.getPeerIP(), ChatMaster.peerData.getPeerPort());
             //once sent, the guy is authenticated!!
+            ChatMaster.clientIM.createChatWindow(ChatMaster.peerData.getUsername());
             ChatMaster.peerData.setAuth(true);
             ChatMaster.changeState(ChatMaster.STATE_RID530);
             System.out.println("sent 530 and changed state...");
@@ -96,6 +97,7 @@ public class Rid530 extends Request {
 	                //check T1 with what i sent in 520
 	                if (Arrays.equals(ChatMaster.peerData.getTimeT1(), (byte[])ois2.readObject())) {
 	                	//then user is authenticated ! hurray
+                        ChatMaster.clientIM.createChatWindow(ChatMaster.peerData.getUsername());
 	                	ChatMaster.peerData.setAuth(true);
 	                }
 	                ois2.close();

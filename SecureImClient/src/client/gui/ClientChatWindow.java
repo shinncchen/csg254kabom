@@ -9,14 +9,14 @@ public class ClientChatWindow extends javax.swing.JFrame {
 
     private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
-    private PeerDetails peerDetails = null;
+    private ClientIM clientIM = null;
 
 
     /** Creates new form ClientChatWindow */
-    public ClientChatWindow(PeerDetails peerDetails) {
+    public ClientChatWindow(String peerUser, ClientIM clientIM) {
         initComponents();
-        this.peerDetails = peerDetails;
-        this.UserjTextField.setText(peerDetails.getUsername());
+        this.UserjTextField.setText(peerUser);
+        this.clientIM = clientIM;
     }
 
     /** This method is called from within the constructor to
@@ -42,6 +42,11 @@ public class ClientChatWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(80, 400));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                chatWindowClosingAction(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -90,6 +95,8 @@ public class ClientChatWindow extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
 
+        getAccessibleContext().setAccessibleParent(this);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,6 +125,10 @@ public class ClientChatWindow extends javax.swing.JFrame {
              */
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
+
+    private void chatWindowClosingAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_chatWindowClosingAction
+        clientIM.setEnabled(true);
+    }//GEN-LAST:event_chatWindowClosingAction
 
     /**
      * Add conversation to history
