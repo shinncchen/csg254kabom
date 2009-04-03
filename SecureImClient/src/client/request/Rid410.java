@@ -6,6 +6,7 @@
 package client.request;
 
 import client.ChatMaster;
+import client.datastructure.PeerDetails;
 import client.security.Security;
 import client.transport.Sender;
 

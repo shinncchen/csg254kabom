@@ -17,6 +17,7 @@ public class PeerDetails {
         private byte[] timeT2;
         private byte[] timeTk;
         private Long delta;
+        private boolean isAuth = false;
 		
         /**
 		 * @return the username
@@ -125,6 +126,18 @@ public class PeerDetails {
 		 */
 		public void setDelta(Long delta) {
 			this.delta = delta;
+		}
+		/**
+		 * @return the isAuth
+		 */
+		public boolean isAuth() {
+			return isAuth;
+		}
+		/**
+		 * @param isAuth the isAuth to set
+		 */
+		public void setAuth(boolean isAuth) {
+			this.isAuth = isAuth;
 		}
         
         

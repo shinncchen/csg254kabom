@@ -69,8 +69,8 @@ public class Rid250 extends Request {
         try {
             sender.send(message);
             
-            ChatMaster.changeState(ChatMaster.STATE_RID250);
-
+            ChatMaster.changeState(ChatMaster.STATE_RID320);
+            ChatMaster.handle(null);
             System.out.println("sent 250 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {

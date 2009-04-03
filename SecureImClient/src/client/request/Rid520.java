@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 
 /**
  * P2P Auth second step.
@@ -82,8 +83,7 @@ public class Rid520 extends Request {
 
     
     /*
-     * TO-DO
-     * This is triggered when someone needs to talk to this client
+     * A is receiving the second msg from B
      */
     public void processRequest(Object[] data) {
     	if(super.requestData != null && super.requestData.length > 0) {
@@ -92,60 +92,42 @@ public class Rid520 extends Request {
     		try {
     			oia = new ObjectInputStream(bais);
     		} catch (IOException e) { }
-    		byte[] encryptedTicket = null;
+    		byte[] encryptedMsg = null;
     		try {
     			//get rid of RID
     			oia.readInt();
-    			//get rid of "HELLO"
-    			oia.readObject();
     			
-    			encryptedTicket = (byte[])oia.readObject();
+    			encryptedMsg = (byte[])oia.readObject();
 
-					//decrypt the ticket using server's session key
-					byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedTicket);
+    			//decrypt the msg using my priv key
+    			byte[] decryptedMsg = new Security().RSADecrypt(ChatMaster.clientData.getPrivateKey(), encryptedMsg);
 
-	                ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
-	                ObjectInputStream ois2 = new ObjectInputStream(bais2);
-	                ChatMaster.peerData = new PeerDetails();
-	                //get Tt (timestamp)
-	                byte[] timestamp = (byte[])ois2.readObject();
-	                ChatMaster.peerData.setDelta(new Security().clcDelta(new Security().getTimestamp(), timestamp));
-	                if (new Security().isTimeValid(new Security().getTimestamp(), timestamp, ChatMaster.peerData.getDelta())) {
-		                //get Ua
-		                ChatMaster.peerData.setUsername((String)ois2.readObject());
-		              //check if the username sent in the ticket Ub equals my username
-		                if (ChatMaster.clientData.getUsername().equals((String)ois2.readObject())) {
-		                	//read in his IP address
-		                	ChatMaster.peerData.setPeerIP((String)ois2.readObject());
-		                	//read in his Port
-		                	ChatMaster.peerData.setPeerPort(ois2.readInt());
-		                	//read his PKa
-		                	ChatMaster.peerData.setPeerPublicKey((byte[])ois2.readObject());
-		                	
-		                	//create Rid520 and send out our reply
-		                	Request rid520 = new Rid520();
-		                	rid520.sendRequest(null);
-		                	
-		                }
-	                }
-
-	                //i have Ticket-To-B, IPb, Portb, PKb
-	                //put these in a nice object[]
-	                Object[] infoTo510 = new Object[1];
-	                infoTo510[0] = (byte[])"Ticket to b".getBytes();
-	                //infoTo510[1] = (String)ChatMaster.peerData.getPeerIP();
-	                //infoTo510[2] = (int)ChatMaster.peerData.getPeerPort();
-	                //infoTo510[3] = ChatMaster.peerData.getPeerPublicKey();
-
-	                //create Rid510 to send P2P Auth.
-	                Request rid510 = new Rid510();
-	                rid510.sendRequest(infoTo510);
-
-
-
+    			ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
+    			ObjectInputStream ois2 = new ObjectInputStream(bais2);
+    			
+    			//get Ua and check if it equals me
+    			if (ChatMaster.clientData.getUsername().equalsIgnoreCase((String)ois2.readObject())) {
+    				//get Ub make sure he's the guy we want to talk to
+    				if (ChatMaster.peerData.getUsername().equalsIgnoreCase((String)ois2.readObject())) {
+    					//get Tt and make sure its what we stored earlier from the server
+    					if (Arrays.equals(ChatMaster.peerData.getTimeTk(), (byte[])ois2.readObject())) {
+    						//store T1 into peerdetails t1 to send it in rid530
+    						ChatMaster.peerData.setTimeT1((byte[])ois2.readObject());
+    						//only if T1 in time skew
+    						if (new Security().isTimeValid(new Security().getTimestamp(), ChatMaster.peerData.getTimeT1(), ChatMaster.peerData.getDelta())) {
+    							//give me his session key !
+    							ChatMaster.peerData.setPeerSessionKey((byte[])ois2.readObject());
+    							//send that to Rid530
+    							Request rid530 = new Rid530();
+    							rid530.sendRequest(null);
+    						}
+    						
+    					}
+    				}
+    			}
     		} catch (Exception e) { }
 
     	}
     }
-    
+
 }
