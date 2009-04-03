@@ -289,11 +289,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
-        // TODO - need to send logout request (RID_710)
-        // callChatMasterGuiEvent(ChatMaster.STATE_RID710);
-        if(true) {
-            setLogoutState();
-        }
+        callChatMasterGuiEvent(ChatMaster.STATE_RID710);
 }//GEN-LAST:event_logoutAction
 
     /**
@@ -372,6 +368,14 @@ public class ClientIM extends javax.swing.JFrame {
                 ChatMaster.peerData = new PeerDetails();
                 ChatMaster.peerData.setUsername((String)UserListjList.getSelectedValue());
                 guiEvent.setRequestRecieved(rid410);
+                ChatMaster.handle(guiEvent);
+                break;
+            }
+            //LOGOUT
+            case ChatMaster.STATE_RID710 : {
+                ChatMaster.changeState(ChatMaster.STATE_RID710);
+                Request rid710 = new Rid710();
+                guiEvent.setRequestRecieved(rid710);
                 ChatMaster.handle(guiEvent);
                 break;
             }
