@@ -49,7 +49,7 @@ public class Rid410 extends Request {
 	            	{
 	            		//Check Ua is same 
 	            		String userBIp = null,tmp = null;
-	            		if (usr.equals((String)ois2.readObject())){
+	            		//if (usr.equals((String)ois2.readObject())){
 	            			String Ub = (String)ois2.readObject();
 	            			if(usr.equalsIgnoreCase(Ub))
 	            			{
@@ -80,10 +80,10 @@ public class Rid410 extends Request {
 	            			catch(NullPointerException e){
 	            				System.out.println("user" +Ub+ "is not online");
 	            			}
-	            		}
-	            			else{
-	            				System.out.println("Requester for a ticket for self !!");
-	            			}
+	            		//}
+	            		//	else{
+	            		//		System.out.println("Requester for a ticket for self !!");
+	            		//	}
 	            		}
 	            		else{} //ignore
 		            	}
