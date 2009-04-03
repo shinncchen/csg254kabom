@@ -14,15 +14,6 @@ import client.request.Request;
 public class GuiEvent implements ImEvent {
     
     private Request requestRecieved = null;
-    private String[] parameter = null;
-
-    public String[] getParameter() {
-        return parameter;
-    }
-
-    public void setParameter(String[] parameter) {
-        this.parameter = parameter;
-    }
 
     public int getEventType() {
         return ImEvent.USER_EVENT;

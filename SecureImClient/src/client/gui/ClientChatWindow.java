@@ -141,8 +141,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
     private void callChatMasterGuiEvent(String[] parameters, int STATE) {
         // create gui event for login
         GuiEvent guiEvent = new GuiEvent();
-        // set parameter for the gui event
-        guiEvent.setParameter(parameters);
         // set ChatMaster state for STATE
         ChatMaster.changeState(STATE);
         ChatMaster.handle(guiEvent);

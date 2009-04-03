@@ -3,7 +3,10 @@ package client.gui;
 import java.awt.*;
 import client.*;
 import client.datastructure.*;
-import client.event.GuiEvent;
+import client.event.*;
+import client.request.*;
+import client.request.*;
+import client.security.*;
 
 public class ClientIM extends javax.swing.JFrame {
 
@@ -258,10 +261,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        String[] parameters = { UsernamejTextField.getText(),
-                                new String (jPasswordField.getPassword()) };
-
-        callChatMasterGuiEvent(parameters, STATE_RID210);
+        callChatMasterGuiEvent(STATE_RID210);
         // TODO - check if user complete LOGIN protocol
         if(ChatMaster.clientData.getIsLogin()) {
             setLoginState();
@@ -288,7 +288,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        callChatMasterGuiEvent(null, STATE_RID310);
+        callChatMasterGuiEvent(STATE_RID310);
 
         // populate users on login panel
         UserListjList.setListData(userList);
@@ -324,7 +324,7 @@ public class ClientIM extends javax.swing.JFrame {
         String[] parameters = { (String)UserListjList.getSelectedValue() };
 
         if(!parameters[0].trim().equals("")) {
-            callChatMasterGuiEvent(parameters, STATE_RID410);
+            callChatMasterGuiEvent(STATE_RID410);
 
             UserListjFrame.setVisible(false);
             createChatWindow(new PeerDetails());
@@ -337,14 +337,42 @@ public class ClientIM extends javax.swing.JFrame {
      * @param parameters
      * @param STATE
      */
-    private void callChatMasterGuiEvent(String[] parameters, int STATE) {
+    private void callChatMasterGuiEvent(int STATE) {
         // create gui event handle by ChatMaster
         GuiEvent guiEvent = new GuiEvent();
-        // set parameter for the gui event
-        guiEvent.setParameter(parameters);
         // set ChatMaster state for STATE
-        ChatMaster.changeState(STATE);
         ChatMaster.handle(guiEvent);
+
+        switch(STATE) {
+            //LOGIN
+            case STATE_RID210 : {
+                ChatMaster.changeState(ChatMaster.STATE_RID210);
+                Request rid210 = new Rid210();
+                ChatMaster.clientData.setUsername(UsernamejTextField.getText());
+                ChatMaster.clientData.setPwdHash(new Security().getHash(new String(jPasswordField.getPassword()).getBytes()));
+                guiEvent.setRequestRecieved(rid210);
+                ChatMaster.handle(guiEvent);
+                break;
+            }
+            //LIST
+            case STATE_RID310 : {
+                ChatMaster.changeState(ChatMaster.STATE_RID310);
+                Request rid310 = new Rid310();
+                guiEvent.setRequestRecieved(rid310);
+                ChatMaster.handle(guiEvent);
+                break;
+            }
+            //PERMIT
+            case STATE_RID410 : {
+                ChatMaster.changeState(ChatMaster.STATE_RID210);
+                Request rid210 = new Rid210();
+                ChatMaster.clientData.setUsername(UsernamejTextField.getText());
+                ChatMaster.clientData.setPwdHash(new Security().getHash(new String(jPasswordField.getPassword()).getBytes()));
+                guiEvent.setRequestRecieved(rid210);
+                ChatMaster.handle(guiEvent);
+                break;
+            }
+        }
     }
 
     /**

@@ -77,15 +77,7 @@ public class ChatMaster {
 
         switch (ChatMaster.CURRENT_STATE) {
 
-            case ChatMaster.STATE_INITAL: {
-                try {
-                    Thread.currentThread().sleep(2000);
-                } catch (InterruptedException ex) {}
 
-                Request rid210 = new Rid210();
-                rid210.sendRequest(null);
-                break;
-            }
             //LOGIN BEGINS HERE
             case ChatMaster.STATE_RID210: {
                 System.out.println("action in state RID210");
@@ -99,14 +91,9 @@ public class ChatMaster {
                 }
                 else if(imEvent.getEventType() == imEvent.USER_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
-                    // get parameter from the gui event
-                    String[] parameters = guiEvent.getParameter();
-                    clientData.setUsername(parameters[0]);
-                    clientData.setPwdHash(new Security().getHash(parameters[1].getBytes()));
+                    Request request = guiEvent.getRequestRecieved();
 
-                    ChatMaster.handle(null);
-                    // Request rid210 = new Rid210();
-                    // rid210.sendRequest(null);
+                    request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
@@ -140,8 +127,10 @@ public class ChatMaster {
                     }
                 }
                 else if(imEvent.getEventType() == imEvent.USER_EVENT) {
-                    Request rid310 = new Rid310();
-                    rid310.sendRequest(null);
+                    GuiEvent guiEvent = (GuiEvent) imEvent;
+                    Request request = guiEvent.getRequestRecieved();
+
+                    request.setRequestData(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
@@ -161,12 +150,9 @@ public class ChatMaster {
                 }
                 else if(imEvent.getEventType() == imEvent.USER_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
-                    // get parameter from the gui event
-                    String[] parameters = guiEvent.getParameter();
-                    peerData.setUsername(parameters[0]);
+                    Request request = guiEvent.getRequestRecieved();
 
-                    Request rid410 = new Rid410();
-                    rid410.sendRequest(null);
+                    request.setRequestData(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
