@@ -75,12 +75,4 @@ public class ClientDetails {
 		public void setTimeT2(byte[] timeT2) {
 			this.timeT2 = timeT2;
 		}
-
-        public boolean getIsLogin() {
-            return isLogin;
-        }
-
-        public void setIsLogin(boolean isLogin) {
-            this.isLogin = isLogin;
-        }
 }
