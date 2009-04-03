@@ -36,7 +36,7 @@ public class Rid720 extends Request {
 
 	                ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
 	                ObjectInputStream ois2 = new ObjectInputStream(bais2);
-
+                    System.out.println("sjdfkdf");
 	                //if timestamp matches
 	                if (Arrays.equals(ChatMaster.clientData.getTimeT1(), (byte[])ois2.readObject())) {
                         // user is logout
