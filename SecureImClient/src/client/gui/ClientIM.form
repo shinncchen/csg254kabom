@@ -236,7 +236,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="UsernamejTextField">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Enter username"/>
+                        <Property name="text" type="java.lang.String" value="Raghu"/>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[15, 20]"/>
                         </Property>
@@ -247,7 +247,7 @@
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="jPasswordField">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="password"/>
+                        <Property name="text" type="java.lang.String" value="ok"/>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[15, 20]"/>
                         </Property>

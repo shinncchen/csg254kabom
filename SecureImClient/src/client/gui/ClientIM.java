@@ -25,7 +25,12 @@ public class ClientIM extends javax.swing.JFrame {
     /** Creates new form ClientIM */
     public ClientIM() {
         initComponents();
+        // set ClientIM to logout state
         setLogoutState();
+        // initialize ChatMaster
+        ChatMaster.initialize();
+        // set ClientIM object to ChatMaster
+        ChatMaster.setClientIMObject(this);
     }
 
 
@@ -134,7 +139,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
-        UsernamejTextField.setText("Enter username");
+        UsernamejTextField.setText("Raghu");
         UsernamejTextField.setMinimumSize(new java.awt.Dimension(15, 20));
         UsernamejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -143,7 +148,7 @@ public class ClientIM extends javax.swing.JFrame {
         });
         jPanel7.add(UsernamejTextField);
 
-        jPasswordField.setText("password");
+        jPasswordField.setText("ok");
         jPasswordField.setMinimumSize(new java.awt.Dimension(15, 20));
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -231,8 +236,6 @@ public class ClientIM extends javax.swing.JFrame {
         ErrorjTextField.setVisible(false);
         // initialize userlist
         userList = null;
-        // initialize ChatMaster
-        ChatMaster.initialize();
     }
 
     /**
@@ -249,8 +252,6 @@ public class ClientIM extends javax.swing.JFrame {
         StatusjTextField.setText("Connected");
         // hide error text box
         ErrorjTextField.setVisible(false);
-        // set ClientIM object to ChatMaster
-        ChatMaster.setClientIMObject(this);
     }
 
     /**
@@ -270,7 +271,8 @@ public class ClientIM extends javax.swing.JFrame {
         ChatMaster.changeState(STATE_RID210);
         ChatMaster.handle(guiEvent);
 
-        if(ChatMaster.clientData.getIsLogin()) {
+        // TODO - need condition to check if login
+        if(true) {
             setLoginState();
         }
 }//GEN-LAST:event_loginAction
@@ -280,7 +282,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
-        // TODO - need to send logout request (RID_710, RID_720)
+        // TODO - need to send logout request (RID_710)
         // set logout state for IM
         if(true) {
             setLogoutState();
@@ -325,7 +327,6 @@ public class ClientIM extends javax.swing.JFrame {
      */
     private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
         String guestuser = (String)UserListjList.getSelectedValue();
-        Key sharedKey = null;
 
         if(!guestuser.trim().equals("")) {
             // TODO - client select an user to talk (RID_410)
@@ -348,16 +349,6 @@ public class ClientIM extends javax.swing.JFrame {
         chatwindow.setVisible(true);
     }
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClientIM().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ActionjMenu;
