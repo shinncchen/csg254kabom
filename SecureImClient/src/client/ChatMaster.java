@@ -182,4 +182,8 @@ public class ChatMaster {
     public static void setClientIMObject(ClientIM clientIM) {
         ChatMaster.clientIM = clientIM;
     }
+
+    public static boolean isLoginState() {
+        return (ChatMaster.CURRENT_STATE == ChatMaster.STATE_LOGIN) ? true : false;
+    }
 }
