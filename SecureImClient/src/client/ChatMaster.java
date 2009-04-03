@@ -159,6 +159,22 @@ public class ChatMaster {
                 }
                 break;
             }
+            //P2P AUTH
+            case ChatMaster.STATE_RID510: {
+                System.out.println("action in state RID510");
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    if(request.getRequestId() == Request.RID_520) {
+
+                        request.processRequest(null);
+                    }
+                }
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                }
+                break;
+            }
         }
     }
     

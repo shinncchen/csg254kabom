@@ -358,6 +358,7 @@ public class ClientIM extends javax.swing.JFrame {
             case ChatMaster.STATE_RID410 : {
                 ChatMaster.changeState(ChatMaster.STATE_RID210);
                 Request rid410 = new Rid410();
+                ChatMaster.peerData = new PeerDetails();
                 ChatMaster.peerData.setUsername((String)UserListjList.getSelectedValue());
                 guiEvent.setRequestRecieved(rid410);
                 ChatMaster.handle(guiEvent);
