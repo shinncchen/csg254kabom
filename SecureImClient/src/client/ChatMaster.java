@@ -40,6 +40,9 @@ public class ChatMaster {
     //P2P MESSAGE EXCHANGE
     public static final int STATE_RID610 = 610;
     public static final int STATE_RID620 = 620;
+    //LOGOUT
+    public static final int STATE_RID710 = 710;
+    public static final int STATE_RID720 = 720;
 
 
     public static final String SERVER_IP = "127.0.0.1";
@@ -169,6 +172,28 @@ public class ChatMaster {
 
                         request.processRequest(null);
                     }
+                }
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                }
+                break;
+            }
+            //LOGOUT
+            case ChatMaster.STATE_RID710 : {
+                System.out.println("action in state RID710");
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    if(request.getRequestId() == Request.RID_720) {
+
+                        request.processRequest(null);
+                    }
+                }
+                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
+                    GuiEvent guiEvent = (GuiEvent) imEvent;
+                    Request request = guiEvent.getRequestRecieved();
+
+                    request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
