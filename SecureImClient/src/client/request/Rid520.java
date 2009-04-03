@@ -57,7 +57,7 @@ public class Rid520 extends Request {
             
             oos2.flush();
             //encrpt baos2 with PKa
-            byte[] encryptedData = new Security().AESEncrypt(ChatMaster.peerData.getPeerSessionKey(), baos2.toByteArray());
+            byte[] encryptedData = new Security().RSAEncrypt(ChatMaster.peerData.getPeerPublicKey(), baos2.toByteArray());
             
             oos.writeObject((byte[])encryptedData);
             
@@ -89,6 +89,7 @@ public class Rid520 extends Request {
     	if(super.requestData != null && super.requestData.length > 0) {
     		ByteArrayInputStream bais = new ByteArrayInputStream(super.requestData);
     		ObjectInputStream oia = null;
+    		
     		try {
     			oia = new ObjectInputStream(bais);
     		} catch (IOException e) { }

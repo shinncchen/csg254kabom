@@ -118,6 +118,19 @@ public class ChatMaster {
                 }
             }
             break;
+            //if user is logged in
+            case ChatMaster.STATE_LOGIN: {
+            	System.out.println("action in state STATE_LOGIN");
+            	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+            		TransportEvent transportEvent = (TransportEvent) imEvent;
+            		Request request = transportEvent.getRequestRecieved();
+            		if (request.getRequestId() == Request.RID_510) {
+            			//someone wants to talk to me!
+            			request.processRequest(null);
+            		}
+            	}
+            }
+            break;
             //LIST BEGINS HERE
             case ChatMaster.STATE_RID310: {
                 System.out.println("action in state RID310");
@@ -169,8 +182,10 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_520) {
-
+                    	
                         request.processRequest(null);
+                    } else if (request.getRequestId() == Request.RID_510) { //TODO: must remove this line, this is debugging
+                    	request.processRequest(null);
                     }
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
@@ -178,6 +193,19 @@ public class ChatMaster {
                 }
                 break;
             }
+            case ChatMaster.STATE_RID520: {
+            	System.out.println("action in state 520");
+            	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+            		TransportEvent transportEvent = (TransportEvent)imEvent;
+            		Request request = transportEvent.getRequestRecieved();
+            		if (request.getRequestId()==Request.RID_520) {
+            			request.processRequest(null);
+            		} //else if (request.getRequestId()==Request.RID_530) {
+            			//request.sendRequest(null);
+            		//}
+            	}
+            }
+            break;
             //LOGOUT
             case ChatMaster.STATE_RID710 : {
                 System.out.println("action in state RID710");
