@@ -6,11 +6,6 @@ import client.event.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
-    //P2P AUTHENTICATION
-    public static final int STATE_RID510 = 510;
-    //P2P MESSAGE EXCHANGE
-    public static final int STATE_RID610 = 610;
-
     private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
     private PeerDetails peerDetails = null;
@@ -103,14 +98,17 @@ public class ClientChatWindow extends javax.swing.JFrame {
      */
     private void sendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendjButtonActionPerformed
         String message = MessagejTextArea.getText();
+        int length = message.length();
 
-        if(!message.equals("")) {
-            // retrieve only text[buffersize] otherwise problem with RSA encrypt
-            String[] parameters = { message.substring(0, MAXBUFFER) };
+        if(length > 0) {
+            // message too long cause problem with rsa
+            if(length > MAXBUFFER) {
+                message = message.substring(0, MAXBUFFER);
+            }
             // clear chat box
             MessagejTextArea.setText("");
-            callChatMasterGuiEvent(parameters, STATE_RID610);
-            // addChatHistory(ChatMaster.clientData.getUsername(), message);
+            // invoque gui event for ChatMaster
+            callChatMasterGuiEvent(message, ChatMaster.STATE_RID610);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
@@ -119,8 +117,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
      * @param message
      */
     public void receiveMessageAction(String message) {
-        // TODO - need to decrypt message (RID_70)
-        addChatHistory(this.peerDetails.getUsername(), message);
+        // TODO - need to decrypt message (RID_620)
     }
 
     /**
@@ -138,12 +135,24 @@ public class ClientChatWindow extends javax.swing.JFrame {
      * @param parameters
      * @param STATE
      */
-    private void callChatMasterGuiEvent(String[] parameters, int STATE) {
-        // create gui event for login
+    private void callChatMasterGuiEvent(String message, int STATE) {
+        // create gui event handle by ChatMaster
         GuiEvent guiEvent = new GuiEvent();
-        // set ChatMaster state for STATE
-        ChatMaster.changeState(STATE);
-        ChatMaster.handle(guiEvent);
+
+        switch(STATE) {
+            //P2P MESSAGE EXCHANGE
+            case ChatMaster.STATE_RID610 : {
+                /*
+                ChatMaster.changeState(ChatMaster.STATE_RID610);
+                Request rid610 = new Rid610();
+                // TODO - Do we need to set a new member in clientDetails for the message
+                ChatMaster.clientDetails.setMessage(message);
+                guiEvent.setRequestRecieved(rid610);
+                ChatMaster.handle(guiEvent);
+                break;
+                */
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -268,15 +268,6 @@ public class ClientIM extends javax.swing.JFrame {
     }
 
     /**
-     * Display the chat window
-     */
-    public void displayChatWindow() {
-        UserListjFrame.setVisible(false);
-        createChatWindow(new PeerDetails());
-        this.setEnabled(true);
-    }
-
-    /**
      * Login action for IM
      * @param evt
      */
@@ -387,7 +378,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param thisuser
      * @param guestuser
      */
-    private void createChatWindow(PeerDetails peerDetails) {
+    public void createChatWindow(PeerDetails peerDetails) {
         // TODO - need to perform for P2P authentification (RID_510, RID_530)
         ClientChatWindow chatwindow = new ClientChatWindow(peerDetails);
         chatwindow.setVisible(true);
