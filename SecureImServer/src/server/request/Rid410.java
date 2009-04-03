@@ -45,14 +45,17 @@ public class Rid410 extends Request {
 					//store T1
 					userInfo.setTimeT1((byte[])ois2.readObject());
 					//if skew is correct
-	            	if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta())){
+	            	if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta()))
+	            	{
 	            		//Check Ua is same 
 	            		String userBIp = null,tmp = null;
 	            		if (usr.equals((String)ois2.readObject())){
 	            			String Ub = (String)ois2.readObject();
+	            			if(usr.equalsIgnoreCase(Ub))
+	            			{
 	            			Iterator iterator = (ChatMaster.users.keySet()).iterator();
 	            			while (iterator.hasNext()) {
-	            			//CONFUSED !!
+	            			// reading from hashtable
 	            				tmp = (String) iterator.next();
 	            				UserInfo temp = (UserInfo) ChatMaster.users.get(tmp);
 	            				
@@ -76,6 +79,10 @@ public class Rid410 extends Request {
 	            			}
 	            			catch(NullPointerException e){
 	            				System.out.println("user" +Ub+ "is not online");
+	            			}
+	            		}
+	            			else{
+	            				System.out.println("Requester for a ticket for self !!");
 	            			}
 	            		}
 	            		else{} //ignore

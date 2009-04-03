@@ -85,6 +85,7 @@ public class Rid420 extends Request {
           //encrypt with Ub's session key
             oos.writeObject(new Security().AESEncrypt(userBInfo.getSessionKey(), baos3.toByteArray()));
             oos.flush();
+            System.out.println("TICKET-to-" +userBInfo.getUsername() + " created !!" );
             
             message = baos.toByteArray();
             oos.close();

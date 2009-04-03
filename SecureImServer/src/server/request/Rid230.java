@@ -6,7 +6,6 @@
 package server.request;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
 
@@ -59,7 +58,10 @@ public class Rid230 extends Request {
             			//send RID240
             			Request rid240 = new Rid240();
             			rid240.sendRequest(userInfo, null);
-            		} else { System.out.println("Password incorrect for user: " + userInfo.getUsername()); } //ignore
+            		} else { 
+            			ChatMaster.users.remove(userInfo.getIpAdress());
+            			System.out.println("Password incorrect for user: " + userInfo.getUsername()); 
+            			} 
             		
             	} else {} //ignore
             	
