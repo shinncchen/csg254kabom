@@ -263,7 +263,7 @@ public class ClientIM extends javax.swing.JFrame {
 
         callChatMasterGuiEvent(parameters, STATE_RID210);
         // TODO - check if user complete LOGIN protocol
-        if(ChatMaster.isLoginState()) {
+        if(ChatMaster.clientData.getIsLogin()) {
             setLoginState();
         }
         else {
