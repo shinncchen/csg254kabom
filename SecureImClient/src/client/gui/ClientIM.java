@@ -245,6 +245,9 @@ public class ClientIM extends javax.swing.JFrame {
         ErrorjTextField.setVisible(false);
     }
 
+    /**
+     * Display the user list window
+     */
     public void displayUserList() {
         // populate users on login panel
         UserListjList.setListData(userList);
@@ -252,6 +255,15 @@ public class ClientIM extends javax.swing.JFrame {
         UserListjFrame.setVisible(true);
         // disable IM window to be focused
         this.setEnabled(false);
+    }
+
+    /**
+     * Display the chat window
+     */
+    public void displayChatWindow() {
+        UserListjFrame.setVisible(false);
+        createChatWindow(new PeerDetails());
+        this.setEnabled(true);
     }
 
     /**
@@ -309,10 +321,6 @@ public class ClientIM extends javax.swing.JFrame {
 
         if(!peerUser.trim().equals("")) {
             callChatMasterGuiEvent(ChatMaster.STATE_RID410);
-
-            UserListjFrame.setVisible(false);
-            createChatWindow(new PeerDetails());
-            this.setEnabled(true);
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
 
@@ -324,8 +332,6 @@ public class ClientIM extends javax.swing.JFrame {
     private void callChatMasterGuiEvent(int STATE) {
         // create gui event handle by ChatMaster
         GuiEvent guiEvent = new GuiEvent();
-        // set ChatMaster state for STATE
-        ChatMaster.handle(guiEvent);
 
         switch(STATE) {
             //LOGIN
