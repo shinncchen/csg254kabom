@@ -104,8 +104,9 @@ public class ChatMaster {
                     clientData.setUsername(parameters[0]);
                     clientData.setPwdHash(new Security().getHash(parameters[1].getBytes()));
 
-                    Request rid210 = new Rid210();
-                    rid210.sendRequest(null);
+                    ChatMaster.handle(null);
+                    // Request rid210 = new Rid210();
+                    // rid210.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     ChatMaster.changeState(ChatMaster.STATE_INITAL);
@@ -181,9 +182,5 @@ public class ChatMaster {
 
     public static void setClientIMObject(ClientIM clientIM) {
         ChatMaster.clientIM = clientIM;
-    }
-
-    public static boolean isLoginState() {
-        return (ChatMaster.CURRENT_STATE == ChatMaster.STATE_LOGIN) ? true : false;
     }
 }
