@@ -16,5 +16,5 @@ public interface ImEvent {
     
     public int getEventType();
     
-    public String getClientIp();
+    public String getClientIp(); //TODO: should thee setter and the field be abstracted
 }

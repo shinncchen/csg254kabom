@@ -37,6 +37,10 @@ public class Rid230 extends Request {
             //check challenge
             byte[] challenge = (byte[])ois.readObject();
             if (Arrays.equals(challenge, userInfo.getChallenge())) {
+                
+                // if challenge matches, cancel timeout
+                userInfo.deactivateTimeout();
+                
             	//go on
             	byte[] decryptedMsg = new Security().RSADecrypt(ChatMaster.privateKeyServer, (byte[])ois.readObject());
             	

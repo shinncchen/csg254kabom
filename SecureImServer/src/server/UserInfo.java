@@ -1,5 +1,8 @@
 package server;
 
+import java.util.Timer;
+import server.request.TimerTimeoutTask;
+
 /**
  *
  * @author Raghuram
@@ -43,8 +46,10 @@ public class UserInfo {
     private byte[] timeT2;
     private Long delta;
     private boolean isLoggedIn = false;
+    private Timer timeoutTimer;
+    private long TIMEOUT_DURATION = 5000;
 
-	public String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -131,4 +136,18 @@ public class UserInfo {
 	public void setLoggedIn(boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
 	}
+        
+    public void activateTimeout(int requestId) {
+        deactivateTimeout(); //TODO: should we have this
+        timeoutTimer = new Timer();
+        timeoutTimer.schedule(new TimerTimeoutTask(requestId, ipAdress), TIMEOUT_DURATION);
+    }
+    
+    public void deactivateTimeout() {
+        try {
+            timeoutTimer.cancel();
+            timeoutTimer.purge();
+        } catch (Exception ex) {}
+        System.out.println("timeout cancel");
+    }
 }
