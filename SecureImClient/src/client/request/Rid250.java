@@ -45,6 +45,7 @@ public class Rid250 extends Request {
             //write timestamp
             eoos.writeObject(ChatMaster.clientData.getTimeT2());
 
+
             eoos.flush();
             //encrypting
             oos.writeObject(new Security().AESEncrypt(ChatMaster.clientData.getSessionKey(), ebaos.toByteArray()));
@@ -53,6 +54,9 @@ public class Rid250 extends Request {
             oos.flush();
             
             message = baos.toByteArray();
+
+            //user logged in, authenticated
+            ChatMaster.clientData.setIsLogin(true);
             oos.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -63,6 +67,7 @@ public class Rid250 extends Request {
             sender.send(message);
             
             ChatMaster.changeState(ChatMaster.STATE_RID250);
+
             System.out.println("sent 250 and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
