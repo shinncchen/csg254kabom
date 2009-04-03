@@ -43,6 +43,8 @@ public class Rid320 extends Request {
                         String[] userlist = (new String((byte[])ois2.readObject())).split(",");
                         // set userlist
                         ChatMaster.clientIM.setUserList(userlist);
+                        // display the user list
+                        ChatMaster.clientIM.displayUserList();
 
                         ois2.close();
 	                }
