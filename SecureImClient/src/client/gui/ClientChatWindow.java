@@ -3,6 +3,7 @@ package client.gui;
 import client.ChatMaster;
 import client.datastructure.*;
 import client.event.*;
+import client.request.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
@@ -107,18 +108,16 @@ public class ClientChatWindow extends javax.swing.JFrame {
             }
             // clear chat box
             MessagejTextArea.setText("");
-            // invoque gui event for ChatMaster
-            callChatMasterGuiEvent(message, ChatMaster.STATE_RID610);
+            /*
+            GuiEvent guiEvent = new GuiEvent();
+            ChatMaster.changeState(ChatMaster.STATE_RID610);
+            Request rid610 = new Rid610();
+            rid610.setRequestData(message.getBytes());
+            guiEvent.setRequestRecieved(rid610);
+            ChatMaster.handle(guiEvent);
+             */
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
-
-    /**
-     * Receive message from guest user
-     * @param message
-     */
-    public void receiveMessageAction(String message) {
-        // TODO - need to decrypt message (RID_620)
-    }
 
     /**
      * Add conversation to history
@@ -128,31 +127,6 @@ public class ClientChatWindow extends javax.swing.JFrame {
     public void addChatHistory(String user, String message) {
         mChatHistory.append(user+" > "+message+"\n");
         ChatHistjTextArea.setText(mChatHistory.toString());
-    }
-
-    /**
-     * create event for GuiEvent passed to ChatMaster
-     * @param parameters
-     * @param STATE
-     */
-    private void callChatMasterGuiEvent(String message, int STATE) {
-        // create gui event handle by ChatMaster
-        GuiEvent guiEvent = new GuiEvent();
-
-        switch(STATE) {
-            //P2P MESSAGE EXCHANGE
-            case ChatMaster.STATE_RID610 : {
-                /*
-                ChatMaster.changeState(ChatMaster.STATE_RID610);
-                Request rid610 = new Rid610();
-                // TODO - Do we need to set a new member in clientDetails for the message
-                ChatMaster.clientDetails.setMessage(message);
-                guiEvent.setRequestRecieved(rid610);
-                ChatMaster.handle(guiEvent);
-                break;
-                */
-            }
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

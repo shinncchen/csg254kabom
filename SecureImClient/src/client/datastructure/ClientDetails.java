@@ -1,6 +1,6 @@
 package client.datastructure;
 
-import java.security.Key;
+import client.gui.ClientChatWindow;
 
 /*
  * This is a getter/setter class 
@@ -11,12 +11,12 @@ import java.security.Key;
 public class ClientDetails {
         
         private String username;                
-        private byte[] pwdHash;                 // hash of the password entered
-        private int myPort;                     // client port number
-        private byte[] publicKey;               // new public key ... generated everytime client program is run
-        private byte[] privateKey;              // new private key
-        private byte[] sessionKey;              // session key established between client-server
-        private int sConv;                      // number of simultaneous conversations. 0 when not chatting with anyone
+        private byte[] pwdHash;                   // hash of the password entered
+        private int myPort;                       // client port number
+        private byte[] publicKey;                 // new public key ... generated everytime client program is run
+        private byte[] privateKey;                // new private key
+        private byte[] sessionKey;                // session key established between client-server
+        private int sConv;                        // number of simultaneous conversations. 0 when not chatting with anyone
         private byte[] timeT1;
         private byte[] timeT2;
         boolean isLogin = false;
