@@ -7,16 +7,11 @@ package client;
 
 
 
-import client.datastructure.ClientDetails;
-import client.datastructure.PeerDetails;
-import client.event.GuiEvent;
-import client.event.ImEvent;
-import client.event.TransportEvent;
-import client.gui.ClientIM;
-import client.request.Request;
-import client.request.Rid210;
-import client.request.Rid410;
-import client.transport.Listener;
+import client.datastructure.*;
+import client.event.*;
+import client.gui.*;
+import client.request.*;
+import client.transport.*;
 import client.security.*;
 
 /**
@@ -91,7 +86,7 @@ public class ChatMaster {
                 rid210.sendRequest(null);
                 break;
             }
-
+            //LOGIN BEGINS HERE
             case ChatMaster.STATE_RID210: {
                 System.out.println("action in state RID210");
                 if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
@@ -132,17 +127,49 @@ public class ChatMaster {
                 }
             }
             break;
+            //LIST BEGINS HERE
+            case ChatMaster.STATE_RID310: {
+                System.out.println("action in state RID310");
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    if(request.getRequestId() == Request.RID_320) {
 
+                        request.processRequest(null);
+                    }
+                }
+                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
+                    Request rid310 = new Rid310();
+                    rid310.sendRequest(null);
+                }
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                }
+                break;
+            }
             //PERMIT BEGINS HERE
-            case ChatMaster.STATE_RID320: {
+            case ChatMaster.STATE_RID410: {
+                System.out.println("action in state RID410");
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    if(request.getRequestId() == Request.RID_420) {
 
-                try {
-                    Thread.currentThread().sleep(2000);
-                } catch (InterruptedException ex) {}
+                        request.processRequest(null);
+                    }
+                }
+                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
+                    GuiEvent guiEvent = (GuiEvent) imEvent;
+                    // get parameter from the gui event
+                    String[] parameters = guiEvent.getParameter();
+                    peerData.setUsername(parameters[0]);
 
-                peerData = new PeerDetails();
-                Request rid410 = new Rid410();
-                rid410.sendRequest(null);
+                    Request rid410 = new Rid410();
+                    rid410.sendRequest(null);
+                }
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                }
                 break;
             }
         }
