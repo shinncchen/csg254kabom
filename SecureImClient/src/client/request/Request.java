@@ -5,6 +5,7 @@
 
 package client.request;
 
+import client.ChatMaster;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -82,6 +83,14 @@ public abstract class Request {
     
     public byte[] getRequestData() {
         return this.requestData;
+    }
+    
+    public void activateTimeout() {
+        ChatMaster.activateTimeout(requestId);
+    }
+    
+    public void deactivateTimeout() {
+        ChatMaster.deactivateTimeout();
     }
     
 }

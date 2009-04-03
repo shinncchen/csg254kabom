@@ -51,10 +51,13 @@ public class Rid210 extends Request {
             sender.send(message);
             
             ChatMaster.changeState(ChatMaster.STATE_RID210);
-            System.out.println("sent 210 and changed state...");
+            
+            activateTimeout();
+            
+            System.out.println("sent 210, timeout init and changed state...");
             //TODO: timeout setup
         } catch (Exception ex) {
-            
+            ex.printStackTrace();
         }
     }
 

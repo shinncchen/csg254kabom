@@ -7,12 +7,18 @@ package client;
 
 
 
-import client.datastructure.*;
-import client.event.*;
-import client.gui.*;
-import client.request.*;
-import client.transport.*;
+import client.datastructure.ClientDetails;
+import client.datastructure.PeerDetails;
+import client.event.GuiEvent;
+import client.event.ImEvent;
+import client.event.TimeoutEvent;
+import client.event.TransportEvent;
+import client.gui.ClientIM;
+import client.request.Request;
+import client.request.TimerTimeoutTask;
+import client.transport.Listener;
 import client.security.*;
+import java.util.Timer;
 
 /**
  *
@@ -57,6 +63,9 @@ public class ChatMaster {
 
     public static ClientIM clientIM = null;
     
+    private static Timer timeoutTimer;
+    private static long TIMEOUT_DURATION = 5000;
+    
     public static void initialize() {
         // ChatMaster.CURRENT_STATE = ChatMaster.STATE_INITAL;
         clientData = new ClientDetails();
@@ -66,6 +75,8 @@ public class ChatMaster {
         clientData.setPublicKey(rsaKeys.getPublicKey());
         clientData.setPrivateKey(rsaKeys.getPrivateKey());
         ChatMaster.publicKeyServer = Security.hexToByteArray(publicKeyServerHex);
+        
+        timeoutTimer = new Timer();
         
         Listener listener = new Listener();
         listener.setPort(LOCAL_PORT);
@@ -79,7 +90,7 @@ public class ChatMaster {
     public synchronized static void handle(ImEvent imEvent) {
 
         switch (ChatMaster.CURRENT_STATE) {
-
+                
 
             //LOGIN BEGINS HERE
             case ChatMaster.STATE_RID210: {
@@ -88,7 +99,10 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_220) {
-
+                        try {
+                            Thread.currentThread().sleep(10000);
+                        } catch (InterruptedException ex) {
+                        }
                         request.processRequest(null);
                     }
                 }
@@ -99,12 +113,17 @@ public class ChatMaster {
                     request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_210) {
+                        ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                        System.out.println("Timeout accepted, moved to intial state...");
+                    }
                 }
                 break;
             }
             case ChatMaster.STATE_RID230: {
                 System.out.println("action in state RID230");
+                
                 if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
@@ -234,7 +253,21 @@ public class ChatMaster {
     public static void changeState(int newState) {
         ChatMaster.CURRENT_STATE = newState;
     }
-
+    
+    public static void activateTimeout(int requestId) {
+        deactivateTimeout(); //TODO: should we have this
+        timeoutTimer = new Timer();
+        timeoutTimer.schedule(new TimerTimeoutTask(requestId), TIMEOUT_DURATION);
+    }
+    
+    public static void deactivateTimeout() {
+        try {
+            timeoutTimer.cancel();
+            timeoutTimer.purge();
+        } catch (Exception ex) {}
+        System.out.println("timeout cancel");
+    }
+    
     public static void setClientIMObject(ClientIM clientIM) {
         ChatMaster.clientIM = clientIM;
     }
