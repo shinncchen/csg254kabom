@@ -223,8 +223,29 @@ public class ChatMaster {
             			//request.sendRequest(null);
             		//}
             	}
+                break;
             }
-            break;
+            //P2P Message exchange
+            case ChatMaster.STATE_RID610: {
+                System.out.println("action in state RID610");
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    if(request.getRequestId() == Request.RID_620) {
+                    	
+                        request.processRequest(null);
+                    } else if (request.getRequestId() == Request.RID_610) { //TODO: must remove this line, this is debugging
+                    	request.processRequest(null);
+                    }
+                }
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    GuiEvent guiEvent = (GuiEvent) imEvent;
+                    Request request = guiEvent.getRequestRecieved();
+
+                    request.sendRequest(null);
+                }
+                break;
+            }
             //LOGOUT
             case ChatMaster.STATE_RID710 : {
                 System.out.println("action in state RID710");

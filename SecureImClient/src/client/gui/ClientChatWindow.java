@@ -1,5 +1,7 @@
 package client.gui;
 
+import client.ChatMaster;
+import client.event.GuiEvent;
 import client.request.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
@@ -107,15 +109,13 @@ public class ClientChatWindow extends javax.swing.JFrame {
         if(!message.equals("")) {
             // clear chat box
             MessagejTextArea.setText("");
-            // TODO - uncomment once P2P MESSAGE EXCHANGE is done
-            /*
+
             GuiEvent guiEvent = new GuiEvent();
             ChatMaster.changeState(ChatMaster.STATE_RID610);
             Request rid610 = new Rid610();
             rid610.setRequestData(message.getBytes());
             guiEvent.setRequestRecieved(rid610);
             ChatMaster.handle(guiEvent);
-             */
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
