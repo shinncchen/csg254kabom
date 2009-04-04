@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Rid620 extends Request {
     
     public Rid620() {
-        super(Request.RID_520);
+        super(Request.RID_620);
     }
 
     /*
