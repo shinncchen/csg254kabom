@@ -11,6 +11,7 @@ public class ClientIM extends javax.swing.JFrame {
 
 
     private String[] userList = null;
+    private ClientChatWindow chatWindow = null;
 
 
     /** Creates new form ClientIM */
@@ -323,6 +324,27 @@ public class ClientIM extends javax.swing.JFrame {
     }//GEN-LAST:event_PickUserjButtonActionPerformed
 
     /**
+     * Create a chat window between user and the guest user
+     * @param thisuser
+     * @param guestuser
+     */
+    public void createChatWindow(String peerUser) {
+        ClientChatWindow chatwindow = new ClientChatWindow(peerUser, this);
+        this.chatWindow = chatwindow;
+        chatwindow.setVisible(true);
+        this.setEnabled(false);
+    }
+
+    /**
+     * Get the ChatWindow to invoke public function
+     * (i.e. use this for addChatHistory())
+     * @return
+     */
+    public ClientChatWindow getChatWindow() {
+        return this.chatWindow;
+    }
+
+    /**
      * create event for GuiEvent passed to ChatMaster
      * @param parameters
      * @param STATE
@@ -371,18 +393,6 @@ public class ClientIM extends javax.swing.JFrame {
                 break;
             }
         }
-    }
-
-    /**
-     * Create a chat window between user and the guest user
-     * @param thisuser
-     * @param guestuser
-     */
-    public void createChatWindow(String peerUser) {
-        // TODO - need to perform for P2P authentification (RID_510, RID_530)
-        ClientChatWindow chatwindow = new ClientChatWindow(peerUser, this);
-        chatwindow.setVisible(true);
-        this.setEnabled(false);
     }
 
 
