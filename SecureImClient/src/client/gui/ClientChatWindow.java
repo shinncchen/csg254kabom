@@ -4,7 +4,6 @@ import client.request.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
-    private final int MAXBUFFER = 100;
     private StringBuffer mChatHistory = new StringBuffer();
     private ClientIM clientIM = null;
 
@@ -104,13 +103,8 @@ public class ClientChatWindow extends javax.swing.JFrame {
      */
     private void sendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendjButtonActionPerformed
         String message = MessagejTextArea.getText();
-        int length = message.length();
 
-        if(length > 0) {
-            // message too long cause problem with rsa
-            if(length > MAXBUFFER) {
-                message = message.substring(0, MAXBUFFER);
-            }
+        if(!message.equals("")) {
             // clear chat box
             MessagejTextArea.setText("");
             // TODO - uncomment once P2P MESSAGE EXCHANGE is done
