@@ -99,10 +99,10 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_220) {
-                        try {
-                            Thread.currentThread().sleep(10000);
+                       /* try {
+                            //Thread.currentThread().sleep(10000);
                         } catch (InterruptedException ex) {
-                        }
+                        }*/
                         request.processRequest(null);
                     }
                 }
@@ -238,7 +238,13 @@ public class ChatMaster {
                     	request.processRequest(null);
                     }
                 }
-                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
+                	GuiEvent guiEvent = (GuiEvent) imEvent;
+                	Request request = guiEvent.getRequestRecieved();
+                	if (request.getRequestId()==Request.RID_610) {
+                		request.sendRequest(null);
+                	}
+                } else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
 
