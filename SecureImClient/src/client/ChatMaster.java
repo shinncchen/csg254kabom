@@ -229,6 +229,17 @@ public class ChatMaster {
             	}
                 break;
             }
+            case ChatMaster.STATE_RID530: {
+            	System.out.println("action in state 530");
+            	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+            		TransportEvent transportEvent = (TransportEvent)imEvent;
+            		Request request = transportEvent.getRequestRecieved();
+            		if (request.getRequestId()==Request.RID_620) { //TODO: need to delete this, debugging only
+            			request.processRequest(null);
+            		}
+            	}
+            	break;
+            }
             //P2P Message exchange
             case ChatMaster.STATE_RID610: {
                 System.out.println("action in state RID610");
