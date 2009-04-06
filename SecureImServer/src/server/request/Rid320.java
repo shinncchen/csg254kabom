@@ -66,7 +66,6 @@ public class Rid320 extends Request {
             System.out.println("ipaddress sent to: " + userInfo.getIpAdress() + " and port: " + userInfo.getPort());
             userInfo.setCurrentState(UserInfo.STATE_LOGIN);
             System.out.println("sent 320 and changed state...");
-            //TODO: timeout setup
         } catch (Exception ex) {
 
         }

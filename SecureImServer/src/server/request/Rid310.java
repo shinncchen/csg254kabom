@@ -84,6 +84,8 @@ public class Rid310 extends Request {
                                     if(keyIter.hasNext()) {userList.append(",");}
                                 }
                             }
+                            // change state to RID320
+                            userInfo.setCurrentState(UserInfo.STATE_RID320);
                             // create request 320
                             Request rid320 = new Rid320();
                             Object[] objects = {userList.toString()};

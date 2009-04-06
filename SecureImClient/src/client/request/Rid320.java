@@ -31,6 +31,9 @@ public class Rid320 extends Request {
                 	oia.readInt();
 					encryptedMsg = (byte[])oia.readObject();
 
+                    // desactivate timeout for RID_310
+                    super.deactivateTimeout();
+
 					//decrypt the msg using our private key
 					byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedMsg);
 
@@ -45,6 +48,9 @@ public class Rid320 extends Request {
                         ChatMaster.clientIM.setUserList(userlist);
                         // display the user list
                         ChatMaster.clientIM.displayUserList();
+
+                        // change state to RID_410
+                        ChatMaster.changeState(ChatMaster.STATE_RID410);
 
                         ois2.close();
 	                }

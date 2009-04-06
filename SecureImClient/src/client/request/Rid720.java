@@ -30,6 +30,8 @@ public class Rid720 extends Request {
                 try {
                 	oia.readInt();
 					encryptedMsg = (byte[])oia.readObject();
+                    // desactivate timeout for RID_710
+                    super.deactivateTimeout();
 					//decrypt the msg using our private key
 					byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedMsg);
 
@@ -40,9 +42,10 @@ public class Rid720 extends Request {
                         // user is logout
                         ChatMaster.clientData.setIsLogin(false);
                         System.out.println(ChatMaster.clientData.getUsername()+" is logout.");
+                        // change state to initial state
+                        ChatMaster.changeState(ChatMaster.STATE_INITAL);
                         // im client is set on logout state
                         ChatMaster.clientIM.setLogoutState();
-                        ChatMaster.changeState(ChatMaster.STATE_INITAL);
                         ois2.close();
 	                }
 				} catch (Exception e) { }

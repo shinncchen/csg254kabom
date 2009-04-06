@@ -168,7 +168,11 @@ public class ChatMaster {
                     request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_310) {
+                        ChatMaster.changeState(ChatMaster.STATE_RID250);
+                        System.out.println("Timeout accepted, moved to RID_250...");
+                    }
                 }
                 break;
             }

@@ -61,8 +61,9 @@ public class Rid710 extends Request {
             sender.send(message);
 
             ChatMaster.changeState(ChatMaster.STATE_RID710);
+            // activate timeout for RID_710
+            activateTimeout();
             System.out.println("sent 710 and changed state...");
-            //TODO: timeout setup
         } catch (Exception ex) {
 
         }
