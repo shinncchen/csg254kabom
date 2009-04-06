@@ -14,6 +14,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
     public ClientChatWindow(String peerUser, ClientIM clientIM) {
         initComponents();
         this.UserjTextField.setText(peerUser);
+        // pass ClientIM object to chat window
         this.clientIM = clientIM;
     }
 
@@ -110,9 +111,11 @@ public class ClientChatWindow extends javax.swing.JFrame {
             // clear chat box
             MessagejTextArea.setText("");
 
-            GuiEvent guiEvent = new GuiEvent();
             ChatMaster.changeState(ChatMaster.STATE_RID610);
+            // create gui event for p2p message exchange
+            GuiEvent guiEvent = new GuiEvent();
             Request rid610 = new Rid610();
+            // encapsulate the message in the request
             rid610.setRequestData(message.getBytes());
             guiEvent.setRequestRecieved(rid610);
             ChatMaster.handle(guiEvent);
