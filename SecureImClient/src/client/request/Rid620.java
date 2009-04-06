@@ -93,15 +93,13 @@ public class Rid620 extends Request {
     			
                 //if timestamp matches
 	                if (Arrays.equals(ChatMaster.peerData.getTimeT1(), (byte[])ois2.readObject())) {
-                        if(data.length == 1) {
                             ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.clientData.getUsername(), "message delivered");
                             System.out.println("Message was delivered to "+ChatMaster.peerData.getUsername());
-                        }
-                        else {
-                            System.out.println("Message was not delivered to "+ChatMaster.peerData.getUsername());
-                            ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.clientData.getUsername(), "message not delivered!");
-                        }
-                    }
+                            ChatMaster.changeState(ChatMaster.STATE_RID530);
+                            //System.out.println("Message was not delivered to "+ChatMaster.peerData.getUsername());
+                            //ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.clientData.getUsername(), "message not delivered!");
+                        //}
+	                }
     		} catch (Exception e) { }
 
     	}

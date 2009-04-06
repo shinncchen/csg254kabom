@@ -111,7 +111,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
             // clear chat box
             MessagejTextArea.setText("");
 
-            ChatMaster.changeState(ChatMaster.STATE_RID610);
+            //ChatMaster.changeState(ChatMaster.STATE_RID610);
             // create gui event for p2p message exchange
             GuiEvent guiEvent = new GuiEvent();
             Request rid610 = new Rid610();

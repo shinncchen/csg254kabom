@@ -49,16 +49,14 @@ public class Rid610 extends Request {
             //    eoos.writeObject((byte[])data[0]);
             //}
             //package the actual message
-            if (this.requestData!=null) {
-            	eoos.writeObject(new String(requestData));
-            }
-            else { System.out.println("Error formatting RID610: msg was empty"); }
+            String msg = new String(requestData);
+            eoos.writeObject(msg);
             eoos.flush();
 
             // write encrypted(T1 + message) using aes session key
             oos.writeObject(new Security().AESEncrypt(ChatMaster.peerData.getPeerSessionKey(), ebaos.toByteArray()));
             // write hash of message
-            oos.writeObject(new Security().getHash(new Security().getHash(requestData)));
+            oos.writeObject(new Security().getHash(msg.getBytes()));
             oos.flush();
 
             message = baos.toByteArray();

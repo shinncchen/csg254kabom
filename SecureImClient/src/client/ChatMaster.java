@@ -231,12 +231,19 @@ public class ChatMaster {
             }
             case ChatMaster.STATE_RID530: {
             	System.out.println("action in state 530");
+            	//someone wants to talk to me
             	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
             		TransportEvent transportEvent = (TransportEvent)imEvent;
             		Request request = transportEvent.getRequestRecieved();
-            		if (request.getRequestId()==Request.RID_620) { //TODO: need to delete this, debugging only
+            		if (request.getRequestId()==Request.RID_610) { //TODO: need to delete this, debugging only
             			request.processRequest(null);
             		}
+            	} else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
+                    	GuiEvent guiEvent = (GuiEvent) imEvent;
+                    	Request request = guiEvent.getRequestRecieved();
+                    	if (request.getRequestId()==Request.RID_610) {
+                    		request.sendRequest(null);
+                    	}
             	}
             	break;
             }
@@ -253,16 +260,10 @@ public class ChatMaster {
                     	request.processRequest(null);
                     }
                 }
-                else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
-                	GuiEvent guiEvent = (GuiEvent) imEvent;
-                	Request request = guiEvent.getRequestRecieved();
-                	if (request.getRequestId()==Request.RID_610) {
-                		request.sendRequest(null);
-                	}
-                } else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
-
+                    ChatMaster.clientIM.getChatWindow().addChatHistory(peerData.getUsername(), "Timeout, message not delivered");
                     request.sendRequest(null);
                 }
                 break;
