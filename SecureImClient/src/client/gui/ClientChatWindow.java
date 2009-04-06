@@ -107,7 +107,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
     private void sendjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendjButtonActionPerformed
         String message = MessagejTextArea.getText();
 
-        if(!message.equals("")) {
+        if(!message.equals("")&&ChatMaster.clientData.getIsLogin()&&ChatMaster.peerData.isAuth()) {
             // clear chat box
             MessagejTextArea.setText("");
 

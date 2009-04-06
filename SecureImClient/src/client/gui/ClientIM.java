@@ -336,7 +336,7 @@ public class ClientIM extends javax.swing.JFrame {
     }
 
     /**
-     * Get the ChatWindow to invoke public function
+     * Get the ChatWindow to invoke its public functions
      * (i.e. use this for addChatHistory())
      * @return
      */
