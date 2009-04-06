@@ -35,9 +35,6 @@ public class Rid410 extends Request {
         try {
             oos = new ObjectOutputStream(baos);
             
-            //instead of hard coding "Deepak", please enter the username of requested party
-            //ChatMaster.peerData.setUsername("Deepak");
-            
             oos.writeInt(Request.RID_410);
             oos.writeObject("PERMIT");
             oos.writeObject(ChatMaster.clientData.getUsername());
@@ -72,7 +69,8 @@ public class Rid410 extends Request {
 
             ChatMaster.changeState(ChatMaster.STATE_RID410);
             System.out.println("sent 410 and changed state...");
-            //TODO: timeout setup
+            
+            activateTimeout();
         } catch (Exception ex) {
             
         }

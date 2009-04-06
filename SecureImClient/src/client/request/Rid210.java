@@ -23,41 +23,49 @@ public class Rid210 extends Request {
     }
 
     public void sendRequest(Object[] data) {
+        
+        // Create a new sender object
         Sender sender = new Sender();
         
+        // Init streams for data output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //DataOutputStream dos = new DataOutputStream(baos);
         ObjectOutputStream oos = null;
         
+        // Array that stores bytes that are to be sent
         byte[] message = null;
         
         try {
             oos = new ObjectOutputStream(baos);
             
+            // Check ICD for data
             oos.writeInt(Request.RID_210);
             oos.writeObject("LOGIN");
             oos.writeInt(ChatMaster.LOCAL_PORT);
             
             oos.flush();
             
+            // Retrieve message to be sent
             message = baos.toByteArray();
             oos.close();
+            
         } catch (IOException ex) {
             ex.printStackTrace();
-            //TODO: call error screen
+            ChatMaster.clientIM.setErrorVisible();
         }
         
         try {
+            // Send the message
             sender.send(message);
             
+            // Change state to 210
             ChatMaster.changeState(ChatMaster.STATE_RID210);
             
             activateTimeout();
             
             System.out.println("sent 210, timeout init and changed state...");
-            //TODO: timeout setup
         } catch (Exception ex) {
             ex.printStackTrace();
+            ChatMaster.clientIM.setErrorVisible();
         }
     }
 

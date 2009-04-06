@@ -118,6 +118,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
             // encapsulate the message in the request
             rid610.setRequestData(message.getBytes());
             guiEvent.setRequestRecieved(rid610);
+            guiEvent.setGuiEventType(GuiEvent.EVENT_USERCHAT);
             ChatMaster.handle(guiEvent);
         }
 }//GEN-LAST:event_sendjButtonActionPerformed

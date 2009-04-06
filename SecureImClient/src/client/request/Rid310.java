@@ -36,7 +36,6 @@ public class Rid310 extends Request {
             ByteArrayOutputStream ebaos = new ByteArrayOutputStream();
             ObjectOutputStream eoos = new ObjectOutputStream(ebaos);
 
-
             //Ua
             eoos.writeObject(ChatMaster.clientData.getUsername());
             //write timestamp
@@ -61,10 +60,11 @@ public class Rid310 extends Request {
             sender.send(message);
 
             ChatMaster.changeState(ChatMaster.STATE_RID310);
+            
             // activate timeout for RID_310
             activateTimeout();
+            
             System.out.println("sent 310 and changed state...");
-            //TODO: timeout setup
         } catch (Exception ex) {
 
         }

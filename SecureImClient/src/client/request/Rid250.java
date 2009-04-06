@@ -37,7 +37,6 @@ public class Rid250 extends Request {
             oos = new ObjectOutputStream(baos);
             
             oos.writeInt(Request.RID_250);
-            //oos.writeObject(new Security().AESEncrypt(ChatMaster.clientData.getSessionKey(), ChatMaster));
             
             ByteArrayOutputStream ebaos = new ByteArrayOutputStream();
             ObjectOutputStream eoos = new ObjectOutputStream(ebaos);
@@ -45,8 +44,8 @@ public class Rid250 extends Request {
             //write timestamp
             eoos.writeObject(ChatMaster.clientData.getTimeT2());
 
-
             eoos.flush();
+            
             //encrypting
             oos.writeObject(new Security().AESEncrypt(ChatMaster.clientData.getSessionKey(), ebaos.toByteArray()));
             eoos.close();
@@ -54,11 +53,6 @@ public class Rid250 extends Request {
             oos.flush();
             
             message = baos.toByteArray();
-
-            //user logged in, authenticated
-            ChatMaster.clientData.setIsLogin(true);
-            // switch IM panel to login
-            ChatMaster.clientIM.setLoginState();
 
             oos.close();
         } catch (IOException ex) {
@@ -70,9 +64,15 @@ public class Rid250 extends Request {
             sender.send(message);
             
             ChatMaster.changeState(ChatMaster.STATE_LOGIN);
-            ChatMaster.handle(null);
+            
             System.out.println("sent 250 and changed state... to STATE_LOGIN");
-            //TODO: timeout setup
+            
+            //user logged in, authenticated
+            ChatMaster.clientData.setIsLogin(true);
+            
+            // switch IM panel to login
+            ChatMaster.clientIM.setLoginState();
+            
         } catch (Exception ex) {
             
         }

@@ -267,6 +267,10 @@ public class ClientIM extends javax.swing.JFrame {
         // disable IM window to be focused
         this.setEnabled(true);
     }
+    
+    public void setErrorVisible() {
+        ErrorjTextField.setVisible(true);
+    }
 
     /**
      * Login action for IM
@@ -350,43 +354,50 @@ public class ClientIM extends javax.swing.JFrame {
      * @param STATE
      */
     private void callChatMasterGuiEvent(int STATE) {
-        // create gui event handle by ChatMaster
+        // Create gui event handler for the ChatMaster
         GuiEvent guiEvent = new GuiEvent();
 
         switch(STATE) {
-            //LOGIN
+            
+            //Login button pressed by users
             case ChatMaster.STATE_RID210 : {
-                ChatMaster.changeState(ChatMaster.STATE_RID210);
+                
+                // Create a RID 210 request
                 Request rid210 = new Rid210();
-                // set username
+                
+                // set username and password hash
                 ChatMaster.clientData.setUsername(UsernamejTextField.getText());
-                // set hash password
                 ChatMaster.clientData.setPwdHash(new Security().getHash(new String(jPasswordField.getPassword()).getBytes()));
+                
                 guiEvent.setRequestRecieved(rid210);
+                
+                // call state machine
                 ChatMaster.handle(guiEvent);
+                
                 break;
             }
             //LIST
             case ChatMaster.STATE_RID310 : {
-                ChatMaster.changeState(ChatMaster.STATE_RID310);
                 Request rid310 = new Rid310();
                 guiEvent.setRequestRecieved(rid310);
+                guiEvent.setGuiEventType(GuiEvent.EVENT_LIST);
                 ChatMaster.handle(guiEvent);
                 break;
             }
             //PERMIT
             case ChatMaster.STATE_RID410 : {
-                ChatMaster.changeState(ChatMaster.STATE_RID210);
-                Request rid410 = new Rid410();
                 ChatMaster.peerData = new PeerDetails();
                 ChatMaster.peerData.setUsername((String)UserListjList.getSelectedValue());
+                
+                Request rid410 = new Rid410();
                 guiEvent.setRequestRecieved(rid410);
+                
+                guiEvent.setGuiEventType(GuiEvent.EVENT_USERSELECT);
                 ChatMaster.handle(guiEvent);
                 break;
             }
             //LOGOUT
             case ChatMaster.STATE_RID710 : {
-                ChatMaster.changeState(ChatMaster.STATE_RID710);
                 Request rid710 = new Rid710();
                 guiEvent.setRequestRecieved(rid710);
                 ChatMaster.handle(guiEvent);

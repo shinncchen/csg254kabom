@@ -26,7 +26,8 @@ import java.util.Timer;
  */
 public class ChatMaster {
     
-	private static int CURRENT_STATE = 0;
+    private static int CURRENT_STATE = 0;
+    
     public static final int STATE_INITAL = 10;
     //LOGIN
     public static final int STATE_LOGIN = 20;
@@ -67,53 +68,69 @@ public class ChatMaster {
     private static long TIMEOUT_DURATION = 5000;
     
     public static void initialize() {
-        // ChatMaster.CURRENT_STATE = ChatMaster.STATE_INITAL;
+        
+        // Initializing the client data structure
         clientData = new ClientDetails();
-        // clientData.setUsername("Raghu");
-        // clientData.setPwdHash(new Security().getHash("ok".getBytes()));
+        
+        // Creating a RSA key pair
         RSAKeys rsaKeys = new Security().generateRSAKeys();
         clientData.setPublicKey(rsaKeys.getPublicKey());
         clientData.setPrivateKey(rsaKeys.getPrivateKey());
+        
+        // Setting up server's public key
         ChatMaster.publicKeyServer = Security.hexToByteArray(publicKeyServerHex);
         
+        // Initializing Timer object for timeouts
         timeoutTimer = new Timer();
         
+        // set the current state to the initial state
+        ChatMaster.CURRENT_STATE = ChatMaster.STATE_INITAL;
+        
+        // Staring the server part of the client that listens to incoming requests
         Listener listener = new Listener();
         listener.setPort(LOCAL_PORT);
         Thread listenerThread = new Thread(listener);
         listenerThread.start();
         System.out.println("Listener started...");
-        
-        // ChatMaster.handle(null);
     }
     
     public synchronized static void handle(ImEvent imEvent) {
 
         switch (ChatMaster.CURRENT_STATE) {
                 
-
-            //LOGIN BEGINS HERE
-            case ChatMaster.STATE_RID210: {
-                System.out.println("action in state RID210");
-                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
-                    TransportEvent transportEvent = (TransportEvent) imEvent;
-                    Request request = transportEvent.getRequestRecieved();
-                    if(request.getRequestId() == Request.RID_220) {
-                       /* try {
-                            //Thread.currentThread().sleep(10000);
-                        } catch (InterruptedException ex) {
-                        }*/
-                        request.processRequest(null);
-                    }
-                }
-                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
+            case ChatMaster.STATE_INITAL: {
+                System.out.println("action in state Initial");
+                
+                // if the event is of type user
+                if(imEvent.getEventType() == imEvent.USER_EVENT) {
+                    
+                    // Retrieve the request object from the event object
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
 
+                    // Send 210
                     request.sendRequest(null);
                 }
+            }
+            
+            //LOGIN BEGINS HERE
+            case ChatMaster.STATE_RID210: {
+                System.out.println("action in state RID210");
+                
+                // In 210, you receive RID 220 then process it
+                if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
+                    TransportEvent transportEvent = (TransportEvent) imEvent;
+                    Request request = transportEvent.getRequestRecieved();
+                    
+                    if(request.getRequestId() == Request.RID_220) {
+                        request.processRequest(null);
+                    }
+                }
+                
+                // If there is a timeout at this state, revert to the initial state
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    
                     if(timeoutEvent.getRequestId() == Request.RID_210) {
                         ChatMaster.changeState(ChatMaster.STATE_INITAL);
                         System.out.println("Timeout accepted, moved to intial state...");
@@ -121,22 +138,30 @@ public class ChatMaster {
                 }
                 break;
             }
+            
             case ChatMaster.STATE_RID230: {
                 System.out.println("action in state RID230");
                 
+                // If password is right, server responds with session key. Retreive that and store
                 if(imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
+                    
                     if(request.getRequestId() == Request.RID_240) {
-
                         request.processRequest(null);
                     }
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    
+                    if(timeoutEvent.getRequestId() == Request.RID_230) {
+                        ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                        System.out.println("Timeout accepted, moved to intial state...");
+                    }
                 }
+                break;
             }
-            break;
+            
             //if user is logged in
             case ChatMaster.STATE_LOGIN: {
             	System.out.println("action in state STATE_LOGIN");
@@ -148,8 +173,14 @@ public class ChatMaster {
             			request.processRequest(null);
             		}
             	}
+                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
+                    GuiEvent guiEvent = (GuiEvent) imEvent;
+                    Request request = guiEvent.getRequestRecieved();
+                    request.sendRequest(null);
+                }
+                break;
             }
-            break;
+            
             //LIST BEGINS HERE
             case ChatMaster.STATE_RID310: {
                 System.out.println("action in state RID310");
@@ -157,21 +188,14 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_320) {
-
                         request.processRequest(null);
                     }
-                }
-                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
-                    GuiEvent guiEvent = (GuiEvent) imEvent;
-                    Request request = guiEvent.getRequestRecieved();
-
-                    request.sendRequest(null);
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_310) {
-                        ChatMaster.changeState(ChatMaster.STATE_RID250);
-                        System.out.println("Timeout accepted, moved to RID_250...");
+                        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        System.out.println("Timeout accepted, moved to Login state...");
                     }
                 }
                 break;
@@ -187,14 +211,12 @@ public class ChatMaster {
                         request.processRequest(null);
                     }
                 }
-                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
-                    GuiEvent guiEvent = (GuiEvent) imEvent;
-                    Request request = guiEvent.getRequestRecieved();
-
-                    request.sendRequest(null);
-                }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_410) {
+                        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        System.out.println("Timeout accepted, moved to Login state...");
+                    }
                 }
                 break;
             }
@@ -205,14 +227,15 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_520) {
-                    	
                         request.processRequest(null);
-                    } else if (request.getRequestId() == Request.RID_510) { //TODO: must remove this line, this is debugging
-                    	request.processRequest(null);
                     }
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_510) {
+                        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        System.out.println("Timeout accepted, moved to Login state...");
+                    }
                 }
                 break;
             }
@@ -221,16 +244,22 @@ public class ChatMaster {
             	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
             		TransportEvent transportEvent = (TransportEvent)imEvent;
             		Request request = transportEvent.getRequestRecieved();
-            		if (request.getRequestId()==Request.RID_520) {
+            		if (request.getRequestId()==Request.RID_530) {
             			request.processRequest(null);
-            		} //else if (request.getRequestId()==Request.RID_530) {
-            			//request.sendRequest(null);
-            		//}
+            		}
             	}
+                else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_520) {
+                        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        System.out.println("Timeout accepted, moved to Login state...");
+                    }
+                }
                 break;
             }
             case ChatMaster.STATE_RID530: {
             	System.out.println("action in state 530");
+                
             	//someone wants to talk to me
             	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
             		TransportEvent transportEvent = (TransportEvent)imEvent;
@@ -238,7 +267,9 @@ public class ChatMaster {
             		if (request.getRequestId()==Request.RID_610) { //TODO: need to delete this, debugging only
             			request.processRequest(null);
             		}
-            	} else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
+            	}
+                // i want to talk to someone
+                else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
                     	GuiEvent guiEvent = (GuiEvent) imEvent;
                     	Request request = guiEvent.getRequestRecieved();
                     	if (request.getRequestId()==Request.RID_610) {
@@ -247,6 +278,7 @@ public class ChatMaster {
             	}
             	break;
             }
+            
             //P2P Message exchange
             case ChatMaster.STATE_RID610: {
                 System.out.println("action in state RID610");
@@ -254,20 +286,21 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_620) {
-                    	
                         request.processRequest(null);
-                    } else if (request.getRequestId() == Request.RID_610) { //TODO: must remove this line, this is debugging
-                    	request.processRequest(null);
                     }
                 }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    GuiEvent guiEvent = (GuiEvent) imEvent;
-                    Request request = guiEvent.getRequestRecieved();
-                    ChatMaster.clientIM.getChatWindow().addChatHistory(peerData.getUsername(), "Timeout, message not delivered");
-                    request.sendRequest(null);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_610) {
+                        ChatMaster.clientIM.getChatWindow().addChatHistory(peerData.getUsername(), "Timeout, message may not be delivered");
+                        
+                        ChatMaster.changeState(ChatMaster.STATE_RID530);
+                        System.out.println("Timeout accepted, moved to state 530...");
+                    }
                 }
                 break;
             }
+            
             //LOGOUT
             case ChatMaster.STATE_RID710 : {
                 System.out.println("action in state RID710");
@@ -275,18 +308,14 @@ public class ChatMaster {
                     TransportEvent transportEvent = (TransportEvent) imEvent;
                     Request request = transportEvent.getRequestRecieved();
                     if(request.getRequestId() == Request.RID_720) {
-
                         request.processRequest(null);
                     }
                 }
-                else if(imEvent.getEventType() == imEvent.USER_EVENT) {
-                    GuiEvent guiEvent = (GuiEvent) imEvent;
-                    Request request = guiEvent.getRequestRecieved();
-
-                    request.sendRequest(null);
-                }
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
-                    ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                    TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
+                    if(timeoutEvent.getRequestId() == Request.RID_710) {
+                        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                    }
                 }
                 break;
             }

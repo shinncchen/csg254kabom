@@ -37,6 +37,7 @@ public class Rid230 extends Request {
             oos = new ObjectOutputStream(baos);
             
             oos.writeInt(Request.RID_230);
+            
             //challenge
             oos.writeObject(data[0]);
             
@@ -71,7 +72,9 @@ public class Rid230 extends Request {
 
             ChatMaster.changeState(ChatMaster.STATE_RID230);
             System.out.println("sent 230 and changed state...");
-            //TODO: timeout setup
+            
+            activateTimeout();
+            
         } catch (Exception ex) {
             
         }

@@ -20,26 +20,36 @@ public class Rid220 extends Request {
     public void processRequest(Object[] data) {
         if (super.senderIp.equalsIgnoreCase(ChatMaster.SERVER_IP)) {
             if (super.requestData != null && super.requestData.length > 0) {
+                
                 ByteArrayInputStream bais = new ByteArrayInputStream(super.requestData);
                 ObjectInputStream oia = null;
+                
                 try {
                     oia = new ObjectInputStream(bais);
                 } catch (IOException e) {
                 }
+                
                 byte[] challenge = null;
                 try {
                     oia.readInt();
+                    
+                    // Read the challenge 
                     challenge = (byte[]) oia.readObject();
                     
-                    //valid request...
-                    super.deactivateTimeout();
                 } catch (Exception e) {
                 }
-                Object[] objectsToSend = new Object[1];
-                objectsToSend[0] = challenge;
-                System.out.println("challenge = " + challenge);
-                Request rid230 = new Rid230();
-                rid230.sendRequest(objectsToSend);
+                
+                if(challenge != null && challenge.length > 0) {
+                    //valid request...
+                    super.deactivateTimeout();
+                    
+                    // Create and send RID 230
+                    Object[] objectsToSend = new Object[1];
+                    objectsToSend[0] = challenge;
+                    System.out.println("challenge = " + challenge);
+                    Request rid230 = new Rid230();
+                    rid230.sendRequest(objectsToSend);
+                }
             }
         }
     }
