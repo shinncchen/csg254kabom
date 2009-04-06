@@ -50,8 +50,12 @@ public class Rid220 extends Request {
         }
         
         try {
+            // Send the message to the appropriate IP:PORT
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
+            
             System.out.println("ipaddress sent to: " + userInfo.getIpAdress() + " and port: " + userInfo.getPort());
+            
+            // Change state of user to RID 220
             userInfo.setCurrentState(UserInfo.STATE_RID220);
             
             userInfo.activateTimeout(Request.RID_220);

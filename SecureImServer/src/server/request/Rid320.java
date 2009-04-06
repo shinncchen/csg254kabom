@@ -55,7 +55,6 @@ public class Rid320 extends Request {
 
             message = baos.toByteArray();
             oos.close();
-            // userInfo.setCurrentState(UserInfo.STATE_LOGIN);
         } catch (IOException ex) {
             ex.printStackTrace();
             //TODO: call error screen
@@ -64,8 +63,8 @@ public class Rid320 extends Request {
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
             System.out.println("ipaddress sent to: " + userInfo.getIpAdress() + " and port: " + userInfo.getPort());
-            userInfo.setCurrentState(UserInfo.STATE_LOGIN);
-            System.out.println("sent 320 and changed state...");
+            
+            System.out.println("sent 320");
         } catch (Exception ex) {
 
         }

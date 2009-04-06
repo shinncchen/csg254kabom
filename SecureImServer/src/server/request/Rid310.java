@@ -24,36 +24,30 @@ public class Rid310 extends Request {
     }
 
     public void processRequest(UserInfo userInfo, Object[] data) {
+        
+        //Request received for user list, check Ua valid, both inside and outside, check time skew, and respond with the list
         if(super.requestData != null && requestData.length > 0) {
+            
             ByteArrayInputStream bais = new ByteArrayInputStream(requestData);
             ObjectInputStream ois = null;
+            
             try {
             	ois = new ObjectInputStream(bais);
+                
             	//get rid of RID, no need
             	ois.readInt();
+                
+                // retrive list string
                 ois.readObject();
+                
                 // get username plain text
                 String usernamePlain = (String)ois.readObject();
-
-                Iterator<String> keyIter = (ChatMaster.users.keySet()).iterator();
-                boolean isUserFound = false;
-                String userIP = null;
-
-                while (keyIter.hasNext() && !isUserFound) {
-                    // for each entry
-                    userIP = keyIter.next();
-                    // get userInfo
-                    userInfo = (UserInfo) ChatMaster.users.get(userIP);
-
-                    // check if username is Login
-                    if (usernamePlain.equalsIgnoreCase(userInfo.getUsername())){
-                        System.out.println("username:" +userInfo.getUsername());
-                        isUserFound = true;
-                    }
-                }
-
+                
+                // check if user exists
+                boolean userAndIpMatch = userInfo.getUsername().equals(usernamePlain);
+                
                 // decrypt if user is found and login to the server
-                if(isUserFound && userInfo.isLoggedIn()) {
+                if(userAndIpMatch && userInfo.isLoggedIn()) {
                     byte[] decryptedMsg = new Security().AESDecrypt(userInfo.getSessionKey(), (byte[])ois.readObject());
 
                     ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
@@ -61,32 +55,38 @@ public class Rid310 extends Request {
                     
                     // get username encrypted
                     String usernameCrypt = (String)ois2.readObject();
+                    
                     // check if user plaintext == user encrypted
                     if(usernamePlain.equals(usernameCrypt)) {
+                        
                         // get time stamp
                         userInfo.setTimeT1((byte[])ois2.readObject());
-                        //calcualte delta for that client
-                        userInfo.setDelta(new Security().clcDelta(new Security().getTimestamp(), userInfo.getTimeT1()));
+                        
                         //if skew is correct, get list of user online
                         if (new Security().isTimeValid(new Security().getTimestamp(), userInfo.getTimeT1(), userInfo.getDelta())) {
-                            keyIter = (ChatMaster.users.keySet()).iterator();
-                            userIP = null;
+                            
+                            Iterator<String> keyIter = (ChatMaster.users.keySet()).iterator();
+                            String userIP = null;
+                
                             StringBuffer userList = new StringBuffer();
 
                             while (keyIter.hasNext()) {
                                 // for each entry
                                 userIP = keyIter.next();
+                                
                                 // get userInfo
                                 userInfo = (UserInfo) ChatMaster.users.get(userIP);
-                                // check if username is Login and append to user list
-                                if (userInfo.isLoggedIn()){
+                                
+                                // check if user is logged in and append each user to the list except himself
+                                if (userInfo.isLoggedIn() && ! userInfo.getUsername().equals(usernamePlain)) {
+                                    
                                     userList.append(userInfo.getUsername());
+                                    
                                     if(keyIter.hasNext()) {userList.append(",");}
                                 }
                             }
-                            // change state to RID320
-                            userInfo.setCurrentState(UserInfo.STATE_RID320);
-                            // create request 320
+                            
+                            // create and send request 320
                             Request rid320 = new Rid320();
                             Object[] objects = {userList.toString()};
                             rid320.sendRequest(userInfo, objects);

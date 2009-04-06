@@ -25,7 +25,11 @@ public class Rid210 extends Request {
     }
 
     public void processRequest(UserInfo userInfo, Object[] data) {
+        
+        // If request data exists
         if(super.requestData != null && requestData.length > 0) {
+            
+            // Init streams to retreive data
             ByteArrayInputStream bais = new ByteArrayInputStream(requestData);
             ObjectInputStream ois = null;
             
@@ -35,6 +39,7 @@ public class Rid210 extends Request {
             try {
                  ois = new ObjectInputStream(bais);
                  
+                 // Check ICD for why data is retreived this way
                  ois.readInt();
                  string = (String) ois.readObject();
                  port = ois.readInt();
@@ -46,14 +51,19 @@ public class Rid210 extends Request {
                 ex.printStackTrace();
             }
 
+            // if the user sends LOGIN, send challenge
             if(string.equalsIgnoreCase("Login") && port!=0) {
 
+                // Create a challenge
                 Security security = new Security();
                 byte[] challenge = security.getTimestamp();
 
                 System.out.println("sending challenge to user");
+                
+                // Create and send RID 220
                 Request rid220 = new Rid220();
 
+                // Check ICD
                 userInfo.setChallenge(challenge);
                 userInfo.setCurrentState(UserInfo.STATE_RID220);
                 userInfo.setPort(port);

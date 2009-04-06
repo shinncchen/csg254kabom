@@ -69,9 +69,11 @@ public class Rid240 extends Request {
         
         try {
             sender.send(message, userInfo.getIpAdress(), userInfo.getPort());
+            
             userInfo.setCurrentState(UserInfo.STATE_RID240);
+            userInfo.activateTimeout(Request.RID_240);
+            
             System.out.println("sent 240 and changed state...");
-            //TODO: timeout setup
         } catch (Exception ex) {
             
         }

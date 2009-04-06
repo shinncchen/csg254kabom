@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package server.request;
 
 import java.io.ByteArrayInputStream;
@@ -19,7 +18,7 @@ import server.security.Security;
  * @author Abdulla
  */
 public class Rid250 extends Request {
-    
+
     public Rid250() {
         super(Request.RID_250);
     }
@@ -28,31 +27,43 @@ public class Rid250 extends Request {
     }
 
     public void processRequest(UserInfo userInfo, Object[] data) {
-        if(super.requestData != null && requestData.length > 0) {
+
+        // if challenge response t2 is right, log the user in
+        if (super.requestData != null && requestData.length > 0) {
+
             ByteArrayInputStream bais = new ByteArrayInputStream(requestData);
             ObjectInputStream ois = null;
+
             try {
-            	ois = new ObjectInputStream(bais);
-            	//get rid of RID, no need
-            	ois.readInt();
-            	//check whether timestamp matches
-            	
-            	byte[] decryptedMsg = new Security().AESDecrypt(userInfo.getSessionKey(), (byte[])ois.readObject());
-            	
-            	ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
-				ObjectInputStream ois2 = new ObjectInputStream(bais2);
-				
-				//if timestamp = my timestamp. log em in
-				if (Arrays.equals(userInfo.getTimeT2(), (byte[])ois2.readObject())) {
-					System.out.println("User: " + userInfo.getUsername() + " just got logged in");
-					userInfo.setLoggedIn(true);
-				}
-				ois2.close();
-				userInfo.setCurrentState(UserInfo.STATE_LOGIN);
+                ois = new ObjectInputStream(bais);
+                
+                //get rid of RID, no need
+                ois.readInt();
+                
+                //check whether timestamp matches
+                byte[] decryptedMsg = new Security().AESDecrypt(userInfo.getSessionKey(), (byte[]) ois.readObject());
+
+                ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
+                ObjectInputStream ois2 = new ObjectInputStream(bais2);
+
+                //if timestamp = my timestamp. log em in
+                if (Arrays.equals(userInfo.getTimeT2(), (byte[]) ois2.readObject())) {
+                    
+                    userInfo.deactivateTimeout();
+                    
+                    System.out.println("User: " + userInfo.getUsername() + " just got logged in");
+                    userInfo.setLoggedIn(true);
+                }
+                
+                ois2.close();
+                
+                userInfo.setCurrentState(UserInfo.STATE_LOGIN);
             } //end of try catch block
-            catch (Exception e) { System.err.println("Couldn't parse objects, ignoring"); e.printStackTrace(); }
-            
+            catch (Exception e) {
+                System.err.println("Couldn't parse objects, ignoring");
+                e.printStackTrace();
+            }
+
         }
     }
-    
 }

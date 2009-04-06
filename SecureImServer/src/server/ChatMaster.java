@@ -32,17 +32,20 @@ public class ChatMaster {
 
     public static void initialize() {
 
-
+        // Intialize the RSA keys
         ChatMaster.publicKeyServer = Security.hexToByteArray(publicKeyServerHex);
         ChatMaster.privateKeyServer = Security.hexToByteArray(privateKeyServerHex);
 
+        // Initializing user data
         users = new HashMap();
         usersDB = new UsersDB();
 
+        // Starting UPD server to listen to incoming requests
         Listener listener = new Listener();
         listener.setPort(SERVER_PORT);
         Thread listenerThread = new Thread(listener);
         listenerThread.start();
+        
         System.out.println("Listener started...");
     }
 
@@ -57,18 +60,25 @@ public class ChatMaster {
 
                 int requestId = request.getRequestId();
 
+                // Retreive the user from the Hash Map
                 UserInfo currentUser = (UserInfo) users.get(ipAddress);
 
+                // only if user doesn't exist and RID is 210, create an user entry
                 if (currentUser == null) {
                     if (requestId == Request.RID_210) {
                         System.out.println("processing rid 210...");
+                        
                         //the user hasn't established any contact yet, so create an hashmap entry
                         Rid210 rid210 = (Rid210) request;
                         UserInfo userInfo = new UserInfo();
                         userInfo.setIpAdress(request.getSenderIp());
 
+                        // Process 210 and respond
                         rid210.processRequest(userInfo, null);
+                        
+                        // Crate an hash map entry
                         users.put(ipAddress, userInfo);
+                        
                         System.out.println("new user created in hashmap");
                     } else {
                         //user hasn't established contact, but is try to send a request other than the very first one, drop it
@@ -83,14 +93,17 @@ public class ChatMaster {
                             break;
                         }
 //
+                        // Received challenge response, Check and send session key
                         case UserInfo.STATE_RID220: {
                             System.out.println("action in state RID220");
                             request = transportEvent.getRequestRecieved();
+                            
                             if (request.getRequestId() == Request.RID_230) {
                                 request.processRequest(currentUser, null);
 
                             } else {
-                            } //ignore
+                                //ignore request
+                            } 
 
                             break;
                         }
@@ -143,6 +156,24 @@ public class ChatMaster {
                         case UserInfo.STATE_RID220: {
                             System.out.println("timeout in state RID220");
                             if (timeoutEvent.getRequestId() == Request.RID_220) {
+                                System.out.println("removing user...");
+                                users.remove(ipAddress);
+                            }
+                            break;
+                        }
+                        
+                        case UserInfo.STATE_RID240: {
+                            System.out.println("timeout in state RID240");
+                            if (timeoutEvent.getRequestId() == Request.RID_240) {
+                                System.out.println("removing user...");
+                                users.remove(ipAddress);
+                            }
+                            break;
+                        }
+                        
+                        case UserInfo.STATE_RID250: {
+                            System.out.println("timeout in state RID250");
+                            if (timeoutEvent.getRequestId() == Request.RID_250) {
                                 System.out.println("removing user...");
                                 users.remove(ipAddress);
                             }
