@@ -107,11 +107,12 @@ public class Rid610 extends Request {
                     ChatMaster.peerData.setTimeT1((byte[])ois2.readObject());
                     //calcualte delta for that client
                     ChatMaster.peerData.setDelta(new Security().clcDelta(new Security().getTimestamp(), ChatMaster.peerData.getTimeT1()));
+                    // if T1 is valid, read message
 	                if (new Security().isTimeValid(new Security().getTimestamp(), ChatMaster.peerData.getTimeT1(), ChatMaster.peerData.getDelta())) {
                         byte[] message = (byte[])ois2.readObject();
                         // get hash message
                         byte[] message_hash = (byte[])oia.readObject();
-
+                        // compare if message = hash(message)
                         if(Arrays.equals(new Security().getHash(message), message_hash)) {
                             // add conversation to history
                             ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.peerData.getUsername(), new String((byte[])data[0]));
