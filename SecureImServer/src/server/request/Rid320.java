@@ -57,7 +57,6 @@ public class Rid320 extends Request {
             oos.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-            //TODO: call error screen
         }
 
         try {

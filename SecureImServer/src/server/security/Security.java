@@ -146,42 +146,5 @@ public class Security {
 		return this.getLongOfTimestamp(localTime)-this.getLongOfTimestamp(remoteTime);
 	}
 	
-	/*
-	 * test driver
-	 */
-	public static void main(String[] args) {
-		
-		//test RSA
-		RSAKeys keys;
-		Security security = new Security();
-		keys = security.generateRSAKeys();
-		//System.out.println("HEX of PUBLICKEY: " + Security.byteArrayToHex(keys.getPublicKey()));
-		//System.out.println("HEX of PRIVATEKEY: " + Security.byteArrayToHex(keys.getPrivateKey()));
-		//byte[] encrypted = security.RSAEncrypt(keys.getPublicKey(), "the kaboom is great".getBytes());
-		byte[] encrypted = security.RSAEncrypt(Security.hexToByteArray(Security.byteArrayToHex(keys.getPublicKey())), "the kaboom is great".getBytes());
-		byte[] decrypted = security.RSADecrypt(keys.getPrivateKey(), encrypted);
-		System.out.println("Decrypted: " + new String(decrypted));
-		ChatMaster.initialize();
-		byte[] encrypted11 = security.RSAEncrypt(ChatMaster.publicKeyServer, "love is awful".getBytes());
-		byte[] decrypted22 = security.RSADecrypt(ChatMaster.privateKeyServer, encrypted11);
-		System.out.println("decrypted11: " + new String(decrypted22));
-		
-		//test AES
-		byte[] AESkey = security.generateAESKey();
-		byte[] encrypted1 = security.AESEncrypt(AESkey, "no its not".getBytes());
-		byte[] decrypted2 = security.AESDecrypt(AESkey, encrypted1);
-		System.out.println("Decrypted message is: " + new String(decrypted2));
-		System.out.println("Decrypted hash is: " + new String(security.getHash(decrypted2)));
-		System.out.println("Encrypted hash is: " + new String(security.getHash(encrypted1)));
-		
-		//test Timestamps
-		byte[] timeBefore = security.getTimestamp();
-		try { Thread.sleep(50000); } catch (Exception e) { }
-		System.out.println("is time different: " + security.isTimeValid(security.getTimestamp(), timeBefore, 5L));
-		
-	}
-	
-	
-	
 	
 }

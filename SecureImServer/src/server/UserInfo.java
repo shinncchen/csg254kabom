@@ -138,7 +138,7 @@ public class UserInfo {
 	}
         
     public void activateTimeout(int requestId) {
-        deactivateTimeout(); //TODO: should we have this
+        deactivateTimeout();
         timeoutTimer = new Timer();
         timeoutTimer.schedule(new TimerTimeoutTask(requestId, ipAdress), TIMEOUT_DURATION);
     }

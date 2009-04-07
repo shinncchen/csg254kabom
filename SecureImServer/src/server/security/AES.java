@@ -16,8 +16,11 @@ import javax.crypto.spec.IvParameterSpec;
  */
 public class AES {
 	
-	/*
+	/**
 	 * Generate a key
+	 * 
+	 * @param keysize
+	 * @return an AESkey in a bytearray
 	 */
 	public byte[] generateKey(int keysize) {
 		try {
@@ -44,8 +47,13 @@ public class AES {
 	}
 	
 	
-	/*
+	/**
+	 * 
 	 * Encrypt a message with this key and return a byte array
+	 * 
+	 * @param key key to encrypt with
+	 * @param message the message to encrypt
+	 * @return bytearray of encrypte data
 	 */
 	public byte[] AESEncrypt(byte[] key, byte[] message) {
 		
