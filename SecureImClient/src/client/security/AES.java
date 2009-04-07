@@ -1,7 +1,3 @@
-/**
- * AES utilities main body
- * team members don't need to use this class
- */
 package client.security;
 
 import java.io.*;
@@ -11,14 +7,18 @@ import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 
 /**
- * @author Abdulla
+ * @author HuskyHackers
  *
+ * AES utilities
  */
+
 public class AES {
-	
-	/*
-	 * Generate a key
-	 */
+
+    /**
+     * Generate a key
+     * @param keysize - int, keysize
+     * @return - byte[], AES key
+     */
 	public byte[] generateKey(int keysize) {
 		try {
 			
@@ -42,11 +42,13 @@ public class AES {
 		
 		return null;
 	}
-	
-	
-	/*
-	 * Encrypt a message with this key and return a byte array
-	 */
+
+    /**
+     * Encrypt a message with this key and return a byte array
+     * @param key     - byte[], aes key
+     * @param message - byte[], message to encrypt
+     * @return        - byte[], encrypted message
+     */
 	public byte[] AESEncrypt(byte[] key, byte[] message) {
 		
 		try {
@@ -76,10 +78,13 @@ public class AES {
 		return null;
 		
 	}
-	
-	/*
-	 * Decrypt a message with this key and return a byte array
-	 */
+
+    /**
+     * Decrypt a message with this key and return a byte array
+     * @param key     - byte[], aes key
+     * @param message - byte[], message to decrypt
+     * @return        - byte[], decrypted message
+     */
 	public byte[] AESDecrypt(byte[] key, byte[] message) {
 		try {
 			//extract key

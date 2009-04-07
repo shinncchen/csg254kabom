@@ -1,16 +1,21 @@
-/**
- * This class is used to calculate message digest using SHA1
- * Team members don't call this class. Use Security() instead.
- */
 package client.security;
 
 import java.security.*;
+
 /**
- * @author Abdulla
+ * @author HuskyHackers
  *
+ * This class is used to calculate message digest using SHA1
+ * Team members don't call this class. Use Security() instead.
  */
+
 public class SHA1 {
 
+    /**
+     * Compute SHA-1 hash value
+     * @param message - byte[], message to digest
+     * @return        - byte[], SHA-1 hash value
+     */
 	public byte[] getMessageDigest(byte[] message) {
 		try {
 			MessageDigest sha = MessageDigest.getInstance("SHA-1");
