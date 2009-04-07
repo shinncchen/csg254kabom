@@ -80,7 +80,9 @@ public class ClientChatWindow extends javax.swing.JFrame {
             }
 
             public void keyTyped(KeyEvent keyEvent) {
-                if (keyEvent.getKeyChar() == '\n') { SendjButton.doClick(); }
+                if (keyEvent.getKeyChar() == '\n') { 
+                	MessagejTextArea.setText(MessagejTextArea.getText().substring(0, MessagejTextArea.getText().length()-1));
+                	SendjButton.doClick(); }
             }
           };
         MessagejTextArea.addKeyListener(keyListener);
