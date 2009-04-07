@@ -109,6 +109,7 @@ public class Rid530 extends Request {
                     //then user is authenticated ! hurray
                     ChatMaster.clientIM.createChatWindow(ChatMaster.peerData.getUsername());
                     ChatMaster.peerData.setAuth(true);
+                    ChatMaster.changeState(ChatMaster.STATE_RID530);
                 }
                 ois2.close();
                 oia.close();

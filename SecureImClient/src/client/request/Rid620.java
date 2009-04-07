@@ -100,7 +100,7 @@ public class Rid620 extends Request {
                     
                     deactivateTimeout();
                     
-                    ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.clientData.getUsername(), "message delivered");
+                    //ChatMaster.clientIM.getChatWindow().addChatHistory(ChatMaster.clientData.getUsername(), "message delivered");
                     System.out.println("Message was delivered to " + ChatMaster.peerData.getUsername());
                     
                     ChatMaster.changeState(ChatMaster.STATE_RID530);
