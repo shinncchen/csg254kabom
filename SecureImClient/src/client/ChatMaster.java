@@ -21,8 +21,9 @@ import client.security.*;
 import java.util.Timer;
 
 /**
+ * This class is the state machine.
+ * @author HuskyHackers
  *
- * @author Raghuram
  */
 public class ChatMaster {
     
@@ -67,6 +68,11 @@ public class ChatMaster {
     private static Timer timeoutTimer;
     private static long TIMEOUT_DURATION = 5000;
     
+    /**
+     * This method initializes the client.
+     * Set state to INITIAL.
+     * Open a port to listen to transport events. 
+     */
     public static void initialize() {
         
         // Initializing the client data structure
@@ -94,6 +100,10 @@ public class ChatMaster {
         System.out.println("Listener started...");
     }
     
+    /**
+     * ChatMaster handle manages the state transitions based on occurring events 
+     * @param imEvent imEvent is either a GuiEvent or a TransportEvent
+     */
     public synchronized static void handle(ImEvent imEvent) {
 
         switch (ChatMaster.CURRENT_STATE) {
@@ -330,17 +340,27 @@ public class ChatMaster {
             }
         }
     }
-    
+    /**
+     * changeState changes the state to newState
+     * @param newState   
+     */
     public static void changeState(int newState) {
         ChatMaster.CURRENT_STATE = newState;
     }
     
+    /**
+     * activateTimeout starts a timer
+     * @param requestId The requestId that timed out
+     */
     public static void activateTimeout(int requestId) {
         deactivateTimeout();
         timeoutTimer = new Timer();
         timeoutTimer.schedule(new TimerTimeoutTask(requestId), TIMEOUT_DURATION);
     }
     
+    /**
+     * deactivateTimeout stops the timer
+     */
     public static void deactivateTimeout() {
         try {
             timeoutTimer.cancel();
@@ -349,6 +369,10 @@ public class ChatMaster {
         System.out.println("timeout cancel");
     }
     
+    /**
+     * This method creates an object of clientIM GUI
+     * @param clientIM clientIM GUI
+     */
     public static void setClientIMObject(ClientIM clientIM) {
         ChatMaster.clientIM = clientIM;
     }
