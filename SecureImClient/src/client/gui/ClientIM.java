@@ -23,6 +23,7 @@ public class ClientIM extends javax.swing.JFrame {
         ChatMaster.initialize();
         // set ClientIM object to ChatMaster
         ChatMaster.setClientIMObject(this);
+
     }
 
 
@@ -51,7 +52,7 @@ public class ClientIM extends javax.swing.JFrame {
         PasswordjLabel = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         UsernamejTextField = new javax.swing.JTextField();
-        jPasswordField = new javax.swing.JPasswordField();
+        jPasswordField = new javax.swing.JPasswordField(8);
         LoginjButton = new javax.swing.JButton();
         StatusjToolBar = new javax.swing.JToolBar();
         StatusjTextField = new javax.swing.JTextField();
@@ -136,8 +137,9 @@ public class ClientIM extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
-        UsernamejTextField.setText("Raghu");
-        UsernamejTextField.setMinimumSize(new java.awt.Dimension(50, 20));
+        UsernamejTextField.setText("");
+        //UsernamejTextField.setMinimumSize(new java.awt.Dimension(50, 20));
+        UsernamejTextField.setSize(200, 20);
         UsernamejTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 selectAllUser(evt);
@@ -145,8 +147,9 @@ public class ClientIM extends javax.swing.JFrame {
         });
         jPanel7.add(UsernamejTextField);
 
-        jPasswordField.setText("ok");
-        jPasswordField.setMinimumSize(new java.awt.Dimension(50, 20));
+        jPasswordField.setText("");
+        jPasswordField.setSize(200,20);
+        //jPasswordField.setMinimumSize(new java.awt.Dimension(50, 20));
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 selectAllPass(evt);
@@ -362,6 +365,22 @@ public class ClientIM extends javax.swing.JFrame {
      */
     public ClientChatWindow getChatWindow() {
         return this.chatWindow;
+    }
+    
+    
+    /**
+     * print out an error screen
+     * @param error error msg to display
+     */
+    public void setError(String error) {
+    	javax.swing.JOptionPane.showMessageDialog(this, error, "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    
+    /**
+     * displays a generic error statement
+     */
+    public void setError() {
+    	javax.swing.JOptionPane.showMessageDialog(this, "General error occured.\nContact HuskyHackers @ 911", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
 
     /**

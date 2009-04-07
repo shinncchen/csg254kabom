@@ -133,6 +133,7 @@ public class ChatMaster {
                     
                     if(timeoutEvent.getRequestId() == Request.RID_210) {
                         ChatMaster.changeState(ChatMaster.STATE_INITAL);
+                        ChatMaster.clientIM.setError("Timeout dude, is server up?");
                         System.out.println("Timeout accepted, moved to intial state...");
                     }
                 }
@@ -157,6 +158,7 @@ public class ChatMaster {
                     if(timeoutEvent.getRequestId() == Request.RID_230) {
                         ChatMaster.changeState(ChatMaster.STATE_INITAL);
                         System.out.println("Timeout accepted, moved to intial state...");
+                        ChatMaster.clientIM.setError("Username/Password invalid.\nwere you even invited?");
                     }
                 }
                 break;
@@ -196,6 +198,7 @@ public class ChatMaster {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_310) {
                         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        ChatMaster.clientIM.setError("Timeout dude, our server got hacked. sorry");
                         System.out.println("Timeout accepted, moved to Login state...");
                     }
                 }
@@ -216,6 +219,7 @@ public class ChatMaster {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_410) {
                         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        ChatMaster.clientIM.setError("Server doesn't want to give you a ticket\nReason: soldout");
                         System.out.println("Timeout accepted, moved to Login state...");
                     }
                 }
@@ -235,6 +239,7 @@ public class ChatMaster {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_510) {
                         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        ChatMaster.clientIM.setError("Dude, nobody wants to talk to you.\nyou timedout with him/her\nLOSER");
                         System.out.println("Timeout accepted, moved to Login state...");
                     }
                 }
@@ -253,6 +258,7 @@ public class ChatMaster {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_520) {
                         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
+                        ChatMaster.clientIM.setError("Dude, nobody wants to talk to you.\nyou timedout with him/her\nLOSER");
                         System.out.println("Timeout accepted, moved to Login state...");
                     }
                 }
@@ -265,7 +271,7 @@ public class ChatMaster {
             	if (imEvent.getEventType() == ImEvent.TRANSPORT_EVENT) {
             		TransportEvent transportEvent = (TransportEvent)imEvent;
             		Request request = transportEvent.getRequestRecieved();
-            		if (request.getRequestId()==Request.RID_610) { //TODO: need to delete this, debugging only
+            		if (request.getRequestId()==Request.RID_610) {
             			request.processRequest(null);
             		}
             	}
@@ -317,7 +323,8 @@ public class ChatMaster {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_710) {
                         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
-                    }
+                        ChatMaster.clientIM.setError("Server doesn't want to log you out, wow, you're popular!");                  
+                        }
                 }
                 break;
             }
@@ -329,7 +336,7 @@ public class ChatMaster {
     }
     
     public static void activateTimeout(int requestId) {
-        deactivateTimeout(); //TODO: should we have this
+        deactivateTimeout();
         timeoutTimer = new Timer();
         timeoutTimer.schedule(new TimerTimeoutTask(requestId), TIMEOUT_DURATION);
     }

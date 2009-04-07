@@ -57,7 +57,7 @@ public class Rid250 extends Request {
             oos.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-            //TODO: call error screen
+            ChatMaster.clientIM.setError();
         }
         
         try {

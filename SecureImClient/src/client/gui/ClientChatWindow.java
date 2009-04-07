@@ -3,6 +3,7 @@ package client.gui;
 import client.ChatMaster;
 import client.event.GuiEvent;
 import client.request.*;
+import java.awt.event.*;
 
 public class ClientChatWindow extends javax.swing.JFrame {
 
@@ -71,6 +72,18 @@ public class ClientChatWindow extends javax.swing.JFrame {
         MessagejTextArea.setColumns(20);
         MessagejTextArea.setLineWrap(true);
         MessagejTextArea.setRows(5);
+        KeyListener keyListener = new KeyListener() {
+            public void keyPressed(KeyEvent keyEvent) {
+            }
+
+            public void keyReleased(KeyEvent keyEvent) {
+            }
+
+            public void keyTyped(KeyEvent keyEvent) {
+                if (keyEvent.getKeyChar() == '\n') { SendjButton.doClick(); }
+            }
+          };
+        MessagejTextArea.addKeyListener(keyListener);
         jScrollPane2.setViewportView(MessagejTextArea);
 
         jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);

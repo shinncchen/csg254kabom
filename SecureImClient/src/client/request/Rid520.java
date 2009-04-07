@@ -67,8 +67,8 @@ public class Rid520 extends Request {
             oos.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-        //TODO: call error screen
-        }
+            ChatMaster.clientIM.setError();
+            }
 
         try {
             sender.send(message, ChatMaster.peerData.getPeerIP(), ChatMaster.peerData.getPeerPort());
