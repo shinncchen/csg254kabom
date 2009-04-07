@@ -95,7 +95,7 @@ public class Rid420 extends Request {
             
             //encrypt with Ub's session key
             secondPartData = baos3.toByteArray();
-            secondPartData = new Security().AESEncrypt(userInfo.getSessionKey(), secondPartData);
+            secondPartData = new Security().AESEncrypt(userBInfo.getSessionKey(), secondPartData);
             
             oos3.close();
             

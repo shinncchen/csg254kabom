@@ -75,12 +75,12 @@ public class Rid310 extends Request {
                                 userIP = keyIter.next();
                                 
                                 // get userInfo
-                                userInfo = (UserInfo) ChatMaster.users.get(userIP);
+                                UserInfo userTemp = (UserInfo) ChatMaster.users.get(userIP);
                                 
                                 // check if user is logged in and append each user to the list except himself
-                                if (userInfo.isLoggedIn() && ! userInfo.getUsername().equals(usernamePlain)) {
+                                if (userTemp.isLoggedIn() && ! userTemp.getUsername().equals(usernamePlain)) {
                                     
-                                    userList.append(userInfo.getUsername());
+                                    userList.append(userTemp.getUsername());
                                     
                                     if(keyIter.hasNext()) {userList.append(",");}
                                 }

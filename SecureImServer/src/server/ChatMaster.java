@@ -77,7 +77,7 @@ public class ChatMaster {
                         rid210.processRequest(userInfo, null);
                         
                         // Crate an hash map entry
-                        users.put(ipAddress, userInfo);
+                        users.put(request.getSenderIp(), userInfo);
                         
                         System.out.println("new user created in hashmap");
                     } else {
