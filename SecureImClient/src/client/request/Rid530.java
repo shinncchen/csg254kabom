@@ -42,12 +42,11 @@ public class Rid530 extends Request {
             //write T1 in a bytearray to encrypt with session key
             ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
             ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
-
-            oos2.writeObject(new Security().AESEncrypt(ChatMaster.peerData.getPeerSessionKey(), ChatMaster.peerData.getTimeT1()));
+            
+            oos2.writeObject(ChatMaster.peerData.getTimeT1());
             oos2.flush();
-
-            //write encrypted block to main block
-            oos.writeObject(baos2.toByteArray());
+            
+            oos.writeObject(new Security().AESEncrypt(ChatMaster.peerData.getPeerSessionKey(), baos2.toByteArray()));
 
             oos.flush();
 

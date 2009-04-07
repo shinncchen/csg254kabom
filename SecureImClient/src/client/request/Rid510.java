@@ -96,7 +96,7 @@ public class Rid510 extends Request {
 
                 //decrypt the ticket using server's session key
                 byte[] decryptedMsg = new Security().AESDecrypt(ChatMaster.clientData.getSessionKey(), encryptedTicket);
-
+                
                 ByteArrayInputStream bais2 = new ByteArrayInputStream(decryptedMsg);
                 ObjectInputStream ois2 = new ObjectInputStream(bais2);
                 

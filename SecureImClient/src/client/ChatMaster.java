@@ -292,7 +292,7 @@ public class ChatMaster {
                 else if(imEvent.getEventType() == ImEvent.TIMEOUT_EVENT) {
                     TimeoutEvent timeoutEvent= (TimeoutEvent) imEvent;
                     if(timeoutEvent.getRequestId() == Request.RID_610) {
-                        ChatMaster.clientIM.getChatWindow().addChatHistory(peerData.getUsername(), "Timeout, message may not be delivered");
+                        ChatMaster.clientIM.getChatWindow().addChatHistory("System", "Timeout, message may not be delivered");
                         
                         ChatMaster.changeState(ChatMaster.STATE_RID530);
                         System.out.println("Timeout accepted, moved to state 530...");

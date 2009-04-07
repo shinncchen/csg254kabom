@@ -123,6 +123,9 @@ public class Rid520 extends Request {
                             //store T1 into peerdetails t1 to send it in rid530
                             ChatMaster.peerData.setTimeT1((byte[]) ois2.readObject());
                             
+                            // set delta
+                            ChatMaster.peerData.setDelta(new Security().clcDelta(new Security().getTimestamp(), ChatMaster.peerData.getTimeT1()));
+                            
                             //only if T1 in time skew
                             if (new Security().isTimeValid(new Security().getTimestamp(), ChatMaster.peerData.getTimeT1(), ChatMaster.peerData.getDelta())) {
                                 
