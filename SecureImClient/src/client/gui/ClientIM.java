@@ -405,6 +405,7 @@ public class ClientIM extends javax.swing.JFrame {
             case GuiEvent.EVENT_LOGOUT : {
                 Request rid710 = new Rid710();
                 guiEvent.setRequestRecieved(rid710);
+                guiEvent.setGuiEventType(GuiEvent.EVENT_LOGOUT);
                 ChatMaster.handle(guiEvent);
                 break;
             }
