@@ -277,7 +277,12 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void loginAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAction
-        callChatMasterGuiEvent(ChatMaster.STATE_RID210);
+        if(!UsernamejTextField.getText().equals("") && !(new String(jPasswordField.getPassword()).equals(""))) {
+            callChatMasterGuiEvent(GuiEvent.EVENT_LOGIN);
+        }
+        else {
+            setErrorVisible();
+        }
 }//GEN-LAST:event_loginAction
 
     /**
@@ -285,7 +290,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void logoutAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutAction
-        callChatMasterGuiEvent(ChatMaster.STATE_RID710);
+        callChatMasterGuiEvent(GuiEvent.EVENT_LOGOUT);
 }//GEN-LAST:event_logoutAction
 
     /**
@@ -293,7 +298,7 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void UserListjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListjButtonActionPerformed
-        callChatMasterGuiEvent(ChatMaster.STATE_RID310);
+        callChatMasterGuiEvent(GuiEvent.EVENT_LIST);
     }//GEN-LAST:event_UserListjButtonActionPerformed
 
     /**
@@ -321,8 +326,8 @@ public class ClientIM extends javax.swing.JFrame {
     private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
         String peerUser = (String)UserListjList.getSelectedValue();
 
-        if(!peerUser.trim().equals("")) {
-            callChatMasterGuiEvent(ChatMaster.STATE_RID410);
+        if(peerUser != null) {
+            callChatMasterGuiEvent(GuiEvent.EVENT_USERSELECT);
             hideUserList();
         }
     }//GEN-LAST:event_PickUserjButtonActionPerformed
@@ -360,8 +365,8 @@ public class ClientIM extends javax.swing.JFrame {
         switch(STATE) {
             
             //Login button pressed by users
-            case ChatMaster.STATE_RID210 : {
-                
+            case GuiEvent.EVENT_LOGIN : {
+
                 // Create a RID 210 request
                 Request rid210 = new Rid210();
                 
@@ -377,7 +382,7 @@ public class ClientIM extends javax.swing.JFrame {
                 break;
             }
             //LIST
-            case ChatMaster.STATE_RID310 : {
+            case GuiEvent.EVENT_LIST : {
                 Request rid310 = new Rid310();
                 guiEvent.setRequestRecieved(rid310);
                 guiEvent.setGuiEventType(GuiEvent.EVENT_LIST);
@@ -385,7 +390,7 @@ public class ClientIM extends javax.swing.JFrame {
                 break;
             }
             //PERMIT
-            case ChatMaster.STATE_RID410 : {
+            case GuiEvent.EVENT_USERSELECT : {
                 ChatMaster.peerData = new PeerDetails();
                 ChatMaster.peerData.setUsername((String)UserListjList.getSelectedValue());
                 
@@ -397,7 +402,7 @@ public class ClientIM extends javax.swing.JFrame {
                 break;
             }
             //LOGOUT
-            case ChatMaster.STATE_RID710 : {
+            case GuiEvent.EVENT_LOGOUT : {
                 Request rid710 = new Rid710();
                 guiEvent.setRequestRecieved(rid710);
                 ChatMaster.handle(guiEvent);

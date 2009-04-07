@@ -124,6 +124,7 @@ public class ClientChatWindow extends javax.swing.JFrame {
 }//GEN-LAST:event_sendjButtonActionPerformed
 
     private void chatWindowClosingAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_chatWindowClosingAction
+        ChatMaster.changeState(ChatMaster.STATE_LOGIN);
         clientIM.setEnabled(true);
     }//GEN-LAST:event_chatWindowClosingAction
 

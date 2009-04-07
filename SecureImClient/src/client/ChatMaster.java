@@ -176,7 +176,14 @@ public class ChatMaster {
                 else if(imEvent.getEventType() == imEvent.USER_EVENT) {
                     GuiEvent guiEvent = (GuiEvent) imEvent;
                     Request request = guiEvent.getRequestRecieved();
-                    request.sendRequest(null);
+                    // User request list of user
+                    if (guiEvent.getGuiEventType()==guiEvent.EVENT_LIST) {
+                        request.sendRequest(null);
+                    }
+                    // User request logout
+                    else if (guiEvent.getGuiEventType()==guiEvent.EVENT_LOGOUT) {
+                        request.sendRequest(null);
+                    }
                 }
                 break;
             }
@@ -272,6 +279,7 @@ public class ChatMaster {
                 else if (imEvent.getEventType() == ImEvent.USER_EVENT) {
                     	GuiEvent guiEvent = (GuiEvent) imEvent;
                     	Request request = guiEvent.getRequestRecieved();
+                        // user request to chat
                     	if (request.getRequestId()==Request.RID_610) {
                     		request.sendRequest(null);
                     	}
