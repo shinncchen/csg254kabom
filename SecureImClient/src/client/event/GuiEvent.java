@@ -1,15 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.event;
 
 import client.request.Request;
 
 /**
+ * @author HuskyHackers
  *
- * @author Shinn Chyang Chen
+ * GuiEvent class which create an gui event
+ * to be handle by the state machine
  */
 public class GuiEvent implements ImEvent {
     

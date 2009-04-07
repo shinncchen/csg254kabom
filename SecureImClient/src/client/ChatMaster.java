@@ -5,8 +5,6 @@ package client;
  * and open the template in the editor.
  */
 
-
-
 import client.datastructure.ClientDetails;
 import client.datastructure.PeerDetails;
 import client.event.GuiEvent;
@@ -21,10 +19,11 @@ import client.security.*;
 import java.util.Timer;
 
 /**
- * This class is the state machine.
  * @author HuskyHackers
  *
+ * This class is the state machine.
  */
+
 public class ChatMaster {
     
     private static int CURRENT_STATE = 0;
