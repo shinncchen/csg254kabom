@@ -288,9 +288,6 @@ public class ClientIM extends javax.swing.JFrame {
         if(!UsernamejTextField.getText().equals("") && !(new String(jPasswordField.getPassword()).equals(""))) {
             callChatMasterGuiEvent(GuiEvent.EVENT_LOGIN);
         }
-        else {
-            setErrorVisible();
-        }
 }//GEN-LAST:event_loginAction
 
     /**
