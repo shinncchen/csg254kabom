@@ -93,6 +93,11 @@ public class ClientIM extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(250, 400));
         setName("IM Window"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                ClosingIMAction(evt);
+            }
+        });
 
         ContentjPanel.setLayout(new java.awt.CardLayout());
 
@@ -324,13 +329,19 @@ public class ClientIM extends javax.swing.JFrame {
      * @param evt
      */
     private void PickUserjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUserjButtonActionPerformed
-        String peerUser = (String)UserListjList.getSelectedValue();
-
-        if(peerUser != null) {
+        if(!UserListjList.isSelectionEmpty()) {
             callChatMasterGuiEvent(GuiEvent.EVENT_USERSELECT);
-            hideUserList();
         }
+        hideUserList();
     }//GEN-LAST:event_PickUserjButtonActionPerformed
+
+    /**
+     * Sent logout request when program is closing
+     * @param evt
+     */
+    private void ClosingIMAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_ClosingIMAction
+        callChatMasterGuiEvent(GuiEvent.EVENT_LOGOUT);
+    }//GEN-LAST:event_ClosingIMAction
 
     /**
      * Create a chat window between user and the guest user
