@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Decode the received packet to an instance of Request
+ *
+ * @author HuskyHackers
  */
 
 package client.transport;
@@ -12,12 +13,18 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 
-/**
- *
- * @author Raghuram
- */
 public class Decode {
 
+    /**
+     * Decode a datagram packet to an instance of Request
+     * and encapsulate in a TransportEvent
+     * @param datagramPacket - DatagramPacket, the datagram packet received
+     * @return               - TransportEvent, transport event
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
+     */
     public TransportEvent getTransportEventFromDatagram(DatagramPacket datagramPacket) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         // Initialize a Transport Event that has to be returned

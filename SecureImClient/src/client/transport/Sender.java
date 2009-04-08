@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class contains method to send a datagram packet
+ *
+ * @author HuskyHackers
  */
 
 package client.transport;
@@ -13,16 +14,28 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-/**
- *
- * @author Raghuram
- */
 public class Sender {
-    
+
+    /**
+     * Send a datagram packet given a message
+     * @param message - string, message to send
+     * @throws java.net.SocketException
+     * @throws java.net.UnknownHostException
+     * @throws java.io.IOException
+     */
     public void send(byte[] message) throws SocketException, UnknownHostException, IOException {
         this.send(message, ChatMaster.SERVER_IP, ChatMaster.SERVER_PORT);
     }
 
+    /**
+     * Send a datagram packet given a message, IP and port
+     * @param message    - byte[], message to send
+     * @param remoteIp   - string, ip address
+     * @param remotePort - int, port number
+     * @throws java.net.SocketException
+     * @throws java.net.UnknownHostException
+     * @throws java.io.IOException
+     */
     public void send(byte[] message, String remoteIp, int remotePort) throws SocketException, UnknownHostException, IOException {
         // Initialize the INET address of the remote machine
         InetAddress remoteInetAddress = InetAddress.getByName(remoteIp);

@@ -1,9 +1,10 @@
-package client;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class is the state machine.
+ *
+ * @author HuskyHackers
  */
+
+package client;
 
 import client.datastructure.ClientDetails;
 import client.datastructure.PeerDetails;
@@ -17,12 +18,6 @@ import client.request.TimerTimeoutTask;
 import client.transport.Listener;
 import client.security.*;
 import java.util.Timer;
-
-/**
- * @author HuskyHackers
- *
- * This class is the state machine.
- */
 
 public class ChatMaster {
     

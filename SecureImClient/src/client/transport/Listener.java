@@ -1,6 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class contains method to listen for an UDP port, process packet
+ * and pass it to the ChatMaster
+ *
+ * @author HuskyHackers
  */
 
 package client.transport;
@@ -10,14 +12,14 @@ import client.event.TransportEvent;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-/**
- *
- * @author Raghuram
- */
 public class Listener implements Runnable {
     
     private int port = 0;
-    
+
+    /**
+     * Listen to an udp port and read the packet. The packet is then process to
+     * be handle by the ChatMaster
+     */
     public void run() {
         try {
 
@@ -60,6 +62,10 @@ public class Listener implements Runnable {
         }
     }
 
+    /**
+     * Set port number used for listening datagram packet
+     * @param port - int, port number
+     */
     public void setPort(int port) {
         this.port = port;
     }
