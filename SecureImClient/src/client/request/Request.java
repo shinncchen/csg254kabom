@@ -1,14 +1,15 @@
+/**
+ * Abstract class for Request
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/**
- * @author HuskyHackers
- *
- * Abstract class for Request
- */
 public abstract class Request {
     
     //LOGIN

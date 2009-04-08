@@ -1,13 +1,14 @@
+/**
+ * LOGIN protocol - Rid220
+ * 
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
 import java.io.*;
 
-/**
- * @author HuskyHackers
- *
- * LOGIN protocol - Rid220
- */
 public class Rid220 extends Request {
 
     /**

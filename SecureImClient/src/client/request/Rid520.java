@@ -1,3 +1,9 @@
+/**
+ * P2P AUTHENTICATION protocol - RID 520
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -12,19 +18,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
-/**
- * P2P Auth second step.
- *
- * @author Abdulla
- */
 public class Rid520 extends Request {
 
+    /**
+     * Rid520 constructor
+     */
     public Rid520() {
         super(Request.RID_520);
     }
 
-    /*
+    /**
+     * Sending a Request RID_520 to the peer client.
      * This executes when replying to first 510 msg
+     * @param data
      */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
@@ -77,12 +83,13 @@ public class Rid520 extends Request {
             System.out.println("sent 520 and changed state...");
             
             activateTimeout();
-        } catch (Exception ex) {
-        }
+        } catch (Exception ex) {}
     }
 
-    /*
+    /**
+     * Receiving a Request RID_520 from a peer client.
      * A is receiving the second msg from B
+     * @param data
      */
     public void processRequest(Object[] data) {
         
@@ -141,9 +148,7 @@ public class Rid520 extends Request {
                         }
                     }
                 }
-            } catch (Exception e) {
-            }
-
+            } catch (Exception e) {}
         }
     }
 }

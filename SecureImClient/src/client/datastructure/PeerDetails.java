@@ -1,11 +1,12 @@
-package client.datastructure;
-
 /*
- * @author HuskyHackers
- *
  * This is a getter/setter class that will be used
  * to get/set all the peer client details mostly from/onto session
+ *
+ * @author HuskyHackers
  */
+
+package client.datastructure;
+
 public class PeerDetails {
 
     private String username;                // username of the peer whom u want to chat with or .. who initiated the chat

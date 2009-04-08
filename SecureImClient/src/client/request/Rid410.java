@@ -1,3 +1,9 @@
+/**
+ * PERMIT protocol - Rid410
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -9,11 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-/**
- * @author HuskyHackers
- *
- * PERMIT protocol - Rid410
- */
 public class Rid410 extends Request {
 
     /**

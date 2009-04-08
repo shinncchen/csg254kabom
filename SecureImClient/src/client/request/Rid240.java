@@ -1,3 +1,9 @@
+/**
+ * LOGIN protocol - Rid240
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -8,11 +14,6 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author HuskyHackers
- *
- * LOGIN protocol - Rid240
- */
 public class Rid240 extends Request {
 
     /**

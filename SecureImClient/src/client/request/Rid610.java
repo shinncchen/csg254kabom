@@ -1,3 +1,9 @@
+/**
+ * P2P MESSAGE EXCHANGE protocol - RID 610
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -14,12 +20,17 @@ import java.util.Arrays;
 
 public class Rid610 extends Request {
 
+    /**
+     * Rid610 constructor
+     */
     public Rid610() {
         super(Request.RID_610);
     }
 
-    /*
-     * This executes when this client wants to talk
+    /**
+     * Sending a Request RID_610 to the peer client.
+     * Client sends a message to a peer client
+     * @param data
      */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
@@ -78,8 +89,10 @@ public class Rid610 extends Request {
         }
     }
 
-    /*
-     * This is triggered when someone needs to talk to this client
+    /**
+     * Receiving a Request RID_610 from a peer client.
+     * Client receives a message from a peer client
+     * @param data
      */
     public void processRequest(Object[] data) {
         
@@ -139,9 +152,7 @@ public class Rid610 extends Request {
                 } else {
                     System.out.println("Warning, peer user not expecting!");
                 }
-            } catch (Exception e) {
-            }
-
+            } catch (Exception e) {}
         }
     }
 }

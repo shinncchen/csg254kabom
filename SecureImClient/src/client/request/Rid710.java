@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGOUT protocol - RID 710
+ *
+ * @author HuskyHackers
  */
 
 package client.request;
@@ -14,10 +15,17 @@ import java.io.*;
 
 public class Rid710 extends Request {
 
+    /**
+     * Rid710 constructor
+     */
     public Rid710() {
         super(Request.RID_710);
     }
 
+    /**
+     * Sending a Request RID_710 to the server
+     * @param data
+     */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
 
@@ -70,6 +78,10 @@ public class Rid710 extends Request {
         }
     }
 
+    /**
+     * RID_710 never process a Request
+     * @param data
+     */
     public void processRequest(Object[] data) {
     }
 }

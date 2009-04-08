@@ -1,12 +1,13 @@
+/**
+ * GuiEvent class which create an gui event handled by the state machine
+ *
+ * @author HuskyHackers
+ */
+
 package client.event;
 
 import client.request.Request;
 
-/**
- * @author HuskyHackers
- *
- * GuiEvent class which create an gui event handled by the state machine
- */
 public class GuiEvent implements ImEvent {
     
     public static final int EVENT_LOGIN = 10;

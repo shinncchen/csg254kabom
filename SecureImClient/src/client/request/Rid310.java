@@ -1,3 +1,9 @@
+/**
+ * LIST protocol - Rid310
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.*;
@@ -6,11 +12,6 @@ import client.transport.*;
 
 import java.io.*;
 
-/**
- * @author HuskyHackers
- *
- * LIST protocol - Rid310
- */
 public class Rid310 extends Request {
 
     /**

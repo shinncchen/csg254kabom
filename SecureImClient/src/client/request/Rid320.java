@@ -1,3 +1,9 @@
+/**
+ * LIST protocol - Rid320
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -6,11 +12,6 @@ import client.security.Security;
 import java.io.*;
 import java.util.Arrays;
 
-/**
- * @author HuskyHackers
- *
- * LIST protocol - Rid320
- */
 public class Rid320 extends Request {
 
     /**

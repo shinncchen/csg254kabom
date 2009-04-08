@@ -1,3 +1,9 @@
+/**
+ * LOGIN protocol - Rid230
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -10,11 +16,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * @author HuskyHackers
- *
- * LOGIN protocol - Rid230
- */
 public class Rid230 extends Request {
 
     /**

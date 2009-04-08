@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGIN protocol - Rid250
+ *
+ * @author HuskyHackers
  */
 
 package client.request;
@@ -15,11 +16,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * @author HuskyHackers
- *
- * LOGIN protocol - Rid250
- */
 public class Rid250 extends Request {
 
     /**

@@ -1,7 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * PERMIT protocol - Rid420
+ *
+ * @author HuskyHackers
  */
+
 package client.request;
 
 import client.ChatMaster;
@@ -10,16 +12,19 @@ import client.security.Security;
 import java.io.*;
 import java.util.Arrays;
 
-/**
- *
- * @author Abdulla
- */
 public class Rid420 extends Request {
 
+    /**
+     * Rid420 constructor
+     */
     public Rid420() {
         super(Request.RID_420);
     }
 
+    /**
+     * Processing a Request RID_420 from the server
+     * @param data
+     */
     public void processRequest(Object[] data) {
         // check response nonce T1, check Ua and Ub, store relevant data
         if (super.senderIp.equalsIgnoreCase(ChatMaster.SERVER_IP)) {
@@ -86,6 +91,10 @@ public class Rid420 extends Request {
         }
     }
 
+    /**
+     * RID_220 never send a Request
+     * @param data
+     */
     public void sendRequest(Object[] data) {
     }
 }

@@ -1,12 +1,13 @@
+/**
+ * TransportEvent class which create an event when sending/receiving a request
+ *
+ * @author HuskyHackers
+ */
+
 package client.event;
 
 import client.request.Request;
 
-/**
- * @author HuskyHackers
- *
- * TransportEvent class which create an event when sending/receiving a request
- */
 public class TransportEvent implements ImEvent {
 
     private Request requestRecieved = null;

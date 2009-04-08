@@ -1,11 +1,12 @@
-package client.datastructure;
-
 /*
- * @author HuskyHackers
- * 
  * This is a getter/setter class that will be used
  * to get/set all the client details mostly from/onto session
+ *
+  * @author HuskyHackers
  */
+
+package client.datastructure;
+
 public class ClientDetails {
 
     private String username;

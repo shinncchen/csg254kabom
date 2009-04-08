@@ -1,3 +1,9 @@
+/**
+ * P2P AUTHENTICATION protocol - RID 510
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -11,19 +17,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * P2P Auth starts here.
- *
- * @author Abdulla
- */
 public class Rid510 extends Request {
 
+    /**
+     * Rid510 constructor
+     */
     public Rid510() {
         super(Request.RID_510);
     }
 
-    /*
+    /**
+     * Sending a Request RID_510 to the peer client.
      * This executes when this client wants to talk
+     * @param data
      */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
@@ -68,8 +74,10 @@ public class Rid510 extends Request {
         }
     }
 
-    /*
+    /**
+     * Receiving a Request RID_510 from a peer client.
      * This is triggered when someone needs to talk to this client
+     * @param data
      */
     public void processRequest(Object[] data) {
         // Retreive ticket, check Tt within time skew, check Ub in ticket, store relevent data and return 520

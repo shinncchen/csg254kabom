@@ -1,3 +1,9 @@
+/**
+ * P2P AUTHENTICATION protocol - RID 530
+ *
+ * @author HuskyHackers
+ */
+
 package client.request;
 
 import client.ChatMaster;
@@ -12,19 +18,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
-/**
- * P2P Auth starts here.
- *
- * @author Abdulla
- */
 public class Rid530 extends Request {
 
+    /**
+     * Rid530 constructor
+     */
     public Rid530() {
         super(Request.RID_530);
     }
 
-    /*
+    /**
+     * Sending a Request RID_530 to the peer client.
      * last msg to send, once sent. A is authenticated with him.
+     * @param data
      */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
@@ -71,8 +77,10 @@ public class Rid530 extends Request {
         }
     }
 
-    /*
+    /**
+     * Receiving a Request RID_530 from a peer client.
      * If received, then B authenticated with A
+     * @param data
      */
     public void processRequest(Object[] data) {
         // check T1
@@ -113,8 +121,7 @@ public class Rid530 extends Request {
                 ois2.close();
                 oia.close();
 
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 }

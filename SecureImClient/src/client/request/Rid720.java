@@ -1,7 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGOUT protocol - Rid720
+ *
+ * @author HuskyHackers
  */
+
 package client.request;
 
 import client.ChatMaster;
@@ -12,10 +14,17 @@ import java.util.Arrays;
 
 public class Rid720 extends Request {
 
+    /**
+     * Rid720 constructor
+     */
     public Rid720() {
         super(Request.RID_720);
     }
 
+    /**
+     * Processing a Request RID_720 from the server
+     * @param data
+     */
     public void processRequest(Object[] data) {
         // check T1
         if (super.senderIp.equalsIgnoreCase(ChatMaster.SERVER_IP)) {
@@ -64,6 +73,10 @@ public class Rid720 extends Request {
         }
     }
 
+    /**
+     * RID_720 never send a Request
+     * @param data
+     */
     public void sendRequest(Object[] data) {
     }
 }

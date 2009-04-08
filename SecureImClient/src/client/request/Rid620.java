@@ -1,3 +1,8 @@
+/**
+ * P2P MESSAGE EXCHANGE protocol - RID 620
+ *
+ * @author HuskyHackers
+ */
 package client.request;
 
 import client.ChatMaster;
@@ -14,12 +19,17 @@ import java.util.Arrays;
 
 public class Rid620 extends Request {
 
+    /**
+     * Rid620 constructor
+     */
     public Rid620() {
         super(Request.RID_620);
     }
 
-    /*
+    /**
+     * Sending a Request RID_610 to the peer client.
      * This executes when replying to first 510 msg
+     * @param data
      */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
@@ -65,8 +75,10 @@ public class Rid620 extends Request {
         }
     }
 
-    /*
+    /**
+     * Receiving a Request RID_620 from a peer client.
      * A is receiving the second msg from B
+     * @param data
      */
     public void processRequest(Object[] data) {
         
@@ -105,8 +117,7 @@ public class Rid620 extends Request {
                     
                     ChatMaster.changeState(ChatMaster.STATE_RID530);
                 }
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
         }
     }
 }
