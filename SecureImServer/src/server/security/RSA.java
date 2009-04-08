@@ -1,7 +1,3 @@
-/**
- * RSA Utilities main body
- * don't use this class
- */
 package server.security;
 
 import java.io.*;
@@ -9,13 +5,18 @@ import java.security.*;
 import javax.crypto.*;
 
 /**
- * @author Abdulla
+ * @author HuskyHackers
  *
+ * RSA Utilities
  */
 public class RSA {
-	/*
-	 * Generates RSA Keys
-	 */
+
+    /**
+     * Generates RSA Keys
+     * @param keysize - int, rsa keysize
+     * @param keys    - RSAkeys, rsa keys
+     * @return        - RSAKeys, rsa keys
+     */
 	public RSAKeys generateRandomKeys(int keysize, RSAKeys keys) {
 		
 		try {
@@ -41,7 +42,13 @@ public class RSA {
 		}
 		return null;
 	}
-	
+
+    /**
+     * Encrypting a message using a public RSA key
+     * @param publicKey        - byte[], rsa public key
+     * @param messageToEncrypt - byte[], message to encrypt
+     * @return                 - byte[], encrypted message
+     */
 	public byte[] RSAEncrypt(byte[] publicKey, byte[] messageToEncrypt) {
 		
 		//retrieve the RSA public key from byte array
@@ -80,7 +87,13 @@ public class RSA {
 		}
 		return null;
 	}
-	
+
+    /**
+     * Decrypt a message using a private RSA key
+     * @param privateKey       - byte[], rsa private key
+     * @param messageToDecrypt - byte[], mesage to encrypt
+     * @return                 - byte[], encrypted message
+     */
 	public byte[] RSADecrypt(byte[] privateKey, byte[] messageToDecrypt) {
 		
 		//System.out.println("RSA DEcrypt");

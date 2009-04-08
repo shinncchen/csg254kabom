@@ -1,7 +1,3 @@
-/**
- * AES utilities main body
- * team members don't need to use this class
- */
 package server.security;
 
 import java.io.*;
@@ -11,8 +7,9 @@ import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 
 /**
- * @author Abdulla
+ * @author HuskyHackers
  *
+ * AES utilities
  */
 public class AES {
 	
@@ -85,9 +82,12 @@ public class AES {
 		
 	}
 	
-	/*
-	 * Decrypt a message with this key and return a byte array
-	 */
+    /**
+     * Decrypt a message with this key and return a byte array
+     * @param key     - byte[], aes key
+     * @param message - byte[], message to decrypt
+     * @return        - byte[], decrypted message
+     */
 	public byte[] AESDecrypt(byte[] key, byte[] message) {
 		try {
 			//extract key
