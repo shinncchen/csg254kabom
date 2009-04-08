@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.event;
 
 /**
+ * @author HuskyHackers
  *
- * @author Raghuram
+ * TimeoutEvent class which create an gui event
+ * to be handle by the state machine
  */
 public class TimeoutEvent implements ImEvent {
 

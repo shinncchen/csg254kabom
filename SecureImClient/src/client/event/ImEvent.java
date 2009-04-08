@@ -5,9 +5,9 @@ package client.event;
  *
  * Interface class for the different type of event expecting by
  * the event handler. An ImEvent can be:
- *    1) transport event - sending/receiving a request
- *    2) timeout event   - a timeout occured in a request
- *    3) user event      - gui event occured
+ *    1) transport event - event created when sending/receiving a request
+ *    2) timeout event   - event created when a timeout occurs in a request
+ *    3) user event      - event created by an user
  */
 public interface ImEvent {
     
