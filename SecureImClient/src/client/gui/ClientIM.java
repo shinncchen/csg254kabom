@@ -7,14 +7,20 @@ import client.event.*;
 import client.request.*;
 import client.security.*;
 
+/**
+ * @author HuskyHackers
+ *
+ * GUI implementation for the IM Chat program
+ */
 public class ClientIM extends javax.swing.JFrame {
-
 
     private String[] userList = null;
     private ClientChatWindow chatWindow = null;
 
 
-    /** Creates new form ClientIM */
+    /**
+     * Creates new form ClientIM
+     */
     public ClientIM() {
         initComponents();
         // set ClientIM to logout state

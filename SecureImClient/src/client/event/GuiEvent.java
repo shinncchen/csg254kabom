@@ -5,8 +5,7 @@ import client.request.Request;
 /**
  * @author HuskyHackers
  *
- * GuiEvent class which create an gui event
- * to be handle by the state machine
+ * GuiEvent class which create an gui event handled by the state machine
  */
 public class GuiEvent implements ImEvent {
     

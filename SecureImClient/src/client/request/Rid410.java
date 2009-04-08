@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.request;
 
 import client.ChatMaster;
@@ -15,15 +10,23 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
+ * @author HuskyHackers
  *
- * @author Deepak 
+ * PERMIT protocol - Rid410
  */
 public class Rid410 extends Request {
-    
+
+    /**
+     * Rid410 constructor
+     */
     public Rid410() {
         super(Request.RID_410);
     }
 
+    /**
+     * Sending a Request RID_410 to the server
+     * @param data
+     */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
         
@@ -76,6 +79,10 @@ public class Rid410 extends Request {
         }
     }
 
+    /**
+     * RID_410 never process a Request
+     * @param data
+     */
     public void processRequest(Object[] data) {
     }
     

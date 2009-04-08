@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.request;
 
 import client.ChatMaster;
@@ -10,8 +5,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
+ * @author HuskyHackers
  *
- * @author Raghuram
+ * Abstract class for Request
  */
 public abstract class Request {
     
@@ -41,7 +37,11 @@ public abstract class Request {
     protected int requestId;
     protected String senderIp;
     protected byte[] requestData;
-    
+
+    /**
+     * Request constructor given a request id
+     * @param requestId - int, request id
+     */
     public Request(int requestId) {
         this.requestId = requestId;
         try {
@@ -51,44 +51,87 @@ public abstract class Request {
             ex.printStackTrace();
         }
     }
-    
+
+    /**
+     * Request constructor given a request id and sender IP
+     * @param requestId - int, request id
+     * @param senderIp  - string, ip of the sender
+     */
     public Request(int requestId, String senderIp) {
         this.requestId = requestId;
         this.senderIp = senderIp;
     }
-    
+
+    /**
+     * Sending a Request
+     * @param data - Object[], data in the Request
+     */
     public abstract void sendRequest(Object[] data);
-    
+
+    /**
+     * Processing a Request
+     * @param data - Object[], data in the Request
+     */
     public abstract void processRequest(Object[] data);
 
+    /**
+     * Set request id from a Request
+     * @param requestId - int, request id
+     */
     public void setRequestId(int requestId) {
         this.requestId = requestId;
     }
 
+    /**
+     * Get request id from a Request
+     * @return
+     */
     public int getRequestId() {
         return this.requestId;
     }
 
+    /**
+     * Set request id from a Request
+     * @param senderIp - string, IP address of the sender
+     */
     public void setSenderIp(String senderIp) {
         this.senderIp = senderIp;
     }
 
+    /**
+     * Get IP address of the sender from a Request
+     * @return - string, IP address of the sender
+     */
     public String getSenderIp() {
         return this.senderIp;
     }
 
+    /**
+     * Set request data from a Request
+     * @param requestData - byte[], data
+     */
     public void setRequestData(byte[] requestData) {
         this.requestData = requestData;
     }
-    
+
+    /**
+     * Get request data from a Request
+     * @return - byte[], data
+     */
     public byte[] getRequestData() {
         return this.requestData;
     }
-    
+
+    /**
+     * Activate a timeout from this Request
+     */
     public void activateTimeout() {
         ChatMaster.activateTimeout(requestId);
     }
-    
+
+    /**
+     * Desactivvate the timeout from this Request
+     */
     public void deactivateTimeout() {
         ChatMaster.deactivateTimeout();
     }

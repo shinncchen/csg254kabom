@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.request;
 
 import client.*;
@@ -11,13 +6,24 @@ import client.transport.*;
 
 import java.io.*;
 
-
+/**
+ * @author HuskyHackers
+ *
+ * LIST protocol - Rid310
+ */
 public class Rid310 extends Request {
 
+    /**
+     * Rid310 constructor
+     */
     public Rid310() {
         super(Request.RID_310);
     }
 
+    /**
+     * Sending a Request RID_310 to the server
+     * @param data
+     */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
 
@@ -70,6 +76,10 @@ public class Rid310 extends Request {
         }
     }
 
+    /**
+     * RID_310 never process a Request
+     * @param data
+     */
     public void processRequest(Object[] data) {
     }
 }

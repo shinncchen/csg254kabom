@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client.request;
 
 import client.ChatMaster;
@@ -13,15 +8,23 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
+ * @author HuskyHackers
  *
- * @author Raghuram
+ * LOGIN protocol - RID 210
  */
 public class Rid210 extends Request {
-    
+
+    /**
+     * Rid210 constructor
+     */
     public Rid210() {
         super(Request.RID_210);
     }
 
+    /**
+     * Sending a Request RID_210 to the server
+     * @param data
+     */
     public void sendRequest(Object[] data) {
         
         // Create a new sender object
@@ -69,6 +72,10 @@ public class Rid210 extends Request {
         }
     }
 
+    /**
+     * RID_210 never process a Request
+     * @param data
+     */
     public void processRequest(Object[] data) {
     }
     

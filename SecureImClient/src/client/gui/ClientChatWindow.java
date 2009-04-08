@@ -5,13 +5,22 @@ import client.event.GuiEvent;
 import client.request.*;
 import java.awt.event.*;
 
+/**
+ * @author HuskyHackers
+ *
+ * GUI implementation for an IM chat window
+ */
 public class ClientChatWindow extends javax.swing.JFrame {
 
     private StringBuffer mChatHistory = new StringBuffer();
     private ClientIM clientIM = null;
 
 
-    /** Creates new form ClientChatWindow */
+    /**
+     * Creates new form ClientChatWindow
+     * @param peerUser - string, peer username
+     * @param clientIM - ClientIm, ClientIm object to chat window
+     */
     public ClientChatWindow(String peerUser, ClientIM clientIM) {
         initComponents();
         this.UserjTextField.setText(peerUser);
@@ -138,6 +147,10 @@ public class ClientChatWindow extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_sendjButtonActionPerformed
 
+    /**
+     * Closing a chat window and change ChatMaster to STATE_LOGIN
+     * @param evt
+     */
     private void chatWindowClosingAction(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_chatWindowClosingAction
         ChatMaster.changeState(ChatMaster.STATE_LOGIN);
         clientIM.setEnabled(true);

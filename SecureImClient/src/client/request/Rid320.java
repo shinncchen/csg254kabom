@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.request;
 
 import client.ChatMaster;
@@ -10,12 +6,24 @@ import client.security.Security;
 import java.io.*;
 import java.util.Arrays;
 
+/**
+ * @author HuskyHackers
+ *
+ * LIST protocol - Rid320
+ */
 public class Rid320 extends Request {
 
+    /**
+     * Rid320 constructor
+     */
     public Rid320() {
         super(Request.RID_320);
     }
 
+    /**
+     * Processing a Request RID_320 from the server
+     * @param data
+     */
     public void processRequest(Object[] data) {
 
         // Decrypt response, check T1, display user list
@@ -69,6 +77,10 @@ public class Rid320 extends Request {
         }
     }
 
+    /**
+     * RID_320 never send a Request
+     * @param data
+     */
     public void sendRequest(Object[] data) {
     }
 }

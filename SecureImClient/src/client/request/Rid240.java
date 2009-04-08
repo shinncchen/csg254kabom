@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.request;
 
 import client.ChatMaster;
@@ -13,15 +9,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * @author HuskyHackers
  *
- * @author Abdulla
+ * LOGIN protocol - Rid240
  */
 public class Rid240 extends Request {
 
+    /**
+     * Rid240 constructor
+     */
     public Rid240() {
         super(Request.RID_240);
     }
 
+    /**
+     * Processing a Request RID_240 from the server
+     * @param data
+     */
     public void processRequest(Object[] data) {
 
         // Check Ua, Challenge response T1, Check T2 in time skew, Retreive session key and store, send RID 250
@@ -75,6 +79,10 @@ public class Rid240 extends Request {
         }
     }
 
+    /**
+     * RID_240 never send a Request
+     * @param data
+     */
     public void sendRequest(Object[] data) {
     }
 }

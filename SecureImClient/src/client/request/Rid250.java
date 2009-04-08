@@ -16,15 +16,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
+ * @author HuskyHackers
  *
- * @author Abdulla
+ * LOGIN protocol - Rid250
  */
 public class Rid250 extends Request {
-    
+
+    /**
+     * Rid250 constructor
+     */
     public Rid250() {
         super(Request.RID_250);
     }
 
+    /**
+     * Sending a Request RID_250 to the server
+     * @param data
+     */
     public void sendRequest(Object[] data) {
         Sender sender = new Sender();
         
@@ -78,6 +86,10 @@ public class Rid250 extends Request {
         }
     }
 
+    /**
+     * RID_250 never process a Request
+     * @param data
+     */
     public void processRequest(Object[] data) {
     }
     

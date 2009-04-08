@@ -1,22 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.request;
 
 import client.ChatMaster;
 import java.io.*;
 
 /**
+ * @author HuskyHackers
  *
- * @author Raghuram
+ * LOGIN protocol - Rid220
  */
 public class Rid220 extends Request {
 
+    /**
+     * Rid220 constructor
+     */
     public Rid220() {
         super(Request.RID_220);
     }
 
+    /**
+     * Processing a Request RID_220 from the server
+     * @param data
+     */
     public void processRequest(Object[] data) {
         if (super.senderIp.equalsIgnoreCase(ChatMaster.SERVER_IP)) {
             if (super.requestData != null && super.requestData.length > 0) {
@@ -54,6 +58,10 @@ public class Rid220 extends Request {
         }
     }
 
+    /**
+     * RID_220 never send a Request
+     * @param data
+     */
     public void sendRequest(Object[] data) {
     }
 }
