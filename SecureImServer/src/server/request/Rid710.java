@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGOUT protocol - Rid710
+ *
+ * @author HuskyHackers
  */
 
 package server.request;
@@ -10,19 +11,29 @@ import java.util.*;
 import server.*;
 import server.security.*;
 
-/**
- *
- * @author Raghuram
- */
+
 public class Rid710 extends Request {
 
+    /**
+     * Rid710 constructor
+     */
     public Rid710() {
         super(Request.RID_710);
     }
 
+    /**
+     * RID_710 never send a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Processing a Request RID_710 from a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
         // Check Ua and Ip match, check Ua inside and outside match, check T1 within skew
         if(super.requestData != null && requestData.length > 0) {

@@ -1,5 +1,5 @@
 /**
- * Abstract class for Request
+ * Abstract class for creating a Request
  *
  * @author HuskyHackers
  */

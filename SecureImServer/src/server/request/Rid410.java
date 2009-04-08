@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * PERMIT protocol - Rid410
+ *
+ * @author HuskyHackers
  */
 package server.request;
 
@@ -21,13 +22,26 @@ import server.security.Security;
  */
 public class Rid410 extends Request {
 
+    /**
+     * Rid410 constructor
+     */
     public Rid410() {
         super(Request.RID_410);
     }
 
+    /**
+     * RID_410 never send a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Processing a Request RID_410 from a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
 
         // Recive permit request, check if user and ip match, decrypt payload, 

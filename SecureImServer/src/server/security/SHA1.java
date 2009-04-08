@@ -1,13 +1,13 @@
+/**
+ * This class is used to calculate message digest using SHA1
+ * Team members don't call this class. Use Security() instead.
+ *
+ * @author HuskyHackers
+ */
+
 package server.security;
 
 import java.security.*;
-
-/**
- * @author HuskyHackers
- *
- * This class is used to calculate message digest using SHA1
- * Team members don't call this class. Use Security() instead.
- */
 
 public class SHA1 {
 

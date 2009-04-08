@@ -1,7 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGIN protocol - Rid250
+ *
+ * @author HuskyHackers
  */
+
 package server.request;
 
 import java.io.ByteArrayInputStream;
@@ -13,19 +15,28 @@ import server.ChatMaster;
 import server.UserInfo;
 import server.security.Security;
 
-/**
- *
- * @author Abdulla
- */
 public class Rid250 extends Request {
 
+    /**
+     * Rid250 constructor
+     */
     public Rid250() {
         super(Request.RID_250);
     }
 
+    /**
+     * RID_250 never send a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Processing a Request RID_250 from a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
 
         // if challenge response t2 is right, log the user in

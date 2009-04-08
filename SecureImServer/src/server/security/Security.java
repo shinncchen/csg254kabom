@@ -1,15 +1,15 @@
-package server.security;
-
-import java.io.*;
-
 /**
- * @author Abdulla Al-Ali
+ * @author HuskyHackers
  *
  * This class has static methods that relate to
  * AES/RSA/Timestamps/Encode/Decode streams
  * Team members: use this class when you need anything
  * to do with security
  */
+
+package server.security;
+
+import java.io.*;
 
 public class Security {
 	

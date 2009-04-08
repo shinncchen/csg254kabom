@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LIST protocol - RID 320
+ *
+ * @author HuskyHackers
  */
 
 package server.request;
@@ -14,19 +15,28 @@ import server.UserInfo;
 import server.security.Security;
 import server.transport.Sender;
 
-/**
- *
- * @author Raghuram
- */
 public class Rid320 extends Request {
 
+    /**
+     * Rid320 constructor
+     */
     public Rid320() {
         super(Request.RID_320);
     }
 
+    /**
+     * RID_320 never process a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Sending a Request RID_320 to a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
         Sender sender = new Sender();
 

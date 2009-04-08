@@ -334,6 +334,7 @@ public class ChatMaster {
             }
         }
     }
+
     /**
      * changeState changes the state to newState
      * @param newState   

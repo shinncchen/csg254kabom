@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGIN protocol - RID 420
+ *
+ * @author HuskyHackers
  */
 
 package server.request;
@@ -13,19 +14,28 @@ import server.UserInfo;
 import server.security.Security;
 import server.transport.Sender;
 
-/**
- *
- * @author Deepak
- */
 public class Rid420 extends Request {
-    
+
+    /**
+     * Rid420 constructor
+     */
     public Rid420() {
         super(Request.RID_420);
     }
 
+    /**
+     * RID_420 never process a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Sending a Request RID_420 to a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
         // Create and send ticket info...
         

@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LIST protocol - Rid310
+ *
+ * @author HuskyHackers
  */
 
 package server.request;
@@ -10,19 +11,28 @@ import java.util.*;
 import server.*;
 import server.security.*;
 
-/**
- *
- * @author Raghuram
- */
 public class Rid310 extends Request {
 
+    /**
+     * Rid310 constructor
+     */
     public Rid310() {
         super(Request.RID_310);
     }
 
+    /**
+     * RID_310 never send a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Processing a Request RID_310 from a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
         
         //Request received for user list, check Ua valid, both inside and outside, check time skew, and respond with the list

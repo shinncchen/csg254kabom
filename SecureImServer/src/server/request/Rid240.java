@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LOGIN protocol - RID 240
+ *
+ * @author HuskyHackers
  */
 
 package server.request;
@@ -14,19 +15,28 @@ import server.UserInfo;
 import server.security.Security;
 import server.transport.Sender;
 
-/**
- *
- * @author Abdulla
- */
 public class Rid240 extends Request {
-    
+
+    /**
+     * Rid240 constructor
+     */
     public Rid240() {
         super(Request.RID_240);
     }
 
+    /**
+     * RID_240 never process a Request
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void processRequest(UserInfo userInfo, Object[] data) {
     }
 
+    /**
+     * Sending a Request RID_240 to a client
+     * @param userInfo - UserInfo, info about the client
+     * @param data
+     */
     public void sendRequest(UserInfo userInfo, Object[] data) {
         Sender sender = new Sender();
         

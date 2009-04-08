@@ -28,10 +28,10 @@ public class ClientDetails {
         return username;
     }
 
-    /**
-     * Set the username for the client
-     * @param username - string, given a username
-     */
+        /**
+         * Set the username for the client
+         * @param username - string, given a username
+         */
     public void setUsername(String username) {
         this.username = username;
     }

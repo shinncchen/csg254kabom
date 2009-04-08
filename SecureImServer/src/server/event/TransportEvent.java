@@ -1,17 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * TransportEvent class which create an event when sending/receiving a request
+ *
+ * @author HuskyHackers
  */
 
 package server.event;
 
 import server.request.Request;
 
-/**
- * @author HuskyHackers
- *
- * TransportEvent class which create an event when sending/receiving a request
- */
 public class TransportEvent implements ImEvent {
 
     private Request requestRecieved = null;

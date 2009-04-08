@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Abstract class for creating a Request
+ *
+ * @author HuskyHackers
  */
 
 package server.request;

@@ -1,12 +1,13 @@
-package server.security;
-
 /**
- * @author HuskyHackers
- *
  * Datastructure for RSAKeys.
  * contains only two fields, PublicKey and PrivateKey
  * which are stored as byte arrays
+ *
+ * @author HuskyHackers
  */
+
+package server.security;
+
 public class RSAKeys {
 
 	private byte[] PublicKey;

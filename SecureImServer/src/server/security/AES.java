@@ -1,16 +1,16 @@
+/**
+ * AES utilities
+ *
+ * @author HuskyHackers
+ */
+
 package server.security;
 
 import java.io.*;
 import java.security.*;
-
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 
-/**
- * @author HuskyHackers
- *
- * AES utilities
- */
 public class AES {
 	
 	/**

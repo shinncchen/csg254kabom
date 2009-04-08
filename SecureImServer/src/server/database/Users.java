@@ -1,10 +1,10 @@
-package server.database;
-
 /**
- * @author HuskyHackers
- *
  * A Class where the server get/set user's credential
+ *
+ * @author HuskyHackers
  */
+
+package server.database;
 
 public class Users {
 

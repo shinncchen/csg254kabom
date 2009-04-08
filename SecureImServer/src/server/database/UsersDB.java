@@ -1,14 +1,14 @@
+/**
+ * Database where username/hash password are stored for a client
+ * 
+ * @author HuskyHackers
+ */
+
 package server.database;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import server.security.Security;
-
-/**
- * @author HuskyHackers
- *
- * Database where username/hash password are stored for a client
- */
 
 public class UsersDB {
 	

@@ -1,14 +1,15 @@
+/**
+ * RSA Utilities
+ *
+ * @author HuskyHackers
+ */
+
 package server.security;
 
 import java.io.*;
 import java.security.*;
 import javax.crypto.*;
 
-/**
- * @author HuskyHackers
- *
- * RSA Utilities
- */
 public class RSA {
 
     /**

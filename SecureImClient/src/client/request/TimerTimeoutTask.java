@@ -23,7 +23,7 @@ public class TimerTimeoutTask extends TimerTask {
         }
 
         /**
-         * Tasks when time out occurs
+         * Tasks to perform when time out occurs
          */
         public void run() {
             System.out.println("Timeout occoured");

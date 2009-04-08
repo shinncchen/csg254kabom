@@ -1,10 +1,11 @@
+/**
+ * TimeoutEvent class which create an timeout event handled by the state machine
+ *
+ * @author HuskyHackers
+ */
+
 package server.event;
 
-/**
- * @author HuskyHackers
- *
- * TimeoutEvent class which create an timeout event handled by the state machine
- */
 public class TimeoutEvent implements ImEvent {
 
     private int requestId ;

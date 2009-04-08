@@ -1,9 +1,11 @@
+/**
+ * This class is the state machine.
+ *
+ * @author HuskyHackers
+ */
+
 package server;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.util.HashMap;
 
 import server.database.UsersDB;
@@ -15,10 +17,6 @@ import server.request.Rid210;
 import server.transport.Listener;
 import server.security.*;
 
-/**
- *
- * @author Raghuram
- */
 public class ChatMaster {
 
     public static final String SERVER_IP = "127.0.0.1";
@@ -30,6 +28,11 @@ public class ChatMaster {
     public static HashMap users = null;
     public static UsersDB usersDB = null;
 
+    /**
+     * This method initializes the client.
+     * Set state to INITIAL.
+     * Open a port to listen to transport events.
+     */
     public static void initialize() {
 
         // Intialize the RSA keys
@@ -49,6 +52,10 @@ public class ChatMaster {
         System.out.println("Listener started...");
     }
 
+    /**
+     * ChatMaster handle manages the state transitions based on occurring events
+     * @param imEvent imEvent is either a GuiEvent or a TransportEvent
+     */
     public synchronized static void handle(ImEvent imEvent) {
 
         String ipAddress = imEvent.getClientIp();
@@ -182,8 +189,6 @@ public class ChatMaster {
                     }
                 }
             }
-
-
         }
     }
 }
