@@ -47,7 +47,7 @@ public class ChatMaster {
     public static final int STATE_RID720 = 720;
 
 
-    public static String SERVER_IP = "192.168.1.1";
+    public static String SERVER_IP = "10.0.7.1";
     public static int SERVER_PORT = 4444;
     public static int LOCAL_PORT = 5555;
     
